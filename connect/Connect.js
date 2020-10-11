@@ -1,7 +1,7 @@
 const server = require('../AppConfig');
 const Sequelize = require('sequelize');
 
-// var Op = Sequelize.Op;
+var Op = Sequelize.Op;
 
 const sequelize = new Sequelize(server.DB, server.USER, server.PASSWORD, {
     host: server.HOST,

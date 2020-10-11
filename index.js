@@ -49,7 +49,7 @@ app.get('/', (req, res, next) => {
     res.send('Hello World');
   });
 
-  router.post("/Signup", checkAuth, (req, res, next) => { userController.Create(req, res, next)});
+  router.post("/Signup", (req, res, next) => { userController.Create(req, res, next)});
   router.post("/Login", (req, res) => { userController.login(req, res)});
 
 //when api doesnt matches with above api list then status 400 bad request is sent
