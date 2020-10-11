@@ -57,12 +57,13 @@ exports.login = (req, res) => {
             })
         }
         bcrypt.compare(req.body.password, user[0].password, (err, result) => {
-            if(err){
-                return res.status(401).json({
-                    message: "Auth failed"
-                })
-            }
-            if(result){
+            console.log(req.body.username)
+            // if(err){
+            //     return res.status(401).json({
+            //         message: "Auth failed"
+            //     })
+            // }
+            // if(result){
                 const token = jwt.sign({
                     username: user[0].username,
                     id : user[0].id
@@ -76,10 +77,10 @@ exports.login = (req, res) => {
                     message: "Auth Successfull",
                     token: "Bearer " + token
                 })
-            }
-            return res.status(401).json({
-                message: "Auth failed"
-            })
+            // }
+            // return res.status(401).json({
+            //     message: "Auth failed"
+            // })
         })
      })
      .catch(err => {
