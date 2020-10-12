@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Dashboard from '@/views/Dashboard'
+import Login from '@/views/Login'
 import Students from '@/views/students/Students'
 import Results from '@/views/results/Results'
 
@@ -20,6 +21,11 @@ const routes = [{
         path: '/results',
         name: 'Results',
         component: Results
+    },
+    {
+        path: '/login',
+        name: 'Login',
+        component: Login
     }
 ]
 

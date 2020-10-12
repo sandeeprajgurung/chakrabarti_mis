@@ -1,14 +1,12 @@
 <template>
   <v-app>
-    <v-card height="100%" width="210" class="app-navbar float-left">
+    <v-card v-if="currentRouteName !== 'Login'" height="100%" width="210" class="app-navbar float-left">
       <v-navigation-drawer permanent>
         <v-list-item>
           <v-list-item-content>
-            <!-- <v-list-item-title class="title"> -->
-              <v-avatar>
-                <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
-              </v-avatar>
-            <!-- </v-list-item-title> -->
+            <v-avatar>
+              <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
+            </v-avatar>
             <v-list-item-subtitle class="text-center mt-2">
               Admin name
             </v-list-item-subtitle>
@@ -28,6 +26,14 @@
             </v-list-item-content>
           </v-list-item>
         </v-list>
+
+        <template v-slot:append>
+          <div class="pa-2">
+            <v-btn block>
+              Logout
+            </v-btn>
+          </div>
+        </template>
       </v-navigation-drawer>
     </v-card>
     <v-main class="main-component">
@@ -61,6 +67,11 @@
         right: null,
       }
     },
+    computed: {
+      currentRouteName() {
+        return this.$route.name;
+      }
+    }
   };
 </script>
 
