@@ -1,0 +1,89 @@
+<template>
+  <v-app>
+    <v-card height="100%" width="210" class="app-navbar float-left">
+      <v-navigation-drawer permanent>
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title class="title">
+              Application
+            </v-list-item-title>
+            <v-list-item-subtitle>
+              Admin
+            </v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-divider></v-divider>
+
+        <v-list dense nav>
+          <v-list-item v-for="item in items" :key="item.title" :to="item.link">
+            <v-list-item-icon>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+      </v-navigation-drawer>
+    </v-card>
+    <v-main class="main-component">
+      <router-view />
+    </v-main>
+  </v-app>
+</template>
+
+<script>
+  export default {
+    name: 'App',
+
+    data() {
+      return {
+        items: [{
+            title: 'Dashboard',
+            icon: 'mdi-view-dashboard',
+            link: '/'
+          },
+          {
+            title: 'Students',
+            icon: 'mdi-account-multiple-outline',
+            link: '/students'
+          },
+          {
+            title: 'Teachers',
+            icon: 'mdi-account-multiple',
+            link: '/teachers'
+          },
+          {
+            title: 'Subjects',
+            icon: 'mdi-book-multiple',
+            link: '/subjects'
+          },
+          {
+            title: 'Results',
+            icon: 'mdi-book-multiple',
+            link: '/results'
+          },
+          {
+            title: 'Setting',
+            icon: 'mdi-settings-box',
+            link: '/setting'
+          }
+        ],
+        right: null,
+      }
+    },
+  };
+</script>
+
+<style lang="scss" scoped>
+.app-navbar {
+  position: fixed;
+}
+.main-component {
+  width: calc(100% - 210px);
+  margin-left: 210px;
+  margin-top: 40px;
+}
+</style>
