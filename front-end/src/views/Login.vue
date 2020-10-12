@@ -1,11 +1,11 @@
 <template>
     <div>
-        <v-bottom-navigation :tabValue="tabValue" color="teal" grow>
-            <v-btn @click="selectCategory('results')">
+        <v-bottom-navigation v-model="tabValue" color="teal" grow>
+            <v-btn tabValue="0" @click="selectCategory('results')">
                 <span>View Result</span>
                 <v-icon>mdi-library</v-icon>
             </v-btn>
-            <v-btn @click="selectCategory('login')">
+            <v-btn tabValue="1" @click="selectCategory('login')">
                 <span>Login</span>
                 <v-icon>mdi-login</v-icon>
             </v-btn>
@@ -63,7 +63,7 @@
         data: () => ({
             name: '',
             email: '',
-            symbolNumber:'',
+            symbolNumber: '',
             username: '',
             password: '',
             select: null,
@@ -89,9 +89,9 @@
                 this.select = null
             },
             selectCategory($category) {
-                if($category === 'login') {
+                if ($category === 'login') {
                     return this.tabValue = 1;
-                } 
+                }
                 return this.tabValue = 0;
             }
         },
