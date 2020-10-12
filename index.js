@@ -1,5 +1,5 @@
 const userController = require("./controller/userController");
-
+const studentController = require("./controller/studentController");
 
 
 const checkAuth = require("./middleware/check-auth");
@@ -51,6 +51,14 @@ app.get('/', (req, res, next) => {
 
   router.post("/Signup", (req, res, next) => { userController.Create(req, res, next)});
   router.post("/Login", (req, res) => { userController.login(req, res)});
+
+  // region for student start
+  router.post("/Student", checkAuth, (req, res) => { studentController.Create(req, res)});
+  router.put("/Student/:Id", checkAuth, (req, res) => { studentController.Update(req, res)});
+  router.delete("/Student/:Id", checkAuth, (req, res) => { studentController.Delete(req, res)});
+  router.get("/Student", checkAuth, (req, res) => { studentController.FindAll(req, res)});
+  router.get("/Student/:Id", checkAuth, (req, res) => { studentController.FindById(req, res)});
+  // region end
 
 //when api doesnt matches with above api list then status 400 bad request is sent
 app.use(function (req, res, next) {
