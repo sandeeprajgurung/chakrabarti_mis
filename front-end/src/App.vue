@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-card v-if="currentRouteName !== 'Login'" height="100%" width="210" class="app-navbar float-left">
+    <v-card v-if="currentRouteName" height="100%" width="210" class="app-navbar float-left">
       <v-navigation-drawer permanent>
         <v-list-item>
           <v-list-item-content>
@@ -36,7 +36,7 @@
         </template>
       </v-navigation-drawer>
     </v-card>
-    <v-main class="main-component">
+    <v-main :class="currentRouteName? 'main-component': 'login-component'">
       <router-view />
     </v-main>
   </v-app>
@@ -69,7 +69,10 @@
     },
     computed: {
       currentRouteName() {
-        return this.$route.name;
+        if(this.$route.name !== 'Login') {
+          return true;
+        }
+        return false;
       }
     }
   };
