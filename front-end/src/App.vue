@@ -29,7 +29,7 @@
 
         <template v-slot:append>
           <div class="pa-2">
-            <v-btn block>
+            <v-btn color="primary" block>
               Logout
             </v-btn>
           </div>

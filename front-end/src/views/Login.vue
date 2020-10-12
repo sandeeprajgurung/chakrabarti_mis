@@ -24,7 +24,7 @@
                             <v-select v-model="select" :items="items" label="Standard"></v-select>
                         </v-col>
                     </v-row>
-                    <v-btn class="mr-4" @click="submit">
+                    <v-btn class="mr-4" @click="submit" color="primary">
                         Search
                     </v-btn>
                     <v-btn @click="clear">
@@ -46,7 +46,7 @@
                                 required />
                         </v-col>
                     </v-row>
-                    <v-btn class="mr-4" @click="submit">
+                    <v-btn class="mr-4" @click="submit" color="primary">
                         Submit
                     </v-btn>
                     <v-btn @click="clear">
