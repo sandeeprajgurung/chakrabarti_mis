@@ -4,11 +4,13 @@
       <v-navigation-drawer permanent>
         <v-list-item>
           <v-list-item-content>
-            <v-list-item-title class="title">
-              Application
-            </v-list-item-title>
-            <v-list-item-subtitle>
-              Admin
+            <!-- <v-list-item-title class="title"> -->
+              <v-avatar>
+                <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
+              </v-avatar>
+            <!-- </v-list-item-title> -->
+            <v-list-item-subtitle class="text-center mt-2">
+              Admin name
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -78,12 +80,13 @@
 </script>
 
 <style lang="scss" scoped>
-.app-navbar {
-  position: fixed;
-}
-.main-component {
-  width: calc(100% - 210px);
-  margin-left: 210px;
-  margin-top: 40px;
-}
+  .app-navbar {
+    position: fixed;
+  }
+
+  .main-component {
+    width: calc(100% - 210px);
+    margin-left: 210px;
+    margin-top: 40px;
+  }
 </style>
