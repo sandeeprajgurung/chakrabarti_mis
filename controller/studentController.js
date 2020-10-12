@@ -27,7 +27,7 @@ exports.Create = (req, res) => {
                 message:
                 err.message || "Some error occurred while creating the Student."
             });
-            });
+        });
     }
     else if (req.body.Programme == 'LLM'){
         Llmstudent.create(student)

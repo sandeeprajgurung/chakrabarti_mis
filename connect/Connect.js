@@ -20,6 +20,7 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
+db.PROGRAMME = require("../model/programme.js")(sequelize, Sequelize);
 db.LLBGROUP = require("../model/llbgroup.js")(sequelize, Sequelize);
 db.LLMGROUP = require("../model/llmgroup.js")(sequelize, Sequelize);
 db.USER = require("../model/user.js")(sequelize, Sequelize);
