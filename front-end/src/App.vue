@@ -53,24 +53,9 @@
             link: '/students'
           },
           {
-            title: 'Teachers',
-            icon: 'mdi-account-multiple',
-            link: '/teachers'
-          },
-          {
-            title: 'Subjects',
-            icon: 'mdi-book-multiple',
-            link: '/subjects'
-          },
-          {
             title: 'Results',
-            icon: 'mdi-book-multiple',
+            icon: 'mdi-library',
             link: '/results'
-          },
-          {
-            title: 'Setting',
-            icon: 'mdi-settings-box',
-            link: '/setting'
           }
         ],
         right: null,
