@@ -14,10 +14,15 @@ module.exports = (sequelize, Sequelize) => {
     freezeTableName: true
   });
 
-  LLBGROUP.associate = model => {
-    LLBGROUP.hasMany(model.LLBSTUDENT,{
-      onDelete: 'cascade'
-    })};
+  // LLBGROUP.associate = model => {
+  //   LLBGROUP.hasMany(model.LLBSTUDENT,{
+  //     onDelete: 'cascade'
+  //   })};
+
+  //   LLBGROUP.associate = model => {
+  //     LLBGROUP.hasMany(model.f,{
+  //       onDelete: 'cascade'
+  //     })};
 
   return LLBGROUP;
 };

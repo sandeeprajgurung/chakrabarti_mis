@@ -1,3 +1,5 @@
+const firstyear = require('./firstyear');
+
 module.exports = (sequelize, Sequelize) => {
     const LLBSTUDENT = sequelize.define("LLBSTUDENT", {
         SID: {
@@ -44,12 +46,12 @@ module.exports = (sequelize, Sequelize) => {
       freezeTableName: true
     });
 
-    LLBSTUDENT.associate = model => {
-        LLBSTUDENT.belongsTo(model.LLBGROUP,{
-            foreignkey : {
-                allowNull : true
-            }
-        })};
+    // LLBSTUDENT.associate = model => {
+    //     LLBSTUDENT.belongsTo(model.LLBGROUP,{
+    //         foreignkey : {
+    //             allowNull : true
+    //         }
+    //     })};
 
     //     LLBSTUDENT.associate = model => {
     //         LLBSTUDENT.belongsTo(model.PROGRAMME,{

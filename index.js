@@ -3,6 +3,7 @@ const studentController = require("./controller/studentController");
 const programmeController = require("./controller/programmeController");
 const resultController = require("./controller/resultController");
 const firstyearController = require("./controller/firstyearController");
+const groupController = require("./controller/groupController");
 
 const checkAuth = require("./middleware/check-auth");
 
@@ -60,6 +61,10 @@ app.get('/', (req, res, next) => {
   router.get("/Programme", (req, res) => { programmeController.FindAll(req, res)});
   // region end
 
+  // region for group
+  router.get("/Group", (req, res) => { groupController.FindAll(req, res)});
+  // region end
+
   // region for student start
   router.post("/Student", (req, res) => { studentController.Create(req, res)});
   router.put("/Student/:Id", (req, res) => { studentController.Update(req, res)});
@@ -74,7 +79,7 @@ app.get('/', (req, res, next) => {
 
   // region for first year student
   router.get("/Firstyear", (req, res) => { firstyearController.FindAll(req, res)});
-  // router.get("/Firstyear", (req, res) => { firstyearController.Search(req, res)});
+  router.get("/Firstyear", (req, res) => { firstyearController.Search(req, res)});
   // region end
 
 //when api doesnt matches with above api list then status 400 bad request is sent
