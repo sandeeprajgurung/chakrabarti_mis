@@ -2,6 +2,7 @@ const userController = require("./controller/userController");
 const studentController = require("./controller/studentController");
 const programmeController = require("./controller/programmeController");
 const resultController = require("./controller/resultController");
+const firstyearController = require("./controller/firstyearController");
 
 const checkAuth = require("./middleware/check-auth");
 
@@ -11,6 +12,7 @@ const bodyParser = require('body-parser');
 const http = require('http');
 const express = require('express');
 const app = express();
+var cors = require('cors')
 // const db = require("./connect/Connect");
 // // db.sequelize.sync();
 // const Llbgroup = db.LLBGROUP;
@@ -21,6 +23,7 @@ const app = express();
 
 var router = express.Router();
 
+app.use(cors());
 
 app.use(bodyParser.urlencoded({
   extended: false
@@ -54,19 +57,24 @@ app.get('/', (req, res, next) => {
   router.post("/Login", (req, res) => { userController.login(req, res)});
 
   // region for programme
-  router.get("/Programme", checkAuth, (req, res) => { programmeController.FindAll(req, res)});
+  router.get("/Programme", (req, res) => { programmeController.FindAll(req, res)});
   // region end
 
   // region for student start
-  router.post("/Student", checkAuth, (req, res) => { studentController.Create(req, res)});
-  router.put("/Student/:Id", checkAuth, (req, res) => { studentController.Update(req, res)});
-  router.delete("/Student/:Id", checkAuth, (req, res) => { studentController.Delete(req, res)});
-  router.get("/Student", checkAuth, (req, res) => { studentController.FindAll(req, res)});
-  router.get("/Student/:Id", checkAuth, (req, res) => { studentController.FindById(req, res)});
+  router.post("/Student", (req, res) => { studentController.Create(req, res)});
+  router.put("/Student/:Id", (req, res) => { studentController.Update(req, res)});
+  router.delete("/Student/:Id", (req, res) => { studentController.Delete(req, res)});
+  router.get("/Student", (req, res) => { studentController.FindAll(req, res)});
+  router.get("/Student/:Id", (req, res) => { studentController.FindById(req, res)});
   // region end
 
-  // region for student marks
-  router.post("/Result", checkAuth, (req, res) => { resultController.Create(req, res)});
+  // region to save student marks
+  router.post("/Result", (req, res) => { resultController.Create(req, res)});
+  // region end
+
+  // region for first year student
+  router.get("/Firstyear", (req, res) => { firstyearController.FindAll(req, res)});
+  // router.get("/Firstyear", (req, res) => { firstyearController.Search(req, res)});
   // region end
 
 //when api doesnt matches with above api list then status 400 bad request is sent
