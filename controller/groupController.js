@@ -1,7 +1,7 @@
 const db = require("../connect/Connect");
 const Llbgroup = db.LLBGROUP;
 const Llmgroup = db.LLMGROUP;
-const Op = db.Sequelize.Op;
+// const Op = db.Sequelize.Op;
 
 exports.FindAll = (req, res) => {
     if(req.body.Programme == 'LLB'){
@@ -27,6 +27,8 @@ exports.FindAll = (req, res) => {
                 err.message || "Some error occurred while retrieving Year."
             });
         });
+    }
+    else if(req.body.Programme == '') {
     }
     else {
         res.status(500).send({

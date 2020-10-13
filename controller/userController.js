@@ -4,7 +4,7 @@ const key = require('../AppConfig');
 
 const db = require("../connect/Connect");
 const User = db.USER;
-const Op = db.Sequelize.Op;
+// const Op = db.Sequelize.Op;
 
 exports.Create = (req, res) => {
 

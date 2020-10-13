@@ -1,5 +1,6 @@
 const server = require('../AppConfig');
 const Sequelize = require('sequelize');
+const mysql = require('mysql2');
 
 var Op = Sequelize.Op;
 
@@ -15,8 +16,22 @@ const sequelize = new Sequelize(server.DB, server.USER, server.PASSWORD, {
     }
 });
 
-const db = {};
+// Create a connection to the database
+// const connection = mysql.createConnection({
+//   host: server.HOST,
+//   user: server.USER,
+//   password: server.PASSWORD,
+//   database: server.DB
+// });
 
+
+// // open the MySQL connection
+// connection.connect(error => {
+//   if (error) throw error;
+//   console.log("Successfully connected to the database.");
+// });
+
+const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
@@ -47,3 +62,4 @@ db.FIFTHYEAR_CONSTITUTIONAL = require("../model/fifthyear_constitutional.js")(se
 db.FIFTHYEAR_ENVIRONMENT = require("../model/fifthyear_environment.js")(sequelize, Sequelize);
 
 module.exports = db;
+// module.exports = connection;
