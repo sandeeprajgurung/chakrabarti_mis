@@ -107,6 +107,15 @@ export default {
     },
     loginSubmit() {
       this.$refs.loginForm.validate();
+
+      axios.post(`http://jsonplaceholder.typicode.com/posts`, {
+      body: this.postBody
+    })
+    .then(response => {})
+    .catch(e => {
+      this.errors.push(e)
+    })
+    
       console.log(this.username);
       console.log(this.password);
     },
