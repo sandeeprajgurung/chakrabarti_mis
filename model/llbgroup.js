@@ -19,5 +19,10 @@ module.exports = (sequelize, Sequelize) => {
   //     onDelete: 'cascade'
   //   })};
 
+  //   LLBGROUP.associate = model => {
+  //     LLBGROUP.hasMany(model.f,{
+  //       onDelete: 'cascade'
+  //     })};
+
   return LLBGROUP;
 };

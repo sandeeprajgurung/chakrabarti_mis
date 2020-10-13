@@ -1,3 +1,5 @@
+const firstyear = require('./firstyear');
+
 module.exports = (sequelize, Sequelize) => {
     const LLBSTUDENT = sequelize.define("LLBSTUDENT", {
         SID: {
