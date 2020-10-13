@@ -16,23 +16,31 @@
         <v-card-title class="pa-0">View Result</v-card-title>
         <v-form ref="viewResultsForm" v-model="valid" lazy-validation>
           <v-row>
-            <v-col cols="12" sm="6">
+            <v-col cols="8" sm="4">
+              <v-select
+                v-model="select"
+                :items="academics"
+                :rules="[(v) => !!v || 'Academics is required']"
+                label="Academics*"
+              ></v-select>
+            </v-col>
+            <v-col cols="8" sm="4">
+              <v-select
+                v-model="select"
+                :items="program"
+                :rules="[(v) => !!v || 'Program is required']"
+                label="Program*"
+              ></v-select>
+            </v-col>
+            <v-col cols="8" sm="4">
               <v-text-field
                 v-model="symbolNumber"
                 :counter="10"
                 :rules="[(v) => !!v || 'Symbol Number is required']"
                 :error-messages="errors"
-                label="Symbol No."
+                label="Symbol No.*"
                 required
               />
-            </v-col>
-            <v-col cols="12" sm="6">
-              <v-select
-                v-model="select"
-                :items="items"
-                :rules="[(v) => !!v || 'Item is required']"
-                label="Standard"
-              ></v-select>
             </v-col>
           </v-row>
           <v-btn class="mr-4" @click="resultSubmit" color="primary">
@@ -85,43 +93,44 @@ export default {
     username: "",
     password: "",
     select: null,
-    items: ["Item 1", "Item 2", "Item 3", "Item 4"],
+    academics: ["Undergraduate","Graduate"],
+    program: ["BA.LL.B First Year", "BA.LL.B Second Year","BA.LL.B Third Year","BA.LL.B Fourth Year","BA.LL.B Fifth Year"],
     checkbox: null,
     tabValue: 0,
   }),
 
-  methods: {
-    clear() {
-        this.$refs.viewResultsForm.reset();
-        this.$refs.loginForm.reset();
+  // methods: {
+  //  clear() {
+  //      this.$refs.viewResultsForm.reset();
+  //      this.$refs.loginForm.reset();
     //   this.symbolNumber = "";
     //   this.username = "";
     //   this.password = "";
     //   this.select = null;
-    },
-    selectCategory($category) {
-      if ($category === "login") {
-        return (this.tabValue = 1);
-      }
-      return (this.tabValue = 0);
-    },
-    loginSubmit() {
-      this.$refs.loginForm.validate();
+  //  },
+  //  selectCategory($category) {
+  //    if ($category === "login") {
+  //     return (this.tabValue = 1);
+  //    }
+  //    return (this.tabValue = 0);
+  //  },
+  //  loginSubmit() {
+  //   this.$refs.loginForm.validate();
 
-      axios.post(`http://jsonplaceholder.typicode.com/posts`, {
-      body: this.postBody
-    })
-    .then(response => {})
-    .catch(e => {
-      this.errors.push(e)
-    })
+  //    axios.post(`http://jsonplaceholder.typicode.com/posts`, {
+  //    body: this.postBody
+  //  })
+  //  .then(response => {})
+  //  .catch(e => {
+  //    this.errors.push(e)
+  //  })
     
-      console.log(this.username);
-      console.log(this.password);
-    },
-    resultSubmit() {
-      this.$refs.viewResultsForm.validate();
-    },
-  },
+  //    console.log(this.username);
+  //    console.log(this.password);
+  //  },
+  //  resultSubmit() {
+  //    this.$refs.viewResultsForm.validate();
+  //  },
+  // },
 };
 </script>
