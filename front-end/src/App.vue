@@ -8,7 +8,7 @@
               <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John">
             </v-avatar>
             <v-list-item-subtitle class="text-center mt-2">
-              Admin name
+              CHBEA | Exam
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
