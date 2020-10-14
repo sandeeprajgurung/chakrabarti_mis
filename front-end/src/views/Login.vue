@@ -21,7 +21,7 @@
           lazy-validation
         >
           <v-row>
-            <v-col cols="8" sm="4">
+            <v-col cols="12" sm="4">
               <v-select
                 v-model="result.academic"
                 :items="academics"
@@ -32,7 +32,7 @@
                 label="Academics*"
               ></v-select>
             </v-col>
-            <v-col cols="8" sm="4">
+            <v-col cols="12" sm="4">
               <v-select
                 v-model="result.program"
                 :items="programs"
@@ -42,7 +42,7 @@
                 label="Program*"
               ></v-select>
             </v-col>
-            <v-col cols="8" sm="4">
+            <v-col cols="12" sm="4">
               <v-text-field
                 v-model="result.symbolNo"
                 :counter="10"

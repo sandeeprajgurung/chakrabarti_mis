@@ -102,6 +102,7 @@
                         </v-col>
                         <v-col cols="12" sm="6">
                           <v-select
+                            v-model="student.gender"
                             :items="gender"
                             :rules="[(v) => !!v || 'Gender is required']"
                             label="Gender"
@@ -319,6 +320,7 @@ export default {
 
     studentFormSubmit() {
       this.$refs.studentForm.validate();
+      console.log(this.student);
     },
 
     initialize() {
