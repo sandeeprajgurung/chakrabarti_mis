@@ -3,7 +3,7 @@ const Llbstudent = db.LLBSTUDENT;
 const Llmstudent = db.LLMSTUDENT;
 // const Op = db.Sequelize.Op;
 
-exports.Create = (req, res) => {
+exports.CreateLLB = (req, res) => {
     const student = {
         SNAME : req.body.Name,
         EXAM_NO : req.body.ExamNo,
@@ -15,9 +15,8 @@ exports.Create = (req, res) => {
         YEAR : req.body.Year,
         PRGID : req.body.PrgId,
         GRPID : req.body.GrpId
-    };
+    }; 
 
-    if(req.body.Programme == 'LLB'){
         Llbstudent.create(student)
         .then(data => {
           res.send(data);
@@ -28,8 +27,22 @@ exports.Create = (req, res) => {
                 err.message || "Some error occurred while creating the Student."
             });
         });
-    }
-    else if (req.body.Programme == 'LLM'){
+}
+
+exports.CreateLLM = (req, res) => {
+    const student = {
+        SNAME : req.body.Name,
+        EXAM_NO : req.body.ExamNo,
+        ROLL_NO : req.body.RollNo,
+        EMAIL : req.body.Email,
+        PHONE_NO : req.body.Phone,
+        GENDER : req.body.Gender,
+        BATCH : req.body.Batch,
+        YEAR : req.body.Year,
+        PRGID : req.body.PrgId,
+        GRPID : req.body.GrpId
+    }; 
+
         Llmstudent.create(student)
         .then(data => {
           res.send(data);
@@ -39,21 +52,12 @@ exports.Create = (req, res) => {
                 message:
                 err.message || "Some error occurred while creating the Student."
             });
-            });
-    }
-    else {
-        res.status(500).send({
-            message:
-            err.message || "Plese select programme."
         });
-    }
-    
 }
 
-exports.Update = (req, res) => {
+exports.UpdateLLB = (req, res) => {
     const id = req.params.Id;
 
-    if(req.body.Programme == 'LLB') {
         Llbstudent.update(req.body, {
             where: { SID: id }
         })
@@ -74,8 +78,11 @@ exports.Update = (req, res) => {
             err.message || "Error updating Student with id=" + id
             });
         });
-    }
-    else if (req.body.Programme == 'LLM'){
+}
+
+exports.UpdateLLM = (req, res) => {
+    const id = req.params.Id;
+
         Llmstudent.update(req.body, {
             where: { SID: id }
         })
@@ -96,20 +103,12 @@ exports.Update = (req, res) => {
             err.message || "Error updating Student with id=" + id
             });
         });
-    }
-    else {
-        res.status(500).send({
-            message:
-            err.message || "Plese select programme."
-        });
-    }
-    
+
 }
 
-exports.Delete = (req, res) => {
+exports.DeleteLLB = (req, res) => {
     const id = req.params.Id;
     
-    if(req.body.Programme == 'LLB') {
         Llbstudent.destroy({
             where: { SID: id }
         })
@@ -129,8 +128,11 @@ exports.Delete = (req, res) => {
             message: "Could not delete Student with id=" + id
           });
         });
-    }
-    else if(req.body.Programme =='LLM'){
+}
+
+exports.DeleteLLM = (req, res) => {
+    const id = req.params.Id;
+    
         Llmstudent.destroy({
             where: { SID: id }
         })
@@ -150,17 +152,9 @@ exports.Delete = (req, res) => {
             message: "Could not delete Student with id=" + id
           });
         });
-    }
-    else {
-        res.status(500).send({
-            message:
-            err.message || "Plese select programme."
-        });
-    }
 }
 
-exports.FindAll = (req,res) => {
-    if(req.body.Programme == 'LLB'){
+exports.FindAllLLB = (req,res) => {
         Llbstudent.findAll()
         .then(data =>{
             res.send(data);
@@ -171,8 +165,10 @@ exports.FindAll = (req,res) => {
                 err.message || "Some error occurred while retrieving Student."
             });
         });
-    }
-    else if(req.body.Programme == 'LLM'){
+    
+}
+
+exports.FindAllLLM = (req,res) => {
         Llmstudent.findAll()
         .then(data =>{
             res.send(data);
@@ -183,14 +179,7 @@ exports.FindAll = (req,res) => {
                 err.message || "Some error occurred while retrieving Student."
             });
         });
-    }
-    else {
-        res.status(500).send({
-            message:
-            err.message || "Plese select programme."
-        });
-    }
-    
+
 }
 
 exports.FindById = (req,res) => {
@@ -231,4 +220,25 @@ exports.FindById = (req,res) => {
         });
     }
     
+}
+
+exports.FindAllStudent = async (req,res) => {
+    
+    try{
+        const llbstudent = await db.sequelize.query('SELECT * from LLBSTUDENT', {
+            type: db.sequelize.QueryTypes.SELECT
+          });
+          const llmstudent = await db.sequelize.query('SELECT * from LLMSTUDENT', {
+            type: db.sequelize.QueryTypes.SELECT
+          });
+    
+          res.send(llbstudent.concat(llmstudent));
+    }
+    catch(err){
+        res.status(500).send({
+            message:
+              err.message || "Some error occurred while retrieving Student."
+          });
+    }
+
 }

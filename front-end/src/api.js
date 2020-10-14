@@ -23,9 +23,28 @@ export default {
         return this.execute('get', '/Programme');
     },
 
-    getGroup(data) {
-        console.log(data);
-        return this.execute('get', '/Group', data);
+    getLlbGroup() {
+        return this.execute('get', '/LLBGroup');
+    },
+
+    getLlmGroup() {
+        return this.execute('get', '/LLMGroup');
+    },
+
+    createLlbStudent(data) {
+        return this.execute('POST', '/LLBStudent', data);
+    },
+
+    createLlmStudent(data) {
+        return this.execute('POST', '/LLMStudent', data);
+    },
+
+    getLlmStudents() {
+        return this.execute('GET', '/LLMStudent');
+    },
+
+    getAllStudents() {
+        return this.execute('GET', '/Student');
     },
 
     getPosts() {
