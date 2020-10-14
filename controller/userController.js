@@ -4,7 +4,7 @@ const key = require('../AppConfig');
 
 const db = require("../connect/Connect");
 const User = db.USER;
-const Op = db.Sequelize.Op;
+// const Op = db.Sequelize.Op;
 
 exports.Create = (req, res) => {
 
@@ -57,6 +57,7 @@ exports.login = (req, res) => {
             })
         }
         bcrypt.compare(req.body.password, user[0].password, (err, result) => {
+            console.log(req.body.username)
             // if(err){
             //     return res.status(401).json({
             //         message: "Auth failed"

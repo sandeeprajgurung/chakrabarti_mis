@@ -1,7 +1,7 @@
 const db = require("../connect/Connect");
 const Llbstudent = db.LLBSTUDENT;
 const Llmstudent = db.LLMSTUDENT;
-const Op = db.Sequelize.Op;
+// const Op = db.Sequelize.Op;
 
 exports.Create = (req, res) => {
     const student = {

@@ -1,9 +1,9 @@
 const db = require("../connect/Connect");
-const Firstyear = db.FIRSTYEAR;
+const Thirdyear = db.THIRDYEAR;
 const Op = db.Sequelize.Op;
 
 exports.FindAll=(req,res)=>{
-    Firstyear.findAll()
+    Thirdyear.findAll()
         .then(data =>{
             res.send(data);
         })
@@ -17,7 +17,7 @@ exports.FindAll=(req,res)=>{
 
 exports.Search=async (req,res)=>{
     try{
-        const student = await db.sequelize.query('SELECT LS.SNAME,FS.POLITICAL,FS.ECONOMIC,FS.HISTORY_OF_NEPAL,FS.SOCOLOGY,FS.PRINCIPLE_OF_LAW,FS.CONCEPT_OF_LAW,FS.LOGIC_LEGAL_REASONING,FS.CLINICAL_WORK FROM llbstudent AS LS join firstyear AS FS on LS.SID = FS.SID WHERE LS.sname = (:name)', {
+        const student = await db.sequelize.query('SELECT LS.SNAME,TY.INTERNATIONAL_HUMAN_RIGHT,TY.INTERPRETATION,TY.LAW_EVIDENCE,TY.INTERNATIONAL_LAW,TY.CONSTITUTIONAL_LAW,TY.LEGAL_RESEARCH,TY.PROFESSIONAL_ETHICS,TY.CLINICAL_LEGAL_EDUCATION,TY.CLINICAL_WORK FROM llbstudent AS LS join thirdyear AS TY on LS.SID = TY.SID WHERE LS.sname = (:name)', {
             replacements: {name: req.query.name},
             type: db.sequelize.QueryTypes.SELECT
           });
@@ -36,8 +36,8 @@ exports.Search=async (req,res)=>{
 exports.Update = (req, res) => {
     const id = req.params.Id;
 
-        Firstyear.update(req.body, {
-            where: { FIRSTYEARID: id }
+    Thirdyear.update(req.body, {
+            where: { THIRDYEARID: id }
         })
         .then(num => {
             if (num == 1) {
@@ -62,8 +62,8 @@ exports.Update = (req, res) => {
 exports.Delete = (req, res) => {
     const id = req.params.Id;
     
-        Firstyear.destroy({
-            where: { FIRSTYEARID: id }
+        Thirdyear.destroy({
+            where: { THIRDYEARID: id }
         })
         .then(num => {
           if (num == 1) {

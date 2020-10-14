@@ -8,7 +8,7 @@ const FourthyearCriminal = db.FOURTHYEAR_CRIMINAL
 const FourthyearBusiness = db.FOURTHYEAR_BUSINESS
 const FourthyearConstitutional = db.FOURTHYEAR_CONSTITUTIONAL
 const FourthyearEnvironment = db.FOURTHYEAR_ENVIRONMENT
-const Op = db.Sequelize.Op;
+// const Op = db.Sequelize.Op;
 
 exports.Create = (req, res) => {
     

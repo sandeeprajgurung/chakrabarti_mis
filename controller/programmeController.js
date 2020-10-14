@@ -1,6 +1,6 @@
 const db = require("../connect/Connect");
 const Programme = db.PROGRAMME;
-const Op = db.Sequelize.Op;
+// const Op = db.Sequelize.Op;
 
 exports.FindAll = (req, res) => {
     Programme.findAll()
