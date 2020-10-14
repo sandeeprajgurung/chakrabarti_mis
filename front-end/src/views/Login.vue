@@ -110,8 +110,8 @@ export default {
       { id: "7", name: "LL.M Second Year" },
     ],
     academics: [
-      { name: "Undergraduate", id: "0" },
-      { name: "Graduate", id: "1" },
+      { name: "Undergraduate", id: "1" },
+      { name: "Graduate", id: "2" },
     ],
     undergraduate: [
       { id: "1", name: "BA.LL.B First Year" },
@@ -132,7 +132,7 @@ export default {
     },
 
     selectedAcademic() {
-      if (this.result.academic === "1") {
+      if (this.result.academic === "2") {
         return (this.programs = this.graduate);
       }
       return (this.programs = this.undergraduate);
