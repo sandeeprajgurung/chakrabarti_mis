@@ -1,10 +1,9 @@
 const db = require("../connect/Connect");
 const Llbgroup = db.LLBGROUP;
 const Llmgroup = db.LLMGROUP;
-// const Op = db.Sequelize.Op;
+const Op = db.Sequelize.Op;
 
-exports.FindAll = (req, res) => {
-    if(req.body.Programme == 'LLB'){
+exports.FindAllLLB = (req, res) => {
         Llbgroup.findAll()
         .then(data => {
             res.send(data);
@@ -15,26 +14,17 @@ exports.FindAll = (req, res) => {
                 err.message || "Some error occurred while retrieving Year."
             });
         });
-    }
-    else if(req.body.Programme == 'LLM') {
-        Llmgroup.findAll()
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-              message:
-                err.message || "Some error occurred while retrieving Year."
-            });
-        });
-    }
-    else if(req.body.Programme == '') {
-    }
-    else {
+}
+
+exports.FindAllLLM = (req,res) =>{
+    Llmgroup.findAll()
+    .then(data => {
+        res.send(data);
+    })
+    .catch(err => {
         res.status(500).send({
-            message:
-              err.message || "Some error occurred while retrieving Year."
-          });
-    }
-    
+          message:
+            err.message || "Some error occurred while retrieving Year."
+        });
+    });
 }

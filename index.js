@@ -67,7 +67,8 @@ app.get('/', (req, res, next) => {
   // region end
 
   // region for group
-  router.get("/Group", (req, res) => { groupController.FindAll(req, res)});
+  router.get("/LLBGroup", (req, res) => { groupController.FindAllLLB(req, res)});
+  router.get("/LLMGroup", (req, res) => { groupController.FindAllLLM(req, res)});
   // region end
 
   // region for student start
