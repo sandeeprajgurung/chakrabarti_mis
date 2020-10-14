@@ -1,11 +1,11 @@
 const db = require("../connect/Connect");
-const FirstyearCriminal = db.FIRSTYEAR_CRIMINALLAW;
+const FirstyearBusiness = db.FIRSTYEAR_BUSINESS;
 const Op = db.Sequelize.Op;
 
 exports.Search=async (req,res)=>{
     try{
-        const student = await db.sequelize.query(`SELECT LS.SNAME,IFNULL(FCL.LEGAL_RESEARCH,0),IFNULL(FCL.COMPARATIVE_STUDY,0),IFNULL(FCL.CRIMINAL_LAW,0),IFNULL(FCL.FORENSIC,0),IFNULL(FCL.JUVINAL_JUSTICE,0) 
-        FROM llmstudent AS LS join FIRSTYEAR_CRIMINALLAW AS FCL on LS.SID = FCL.SID 
+        const student = await db.sequelize.query(`SELECT LS.SNAME,IFNULL(FB.LEGAL_RESEARCH,0),IFNULL(FB.COMPARATIVE_STUDY,0),IFNULL(FB.CONTRACT_LAW,0),IFNULL(FB.INTELLECTUAL_PROPERTY,0)
+        FROM llmstudent AS LS join FIRSTYEAR_BUSINESS AS FB on LS.SID = FCL.SID 
         WHERE LS.PRGID = (:prgid) AND LS.GRPID = (:grpid)`, {
             replacements: {
               prgid: req.query.prgid,

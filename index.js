@@ -8,7 +8,9 @@ const secondyearController = require("./controller/secondyearController")
 const thirdyearController = require("./controller/thirdyearController")
 const fourthyearController = require("./controller/fourthyearController")
 const fifthyearController = require("./controller/fifthyearController")
-const firstyearhumanController = require("./controller/masterfirstyearCriminalController")
+const firstyearhumanController = require("./controller/masterfirstyearHumanController")
+const masterfirstyearCriminalController = require("./controller/masterfirstyearCriminalController")
+const masterfirstyearBusinessController = require("./controller/masterfirstyearBusinessController")
 
 const checkAuth = require("./middleware/check-auth");
 
@@ -130,11 +132,25 @@ app.get('/', (req, res, next) => {
   // region end
 
   // region for LLM first year student result
-  router.get("/Firstyear/HumanRights", (req, res) => { firstyearhumanController.FindAll(req, res)});
-  router.get("/Firstyear/HumanRights/Search", (req, res) => { firstyearhumanController.Search(req, res)});
-  router.put("/Firstyear/HumanRights/:Id", (req, res) => { firstyearhumanController.Update(req, res)});
-  router.delete("/Firstyear/HumanRights/:Id", (req, res) => { firstyearhumanController.Delete(req, res)});
+  router.get("/Master/Firstyear/HumanRights", (req, res) => { firstyearhumanController.FindAll(req, res)});
+  router.get("/Master/Firstyear/HumanRights/Search", (req, res) => { firstyearhumanController.Search(req, res)});
+  router.put("/Master/Firstyear/HumanRights/:Id", (req, res) => { firstyearhumanController.Update(req, res)});
+  router.delete("/Master/Firstyear/HumanRights/:Id", (req, res) => { firstyearhumanController.Delete(req, res)});
   // region end
+
+   // region for LLM Second year student result
+  //  router.get("/Firstyear/HumanRights", (req, res) => { masterfirstyearCriminalController.FindAll(req, res)});
+   router.get("/Master/Firstyear/CriminalLaw/Search", (req, res) => { masterfirstyearCriminalController.Search(req, res)});
+  //  router.put("/Firstyear/HumanRights/:Id", (req, res) => { masterfirstyearCriminalController.Update(req, res)});
+  //  router.delete("/Firstyear/HumanRights/:Id", (req, res) => { masterfirstyearCriminalController.Delete(req, res)});
+   // region end
+
+   // region for LLM first year student result
+  //  router.get("/Firstyear/HumanRights", (req, res) => { masterfirstyearBusinessController.FindAll(req, res)});
+  router.get("/Master/Firstyear/Business/Search", (req, res) => { masterfirstyearBusinessController.Search(req, res)});
+  //  router.put("/Firstyear/HumanRights/:Id", (req, res) => { masterfirstyearBusinessController.Update(req, res)});
+  //  router.delete("/Firstyear/HumanRights/:Id", (req, res) => { masterfirstyearBusinessController.Delete(req, res)});
+   // region end
 
 //when api doesnt matches with above api list then status 400 bad request is sent
 app.use(function (req, res, next) {
