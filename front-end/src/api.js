@@ -24,6 +24,7 @@ export default {
     },
 
     getGroup(data) {
+        console.log(data);
         return this.execute('get', '/Group', data);
     },
 

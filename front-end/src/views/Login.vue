@@ -14,38 +14,45 @@
     <v-container>
       <v-card v-if="tabValue === 0" outlined class="mt-5 pa-10">
         <v-card-title class="pa-0">View Result</v-card-title>
-        <v-form ref="viewResultsForm" v-model="valid" lazy-validation>
+        <v-form
+          ref="viewResultsForm"
+          v-model="valid"
+          @submit.prevent="resultFormSubmit"
+          lazy-validation
+        >
           <v-row>
             <v-col cols="8" sm="4">
               <v-select
-                v-model="select"
+                v-model="result.academic"
                 :items="academics"
+                item-text="name"
+                item-value="id"
+                @change="selectedAcademic"
                 :rules="[(v) => !!v || 'Academics is required']"
                 label="Academics*"
               ></v-select>
             </v-col>
             <v-col cols="8" sm="4">
               <v-select
-                v-model="select"
-                :items="program"
+                v-model="result.program"
+                :items="programs"
+                item-text="name"
+                item-value="id"
                 :rules="[(v) => !!v || 'Program is required']"
                 label="Program*"
               ></v-select>
             </v-col>
             <v-col cols="8" sm="4">
               <v-text-field
-                v-model="symbolNumber"
+                v-model="result.symbolNo"
                 :counter="10"
                 :rules="[(v) => !!v || 'Symbol Number is required']"
-                :error-messages="errors"
                 label="Symbol No.*"
                 required
               />
             </v-col>
           </v-row>
-          <v-btn class="mr-4" @click="resultSubmit" color="primary">
-            Search
-          </v-btn>
+          <v-btn class="mr-4" type="submit" color="primary"> Search </v-btn>
           <v-btn @click="clear"> clear </v-btn>
         </v-form>
       </v-card>
@@ -95,14 +102,23 @@ export default {
     symbolNumber: "",
     username: "",
     password: "",
+    result: {},
     select: null,
-    academics: ["Undergraduate", "Graduate"],
-    program: [
-      "BA.LL.B First Year",
-      "BA.LL.B Second Year",
-      "BA.LL.B Third Year",
-      "BA.LL.B Fourth Year",
-      "BA.LL.B Fifth Year",
+    programs: [],
+    graduate: [
+      { id: "6", name: "LL.M First Year" },
+      { id: "7", name: "LL.M Second Year" },
+    ],
+    academics: [
+      { name: "Undergraduate", id: "0" },
+      { name: "Graduate", id: "1" },
+    ],
+    undergraduate: [
+      { id: "1", name: "BA.LL.B First Year" },
+      { id: "2", name: "BA.LL.B Second Year" },
+      { id: "3", name: "BA.LL.B Third Year" },
+      { id: "4", name: "BA.LL.B Fourth Year" },
+      { id: "5", name: "BA.LL.B Fifth Year" },
     ],
     checkbox: null,
     tabValue: 0,
@@ -110,11 +126,29 @@ export default {
   }),
 
   methods: {
+    resultFormSubmit() {
+      this.$refs.viewResultsForm.validate();
+      console.log(this.result);
+    },
+
+    selectedAcademic() {
+      if (this.result.academic === "1") {
+        return (this.programs = this.graduate);
+      }
+      return (this.programs = this.undergraduate);
+    },
+
     selectCategory($category) {
       if ($category === "login") {
         return (this.tabValue = 1);
       }
       return (this.tabValue = 0);
+    },
+
+    resultSubmit() {},
+
+    clear() {
+      this.$refs.viewResultsForm.reset()
     },
 
     async loginSubmit() {

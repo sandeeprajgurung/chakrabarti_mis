@@ -301,8 +301,9 @@ export default {
     selectedProgram() {
       if (this.student.programme > 5) {
         console.log("LLM");
-        this.modal = { Programme: "LLM" };
-        this.getGroup(this.modal);
+        this.getGroup({
+          Programme: 'LLM'
+        });
       } else if (this.student.programme > 3) {
         console.log("LLB");
         this.getGroup({
@@ -312,7 +313,7 @@ export default {
     },
 
     async getGroup($group) {
-      console.log($group);
+      console.log('Group: ', $group);
       this.group = await api.getGroup($group);
     },
 
