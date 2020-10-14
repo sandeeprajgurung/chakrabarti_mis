@@ -1,7 +1,8 @@
 const db = require("../connect/Connect");
 const Llbstudent = db.LLBSTUDENT;
 const Llmstudent = db.LLMSTUDENT;
-// const Op = db.Sequelize.Op;
+
+const Op = db.Sequelize.Op;
 
 exports.CreateLLB = (req, res) => {
     const student = {
@@ -182,45 +183,45 @@ exports.FindAllLLM = (req,res) => {
 
 }
 
-exports.FindById = (req,res) => {
-    const id = req.params.Id;
+// exports.FindById = (req,res) => {
+//     const id = req.params.Id;
 
-    if(req.body.Programme == 'LLB'){
-        Llbstudent.findAll({where: {
-            SID: id
-         }})
-        .then(data =>{
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-              message:
-                err.message || "Some error occurred while retrieving Student."
-            });
-        });
-    }
-    else if(req.body.Programme == 'LLM'){
-        Llmstudent.findAll({where: {
-            SID: id
-         }})
-        .then(data =>{
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-            message:
-                err.message || "Some error occurred while retrieving Student."
-            });
-        });
-    }
-    else {
-        res.status(500).send({
-            message:
-            err.message || "Plese select programme."
-        });
-    }
+//     if(req.body.Programme == 'LLB'){
+//         Llbstudent.findAll({where: {
+//             SID: id
+//          }})
+//         .then(data =>{
+//             res.send(data);
+//         })
+//         .catch(err => {
+//             res.status(500).send({
+//               message:
+//                 err.message || "Some error occurred while retrieving Student."
+//             });
+//         });
+//     }
+//     else if(req.body.Programme == 'LLM'){
+//         Llmstudent.findAll({where: {
+//             SID: id
+//          }})
+//         .then(data =>{
+//             res.send(data);
+//         })
+//         .catch(err => {
+//             res.status(500).send({
+//             message:
+//                 err.message || "Some error occurred while retrieving Student."
+//             });
+//         });
+//     }
+//     else {
+//         res.status(500).send({
+//             message:
+//             err.message || "Plese select programme."
+//         });
+//     }
     
-}
+// }
 
 exports.FindAllStudent = async (req,res) => {
     
@@ -242,3 +243,59 @@ exports.FindAllStudent = async (req,res) => {
     }
 
 }
+
+exports.SearchLLBStudent = (req, res) => {
+
+    Llbstudent.findAll({
+        where: { 
+            PRGID: req.query.prgid,
+            [Op.or]:[
+                {
+                    GRPID: req.query.grpid
+                },
+                {
+                    GRPID:{
+                        [Op.is]:null
+                    }
+                }
+                ]
+         }
+    })
+    .then(data =>{
+        res.send(data);
+    })
+    .catch(err => {
+        res.status(500).send({
+            message:
+              err.message || "Some error occurred while retrieving Student."
+          });
+    });
+  }
+
+  exports.SearchLLMStudent = (req, res) => {
+
+    Llmstudent.findAll({
+        where: { 
+            PRGID: req.query.prgid,
+            [Op.or]:[
+                {
+                    GRPID: req.query.grpid
+                },
+                {
+                    GRPID:{
+                        [Op.is]:null
+                    }
+                }
+                ]
+         }
+    })
+    .then(data =>{
+        res.send(data);
+    })
+    .catch(err => {
+        res.status(500).send({
+            message:
+              err.message || "Some error occurred while retrieving Student."
+          });
+    });
+  }

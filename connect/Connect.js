@@ -13,7 +13,20 @@ const sequelize = new Sequelize(server.DB, server.USER, server.PASSWORD, {
         min: 0,
       acquire: 30000,
       idle: 10000
-    }
+    },
+    operatorsAliases: {
+      $and: Op.and,
+      $or: Op.or,
+      $eq: Op.eq,
+      $gt: Op.gt,
+      $lt: Op.lt,
+      $lte: Op.lte,
+      $like: Op.like,
+      $between: Op.between,
+      $iLike: Op.iLike,
+      $ne: Op.ne,
+      $in: Op.in
+  }
 });
 
 // Create a connection to the database

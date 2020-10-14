@@ -17,8 +17,8 @@ exports.FindAll=(req,res)=>{
 
 exports.Search=async (req,res)=>{
     try{
-        const student = await db.sequelize.query('SELECT LS.SNAME,TY.INTERNATIONAL_HUMAN_RIGHT,TY.INTERPRETATION,TY.LAW_EVIDENCE,TY.INTERNATIONAL_LAW,TY.CONSTITUTIONAL_LAW,TY.LEGAL_RESEARCH,TY.PROFESSIONAL_ETHICS,TY.CLINICAL_LEGAL_EDUCATION,TY.CLINICAL_WORK FROM llbstudent AS LS join thirdyear AS TY on LS.SID = TY.SID WHERE LS.sname = (:name)', {
-            replacements: {name: req.query.name},
+        const student = await db.sequelize.query('SELECT LS.SNAME,TY.INTERNATIONAL_HUMAN_RIGHT,TY.INTERPRETATION,TY.LAW_EVIDENCE,TY.INTERNATIONAL_LAW,TY.CONSTITUTIONAL_LAW,TY.LEGAL_RESEARCH,TY.PROFESSIONAL_ETHICS,TY.CLINICAL_LEGAL_EDUCATION,TY.CLINICAL_WORK FROM llbstudent AS LS join thirdyear AS TY on LS.SID = TY.SID WHERE LS.PRGID = (:prgid)', {
+            replacements: {prgid: req.query.prgid},
             type: db.sequelize.QueryTypes.SELECT
           });
     
@@ -32,6 +32,8 @@ exports.Search=async (req,res)=>{
     }
    
 }
+
+
 
 exports.Update = (req, res) => {
     const id = req.params.Id;

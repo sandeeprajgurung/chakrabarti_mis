@@ -15,22 +15,38 @@ exports.FindAll=(req,res)=>{
         });
 }
 
-exports.Search=async (req,res)=>{
-    try{
-        const student = await db.sequelize.query('SELECT LS.SNAME,SY.ENGLISH,SY.NEPALI,SY.INTERNATIONAL_RELATION,SY.LEGISLATIVE_PRINCIPLE,SY.PROCEDURE_LAW,SY.SOCOLOGY,SY.CRIMINAL_LAW,SY.CLINICAL_COURSE FROM llbstudent AS LS join secondyear AS SY on LS.SID = SY.SID WHERE LS.sname = (:name)', {
-            replacements: {name: req.query.name},
-            type: db.sequelize.QueryTypes.SELECT
-          });
+// exports.Search=async (req,res)=>{
+//     try{
+//         const student = await db.sequelize.query('SELECT LS.SNAME,SY.ENGLISH,SY.NEPALI,SY.INTERNATIONAL_RELATION,SY.LEGISLATIVE_PRINCIPLE,SY.PROCEDURE_LAW,SY.SOCOLOGY,SY.CRIMINAL_LAW,SY.CLINICAL_COURSE FROM llbstudent AS LS join secondyear AS SY on LS.SID = SY.SID WHERE LS.PRGID = (:prgid)', {
+//             replacements: {prgid: req.query.prgid},
+//             type: db.sequelize.QueryTypes.SELECT
+//           });
     
-          res.send(student);
-    }
-    catch(err){
-        res.status(500).send({
-            message:
-              err.message || "Some error occurred while retrieving Student."
-          });
-    }
+//           res.send(student);
+//     }
+//     catch(err){
+//         res.status(500).send({
+//             message:
+//               err.message || "Some error occurred while retrieving Student."
+//           });
+//     }
    
+// }
+
+exports.Search = (req, res) => {
+
+  Secondyear.findAll({
+    where: { PRGID: req.query.prgid }
+  })
+        .then(data =>{
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+              message:
+                err.message || "Some error occurred while retrieving Student."
+            });
+        });
 }
 
 exports.Update = (req, res) => {
