@@ -58,7 +58,7 @@
                       <v-row>
                         <v-col cols="12">
                           <v-text-field
-                            v-model="student.name"
+                            v-model="student.Name"
                             label="Name"
                             :rules="[(v) => !!v || 'Name is required']"
                             dense
@@ -67,7 +67,7 @@
                         </v-col>
                         <v-col cols="12" sm="6">
                           <v-text-field
-                            v-model="student.examNumber"
+                            v-model="student.ExamNo"
                             :rules="examNumberRules"
                             label="Exam number"
                             dense
@@ -76,7 +76,7 @@
                         </v-col>
                         <v-col cols="12" sm="6">
                           <v-text-field
-                            v-model="student.rollNumber"
+                            v-model="student.RollNo"
                             :rules="rollNumberRules"
                             label="Roll number"
                             dense
@@ -84,8 +84,7 @@
                         </v-col>
                         <v-col cols="12" sm="6">
                           <v-text-field
-                            v-model="student.email"
-                            :rules="emailRules"
+                            v-model="student.Email"
                             label="E-mail"
                             dense
                           >
@@ -93,8 +92,7 @@
                         </v-col>
                         <v-col cols="12" sm="6">
                           <v-text-field
-                            v-model="student.phoneNumber"
-                            :rules="[(v) => !!v || 'Phone number is required']"
+                            v-model="student.Phone"
                             label="Phone no."
                             dense
                           >
@@ -102,8 +100,10 @@
                         </v-col>
                         <v-col cols="12" sm="6">
                           <v-select
-                            v-model="student.gender"
+                            v-model="student.Gender"
                             :items="gender"
+                            item-text="title"
+                            item-value="value"
                             :rules="[(v) => !!v || 'Gender is required']"
                             label="Gender"
                             dense
@@ -111,7 +111,7 @@
                         </v-col>
                         <v-col cols="12" sm="6">
                           <v-text-field
-                            v-model="student.batch"
+                            v-model="student.Batch"
                             :rules="batchRules"
                             label="Batch"
                             dense
@@ -119,17 +119,8 @@
                           </v-text-field>
                         </v-col>
                         <v-col cols="12" sm="6">
-                          <v-text-field
-                            v-model="student.gpa"
-                            :rules="[(v) => !!v || 'GPA is required']"
-                            label="GPA"
-                            dense
-                          >
-                          </v-text-field>
-                        </v-col>
-                        <v-col cols="12" sm="6">
                           <v-select
-                            v-model="student.programme"
+                            v-model="student.PrgId"
                             :items="programmes"
                             item-text="PRGNAME"
                             item-value="PRGID"
@@ -141,9 +132,12 @@
                         </v-col>
                         <v-col cols="12" sm="6">
                           <v-select
-                            :items="items"
-                            :rules="[(v) => !!v || 'GRPID is required']"
-                            label="Group id"
+                            v-model="student.GrpId"
+                            :items="group"
+                            item-text="grpname"
+                            item-value="grpid"
+                            label="Group"
+                            :disabled="disable"
                             dense
                           ></v-select>
                         </v-col>
@@ -197,13 +191,17 @@ import api from "@/api";
 
 export default {
   data: () => ({
-    gender: ["Male", "Female"],
+    gender: [
+      { value: "M", title: "Male" },
+      { value: "F", title: "Female" },
+    ],
     items: ["Foo", "Bar", "Fizz", "Buzz"],
     valid: true,
     student: {},
     programmes: [],
     group: [],
     modal: [],
+    disable: true,
     examNumberRules: [
       (v) => !!v || "Exam number is required",
       (v) =>
@@ -213,10 +211,6 @@ export default {
       (v) => !!v || "Roll number is required",
       (v) =>
         Number.isInteger(Number(v)) || "The value must be an integer number",
-    ],
-    emailRules: [
-      (v) => !!v || "E-mail is required",
-      (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
     ],
     batchRules: [
       (v) => !!v || "Batch is required",
@@ -229,33 +223,40 @@ export default {
     dialogDelete: false,
     headers: [
       {
-        text: "Dessert (100g serving)",
+        text: "Name",
         align: "start",
         sortable: false,
-        value: "name",
+        value: "SNAME",
       },
       {
-        text: "Calories",
-        value: "calories",
+        text: "Roll no.",
+        value: "ROLL_NO",
       },
       {
-        text: "Fat (g)",
-        value: "fat",
+        text: "E-mail",
+        value: "EMAIL",
       },
       {
-        text: "Carbs (g)",
-        value: "carbs",
+        text: "Phone no.",
+        value: "PHONE_NO",
       },
       {
-        text: "Protein (g)",
-        value: "protein",
+        text: "Batch",
+        value: "BATCH",
+        sortable: false,
       },
       {
-        text: "Actions",
+        text: "Program",
+        value: "PRGID",
+        sortable: false,
+      },
+      {
+        text: "Action",
         value: "actions",
         sortable: false,
       },
     ],
+    allStudents: [],
     desserts: [],
     editedIndex: -1,
     editedItem: {
@@ -274,11 +275,6 @@ export default {
     },
   }),
 
-  async created() {
-    this.initialize();
-    this.refreshModal();
-  },
-
   computed: {
     formTitle() {
       return this.editedIndex === -1 ? "New Student" : "Edit Student";
@@ -294,109 +290,49 @@ export default {
     },
   },
 
+  async created() {
+    this.load();
+  },
+
   methods: {
-    async refreshModal() {
+    async load() {
       this.programmes = await api.getProgramme();
+      this.desserts = await api.getLlmStudents();
     },
 
-    selectedProgram() {
-      if (this.student.programme > 5) {
-        console.log("LLM");
-        this.getGroup({
-          Programme: 'LLM'
-        });
-      } else if (this.student.programme > 3) {
-        console.log("LLB");
-        this.getGroup({
-          Programme: "LLB",
-        });
-      } else return true;
+    async selectedProgram() {
+      if (this.student.PrgId > 5) {
+        this.disable = false;
+        this.group = await api.getLlmGroup();
+      } else if (this.student.PrgId > 3) {
+        this.disable = false;
+        this.group = await api.getLlbGroup();
+      } else {
+        this.disable = true;
+        this.group = [];
+      }
     },
 
-    async getGroup($group) {
-      console.log('Group: ', $group);
-      this.group = await api.getGroup($group);
+    async studentFormSubmit() {
+      if (this.$refs.studentForm.validate() === true) {
+        if (this.student.PrgId > 5) {
+          await api.createLlmStudent(this.student);
+        } else {
+          await api.createLlbStudent(this.student);
+        }
+        this.student = {}; // reset form
+        this.$refs.studentForm.reset();
+        this.dialog = false;
+        let msg = {
+          status: "true",
+          text: "Student created successfully",
+        };
+        this.$emit("childToParent", msg);
+        this.load();
+      }
     },
 
-    studentFormSubmit() {
-      this.$refs.studentForm.validate();
-      console.log(this.student);
-    },
-
-    initialize() {
-      this.desserts = [
-        {
-          name: "Frozen Yogurt",
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0,
-        },
-        {
-          name: "Ice cream sandwich",
-          calories: 237,
-          fat: 9.0,
-          carbs: 37,
-          protein: 4.3,
-        },
-        {
-          name: "Eclair",
-          calories: 262,
-          fat: 16.0,
-          carbs: 23,
-          protein: 6.0,
-        },
-        {
-          name: "Cupcake",
-          calories: 305,
-          fat: 3.7,
-          carbs: 67,
-          protein: 4.3,
-        },
-        {
-          name: "Gingerbread",
-          calories: 356,
-          fat: 16.0,
-          carbs: 49,
-          protein: 3.9,
-        },
-        {
-          name: "Jelly bean",
-          calories: 375,
-          fat: 0.0,
-          carbs: 94,
-          protein: 0.0,
-        },
-        {
-          name: "Lollipop",
-          calories: 392,
-          fat: 0.2,
-          carbs: 98,
-          protein: 0,
-        },
-        {
-          name: "Honeycomb",
-          calories: 408,
-          fat: 3.2,
-          carbs: 87,
-          protein: 6.5,
-        },
-        {
-          name: "Donut",
-          calories: 452,
-          fat: 25.0,
-          carbs: 51,
-          protein: 4.9,
-        },
-        {
-          name: "KitKat",
-          calories: 518,
-          fat: 26.0,
-          carbs: 65,
-          protein: 7,
-        },
-      ];
-    },
+    initialize() {},
 
     editItem(item) {
       this.editedIndex = this.desserts.indexOf(item);
