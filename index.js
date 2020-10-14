@@ -72,10 +72,14 @@ app.get('/', (req, res, next) => {
   // region end
 
   // region for student start
-  router.post("/Student", (req, res) => { studentController.Create(req, res)});
-  router.put("/Student/:Id", (req, res) => { studentController.Update(req, res)});
-  router.delete("/Student/:Id", (req, res) => { studentController.Delete(req, res)});
-  router.get("/Student", (req, res) => { studentController.FindAll(req, res)});
+  router.post("/LLBStudent", (req, res) => { studentController.CreateLLB(req, res)});
+  router.post("/LLMStudent", (req, res) => { studentController.CreateLLM(req, res)});
+  router.put("/LLBStudent/:Id", (req, res) => { studentController.UpdateLLB(req, res)});
+  router.put("/LLMStudent/:Id", (req, res) => { studentController.UpdateLLM(req, res)});
+  router.delete("/LLBStudent/:Id", (req, res) => { studentController.DeleteLLB(req, res)});
+  router.delete("/LLMStudent/:Id", (req, res) => { studentController.DeleteLLM(req, res)});
+  router.get("/LLBStudent", (req, res) => { studentController.FindAllLLB(req, res)});
+  router.get("/LLMStudent", (req, res) => { studentController.FindAllLLM(req, res)});
   router.get("/Student/:Id", (req, res) => { studentController.FindById(req, res)});
   // region end
 
