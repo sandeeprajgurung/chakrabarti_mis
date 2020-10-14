@@ -36,9 +36,9 @@ export default {
     errors: null,
     items: ["Item 1", "Item 2", "Item 3", "Item 4"],
     checkbox: null,
-    snackbar: true,
+    snackbar: false,
     text: "",
-    // timeout: 3000,
+    timeout: 3000,
   }),
 
   methods: {
