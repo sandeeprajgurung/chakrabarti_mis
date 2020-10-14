@@ -43,6 +43,10 @@ export default {
         return this.execute('GET', '/LLMStudent');
     },
 
+    getAllStudents() {
+        return this.execute('GET', '/Student');
+    },
+
     getPosts() {
         return this.execute('get', '/posts')
     },

@@ -195,7 +195,6 @@ export default {
       { value: "M", title: "Male" },
       { value: "F", title: "Female" },
     ],
-    items: ["Foo", "Bar", "Fizz", "Buzz"],
     valid: true,
     student: {},
     programmes: [],
@@ -297,7 +296,7 @@ export default {
   methods: {
     async load() {
       this.programmes = await api.getProgramme();
-      this.desserts = await api.getLlmStudents();
+      this.desserts = await api.getAllStudents();
     },
 
     async selectedProgram() {
