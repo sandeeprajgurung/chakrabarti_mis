@@ -5,7 +5,7 @@ const resultController = require("./controller/resultController");
 const firstyearController = require("./controller/firstyearController");
 const groupController = require("./controller/groupController");
 
-const checkAuth = require("./middleware/check-auth");
+// const checkAuth = require("./middleware/check-auth");
 
 
 const bodyParser = require('body-parser');
@@ -29,6 +29,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({
   extended: false
 }));
+
 // create application/json parser
 var jsonParser = bodyParser.json();
 app.use(bodyParser.json());
@@ -67,6 +68,10 @@ app.get('/', (req, res, next) => {
 
   // region for student start
   router.post("/Student", (req, res) => { studentController.Create(req, res)});
+  // region end
+
+  // region for student start
+  router.post("/Student", (req, res) => { studentController.Create(req, res)});
   router.put("/Student/:Id", (req, res) => { studentController.Update(req, res)});
   router.delete("/Student/:Id", (req, res) => { studentController.Delete(req, res)});
   router.get("/Student", (req, res) => { studentController.FindAll(req, res)});
@@ -80,6 +85,10 @@ app.get('/', (req, res, next) => {
   // region for first year student
   router.get("/Firstyear", (req, res) => { firstyearController.FindAll(req, res)});
   router.get("/Firstyear", (req, res) => { firstyearController.Search(req, res)});
+  // region end
+
+  // region for student marks
+  router.post("/Result", (req, res) => { resultController.Create(req, res)});
   // region end
 
 //when api doesnt matches with above api list then status 400 bad request is sent

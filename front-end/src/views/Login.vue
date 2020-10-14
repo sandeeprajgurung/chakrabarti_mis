@@ -21,9 +21,7 @@
                 v-model="symbolNumber"
                 :counter="10"
                 :rules="[(v) => !!v || 'Symbol Number is required']"
-                :error-messages="errors"
                 label="Symbol No."
-                required
               />
             </v-col>
             <v-col cols="12" sm="6">
@@ -44,28 +42,26 @@
 
       <v-card v-if="tabValue === 1" outlined class="mt-5 pa-10">
         <v-card-title class="pa-0">Login</v-card-title>
-        <v-form ref="loginForm" v-model="valid" lazy-validation>
+        <v-form ref="loginForm" v-model="valid" lazy-validation @submit.prevent="loginSubmit">
           <v-row>
             <v-col cols="12" sm="6">
               <v-text-field
-                v-model="username"
+                v-model="model.username"
                 :rules="[(v) => !!v || 'Username is required']"
                 type="text"
                 label="Username"
-                required
               />
             </v-col>
             <v-col cols="12" sm="6">
               <v-text-field
-                v-model="password"
+                v-model="model.password"
                 :rules="[(v) => !!v || 'Password is required']"
                 type="password"
                 label="Password"
-                required
               />
             </v-col>
           </v-row>
-          <v-btn class="mr-4" @click="loginSubmit" color="primary">
+          <v-btn class="mr-4" type="submit" color="primary">
             Submit
           </v-btn>
           <v-btn @click="clear"> clear </v-btn>
@@ -76,6 +72,8 @@
 </template>
 
 <script>
+import api from '@/api';
+
 export default {
   data: () => ({
     valid: true,
@@ -88,6 +86,7 @@ export default {
     items: ["Item 1", "Item 2", "Item 3", "Item 4"],
     checkbox: null,
     tabValue: 0,
+    model: {},
   }),
 
   methods: {
@@ -99,28 +98,24 @@ export default {
     //   this.password = "";
     //   this.select = null;
     },
+
     selectCategory($category) {
       if ($category === "login") {
         return (this.tabValue = 1);
       }
       return (this.tabValue = 0);
     },
-    loginSubmit() {
-      this.$refs.loginForm.validate();
 
-      axios.post(`http://jsonplaceholder.typicode.com/posts`, {
-      body: this.postBody
-    })
-    .then(response => {})
-    .catch(e => {
-      this.errors.push(e)
-    })
-    
-      console.log(this.username);
-      console.log(this.password);
+    async loginSubmit() {
+      this.$refs.loginForm.validate();
+      if (this.model) {
+        await api.login(this.model)
+      }
+      this.model = {}
     },
+
     resultSubmit() {
-      this.$refs.viewResultsForm.validate();
+      // this.$refs.viewResultsForm.validate();
     },
   },
 };
