@@ -221,3 +221,24 @@ exports.FindById = (req,res) => {
     }
     
 }
+
+exports.FindAllStudent = async (req,res) => {
+    
+    try{
+        const llbstudent = await db.sequelize.query('SELECT * from LLBSTUDENT', {
+            type: db.sequelize.QueryTypes.SELECT
+          });
+          const llmstudent = await db.sequelize.query('SELECT * from LLMSTUDENT', {
+            type: db.sequelize.QueryTypes.SELECT
+          });
+    
+          res.send(llbstudent.concat(llmstudent));
+    }
+    catch(err){
+        res.status(500).send({
+            message:
+              err.message || "Some error occurred while retrieving Student."
+          });
+    }
+
+}

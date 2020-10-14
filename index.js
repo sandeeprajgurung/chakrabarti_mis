@@ -72,6 +72,7 @@ app.get('/', (req, res, next) => {
   // region end
 
   // region for student start
+  router.get("/Student", (req, res) => { studentController.FindAllStudent(req, res)});
   router.post("/LLBStudent", (req, res) => { studentController.CreateLLB(req, res)});
   router.post("/LLMStudent", (req, res) => { studentController.CreateLLM(req, res)});
   router.put("/LLBStudent/:Id", (req, res) => { studentController.UpdateLLB(req, res)});
