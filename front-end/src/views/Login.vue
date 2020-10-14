@@ -16,21 +16,31 @@
         <v-card-title class="pa-0">View Result</v-card-title>
         <v-form ref="viewResultsForm" v-model="valid" lazy-validation>
           <v-row>
-            <v-col cols="12" sm="6">
+            <v-col cols="8" sm="4">
+              <v-select
+                v-model="select"
+                :items="academics"
+                :rules="[(v) => !!v || 'Academics is required']"
+                label="Academics*"
+              ></v-select>
+            </v-col>
+            <v-col cols="8" sm="4">
+              <v-select
+                v-model="select"
+                :items="program"
+                :rules="[(v) => !!v || 'Program is required']"
+                label="Program*"
+              ></v-select>
+            </v-col>
+            <v-col cols="8" sm="4">
               <v-text-field
                 v-model="symbolNumber"
                 :counter="10"
                 :rules="[(v) => !!v || 'Symbol Number is required']"
-                label="Symbol No."
+                :error-messages="errors"
+                label="Symbol No.*"
+                required
               />
-            </v-col>
-            <v-col cols="12" sm="6">
-              <v-select
-                v-model="select"
-                :items="items"
-                :rules="[(v) => !!v || 'Item is required']"
-                label="Standard"
-              ></v-select>
             </v-col>
           </v-row>
           <v-btn class="mr-4" @click="resultSubmit" color="primary">
@@ -42,7 +52,12 @@
 
       <v-card v-if="tabValue === 1" outlined class="mt-5 pa-10">
         <v-card-title class="pa-0">Login</v-card-title>
-        <v-form ref="loginForm" v-model="valid" lazy-validation @submit.prevent="loginSubmit">
+        <v-form
+          ref="loginForm"
+          v-model="valid"
+          lazy-validation
+          @submit.prevent="loginSubmit"
+        >
           <v-row>
             <v-col cols="12" sm="6">
               <v-text-field
@@ -61,9 +76,7 @@
               />
             </v-col>
           </v-row>
-          <v-btn class="mr-4" type="submit" color="primary">
-            Submit
-          </v-btn>
+          <v-btn class="mr-4" type="submit" color="primary"> Submit </v-btn>
           <v-btn @click="clear"> clear </v-btn>
         </v-form>
       </v-card>
@@ -72,7 +85,7 @@
 </template>
 
 <script>
-import api from '@/api';
+import api from "@/api";
 
 export default {
   data: () => ({
@@ -83,22 +96,20 @@ export default {
     username: "",
     password: "",
     select: null,
-    items: ["Item 1", "Item 2", "Item 3", "Item 4"],
+    academics: ["Undergraduate", "Graduate"],
+    program: [
+      "BA.LL.B First Year",
+      "BA.LL.B Second Year",
+      "BA.LL.B Third Year",
+      "BA.LL.B Fourth Year",
+      "BA.LL.B Fifth Year",
+    ],
     checkbox: null,
     tabValue: 0,
     model: {},
   }),
 
   methods: {
-    clear() {
-        this.$refs.viewResultsForm.reset();
-        this.$refs.loginForm.reset();
-    //   this.symbolNumber = "";
-    //   this.username = "";
-    //   this.password = "";
-    //   this.select = null;
-    },
-
     selectCategory($category) {
       if ($category === "login") {
         return (this.tabValue = 1);
@@ -109,13 +120,9 @@ export default {
     async loginSubmit() {
       this.$refs.loginForm.validate();
       if (this.model) {
-        await api.login(this.model)
+        await api.login(this.model);
       }
-      this.model = {}
-    },
-
-    resultSubmit() {
-      // this.$refs.viewResultsForm.validate();
+      this.model = {};
     },
   },
 };
