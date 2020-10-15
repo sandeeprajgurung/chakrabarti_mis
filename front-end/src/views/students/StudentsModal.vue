@@ -101,7 +101,7 @@
               <v-col cols="12" sm="6">
                 <v-select
                   :items="items"
-                  :rules="[(v) => !!v || 'PRGID is required']"
+                  :rules="[(v) => !!v || 'Program is required']"
                   label="Program"
                   dense
                 ></v-select>
@@ -109,7 +109,7 @@
               <v-col cols="12" sm="6">
                 <v-select
                   :items="items"
-                  :rules="[(v) => !!v || 'GRPID is required']"
+                  :rules="[(v) => !!v || 'Group is required']"
                   label="GRPID"
                   dense
                 ></v-select>

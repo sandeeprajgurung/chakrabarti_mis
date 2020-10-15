@@ -85,6 +85,7 @@
                         <v-col cols="12" sm="6">
                           <v-text-field
                             v-model="student.Email"
+                            :rules="emailRules"
                             label="E-mail"
                             dense
                           >
@@ -93,6 +94,7 @@
                         <v-col cols="12" sm="6">
                           <v-text-field
                             v-model="student.Phone"
+                            :rules="phoneNoRules"
                             label="Phone no."
                             dense
                           >
@@ -125,7 +127,7 @@
                             item-text="PRGNAME"
                             item-value="PRGID"
                             @change="selectedProgram"
-                            :rules="[(v) => !!v || 'PRGID is required']"
+                            :rules="[(v) => !!v || 'Program is required']"
                             label="Programme"
                             dense
                           ></v-select>
@@ -215,6 +217,22 @@ export default {
       (v) => !!v || "Batch is required",
       (v) =>
         Number.isInteger(Number(v)) || "The value must be an integer number",
+    ],
+    emailRules: [ 
+      v => {
+        if(v.length > 0) {
+        const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return pattern.test(v) || 'Invalid E-mail.';
+        }
+      }
+    ],
+    phoneNoRules:[
+      v => {
+        if(v.length > 0) {
+        const pattern = /^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/;
+        return pattern.test(v) || 'Invalid Phone Number.';
+        }
+      }
     ],
 
     search: "",
