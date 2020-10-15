@@ -222,7 +222,7 @@ export default {
       v => {
         if(v.length > 0) {
         const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return pattern.test(v) || 'Invalid E-mail.';
+        return pattern.test(v) || 'Invalid E-mail';
         }
       }
     ],
@@ -230,7 +230,7 @@ export default {
       v => {
         if(v.length > 0) {
         const pattern = /^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/;
-        return pattern.test(v) || 'Invalid Phone Number.';
+        return pattern.test(v) || 'Invalid Phone Number';
         }
       }
     ],
