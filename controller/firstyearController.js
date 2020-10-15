@@ -15,6 +15,31 @@ exports.FindAll=(req,res)=>{
         });
 }
 
+exports.Create = (req, res) => {
+  const firstyear = {
+    POLITICAL : req.body.Political,
+    ECONOMIC : req.body.Economic,
+    HISTORY_OF_NEPAL : req.body.HistoryOfNepal,
+    SOCOLOGY : req.body.Socology,
+    PRINCIPLE_OF_LAW : req.body.PrincipleOfLaw,
+    CONCEPT_OF_LAW : req.body.ConceptOfLaw,
+    LOGIC_LEGAL_REASONING : req.body.LogicLegalReasoning,
+    CLINICAL_WORK : req.body.ClinicalWork,
+    SID : req.body.SId
+  };
+
+  Firstyear.create(firstyear)
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+      res.status(500).send({
+          message:
+          err.message || "Some error occurred while entering marks."
+      });
+  });
+}
+
 // exports.Search=async (req,res)=>{
 //     try{
 //         const student = await db.sequelize.query('SELECT LS.SNAME,FS.POLITICAL,FS.ECONOMIC,FS.HISTORY_OF_NEPAL,FS.SOCOLOGY,FS.PRINCIPLE_OF_LAW,FS.CONCEPT_OF_LAW,FS.LOGIC_LEGAL_REASONING,FS.CLINICAL_WORK FROM llbstudent AS LS join firstyear AS FS on LS.SID = FS.SID WHERE LS.PRGID = (:prgid)', {

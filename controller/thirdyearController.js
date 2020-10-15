@@ -15,6 +15,33 @@ exports.FindAll=(req,res)=>{
         });
 }
 
+exports.Create = (req, res) => {
+  const thirdyear = {
+    INTERNATIONAL_HUMAN_RIGHT : req.body.InternationalHumanRight,
+    INTERPRETATION : req.body.Interpretation,
+    LAW_EVIDENCE : req.body.LawEvidence,
+    INTERNATIONAL_LAW : req.body.InternationalLaw,
+    CONSTITUTIONAL_LAW : req.body.ConstitutionalLaw,
+    LEGAL_RESEARCH : req.body.LegalResearch,
+    PROFESSIONAL_ETHICS : req.body.ProfessionalEthics,
+    CLINICAL_LEGAL_EDUCATION : req.body.ClinicalLegalEducation,
+    CLINICAL_WORK : req.body.ClinicalWork,
+    SID : req.body.SId,
+    PRGID : req.body.PrgId
+  };
+
+  Thirdyear.create(thirdyear)
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+      res.status(500).send({
+          message:
+          err.message || "Some error occurred while entering marks."
+      });
+  });
+}
+
 exports.Search=async (req,res)=>{
     try{
         const student = await db.sequelize.query('SELECT LS.SNAME,TY.INTERNATIONAL_HUMAN_RIGHT,TY.INTERPRETATION,TY.LAW_EVIDENCE,TY.INTERNATIONAL_LAW,TY.CONSTITUTIONAL_LAW,TY.LEGAL_RESEARCH,TY.PROFESSIONAL_ETHICS,TY.CLINICAL_LEGAL_EDUCATION,TY.CLINICAL_WORK FROM llbstudent AS LS join thirdyear AS TY on LS.SID = TY.SID WHERE LS.PRGID = (:prgid)', {

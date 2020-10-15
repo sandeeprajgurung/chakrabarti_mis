@@ -97,6 +97,7 @@ app.get('/', (req, res, next) => {
 
   // region for first year student result
   router.get("/Firstyear", (req, res) => { firstyearController.FindAll(req, res)});
+  router.post("/Firstyear", (req, res) => { firstyearController.Create(req, res)});
   // router.get("/Firstyear/Search", (req, res) => { firstyearController.Search(req, res)});
   router.put("/Firstyear/:Id", (req, res) => { firstyearController.Update(req, res)});
   router.delete("/Firstyear/:Id", (req, res) => { firstyearController.Delete(req, res)});
@@ -104,6 +105,7 @@ app.get('/', (req, res, next) => {
 
   // region for second year student result
   router.get("/Secondyear", (req, res) => { secondyearController.FindAll(req, res)});
+  router.post("/Secondyear", (req, res) => { secondyearController.Create(req, res)});
   // router.get("/Secondyear/Search", (req, res) => { secondyearController.Search(req, res)});
   router.put("/Secondyear/:Id", (req, res) => { secondyearController.Update(req, res)});
   router.delete("/Secondyear/:Id", (req, res) => { secondyearController.Delete(req, res)});
@@ -111,6 +113,7 @@ app.get('/', (req, res, next) => {
 
   // region for third year student result
   router.get("/Thirdyear", (req, res) => { thirdyearController.FindAll(req, res)});
+  router.post("/Thirdyear", (req, res) => { thirdyearController.Create(req, res)});
   // router.get("/Thirdyear/Search", (req, res) => { thirdyearController.Search(req, res)});
   router.put("/Thirdyear/:Id", (req, res) => { thirdyearController.Update(req, res)});
   router.delete("/Thirdyear/:Id", (req, res) => { thirdyearController.Delete(req, res)});

@@ -15,6 +15,31 @@ exports.FindAll=(req,res)=>{
         });
 }
 
+exports.Create = (req, res) => {
+  const secondyear = {
+    ENGLISH : req.body.English,
+    NEPALI : req.body.Nepali,
+    INTERNATIONAL_RELATION : req.body.InternationalRelation,
+    LEGISLATIVE_PRINCIPLE : req.body.LegislativePrinciple,
+    PROCEDURE_LAW : req.body.ProcedureLaw,
+    SOCOLOGY : req.body.Socology,
+    CRIMINAL_LAW : req.body.CriminalLaw,
+    CLINICAL_COURSE : req.body.ClinicalCourse,
+    SID : req.body.SId
+};
+
+  Secondyear.create(secondyear)
+  .then(data => {
+    res.send(data);
+  })
+  .catch(err => {
+      res.status(500).send({
+          message:
+          err.message || "Some error occurred while entering marks."
+      });
+  });
+}
+
 // exports.Search=async (req,res)=>{
 //     try{
 //         const student = await db.sequelize.query('SELECT LS.SNAME,SY.ENGLISH,SY.NEPALI,SY.INTERNATIONAL_RELATION,SY.LEGISLATIVE_PRINCIPLE,SY.PROCEDURE_LAW,SY.SOCOLOGY,SY.CRIMINAL_LAW,SY.CLINICAL_COURSE FROM llbstudent AS LS join secondyear AS SY on LS.SID = SY.SID WHERE LS.PRGID = (:prgid)', {
