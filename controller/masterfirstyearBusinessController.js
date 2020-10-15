@@ -24,3 +24,24 @@ exports.Search=async (req,res)=>{
     }
    
 }
+
+exports.Create = (req, res) => {
+  const Business = {
+    LEGAL_RESEARCH : req.body.LegalResearch,
+    COMPARATIVE_STUDY : req.body.ComparativeStudy,
+    CONTRACT_LAW : req.body.ContractLaw,
+    INTELLECTUAL_PROPERTY : req.body.IntellectualProperty,
+    SID : req.body.SId
+  };
+
+  FirstyearBusiness.create(Business)
+      .then(data =>  {
+          res.send(data);
+              })
+      .catch(err => {
+          res.status(500).send({
+              message:
+              err.message || "Some error occurred while entering marks."
+          });
+        })
+}

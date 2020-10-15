@@ -1,6 +1,4 @@
 const db = require("../connect/Connect");
-const FirstyearCriminal = db.FIRSTYEAR_CRIMINALLAW;
-const FirstyearBusiness = db.FIRSTYEAR_BUSINESS;
 const FirstyearHumanrights = db.FIRSTYEAR_HUMANRIGHTS;
 const Op = db.Sequelize.Op;
 
@@ -18,6 +16,27 @@ exports.FindAll= async (req,res)=>{
               err.message || "Some error occurred while retrieving Student Result."
           });
     }
+}
+
+exports.Create = (req, res) => {
+  const HumanRights = {
+    LEGAL_RESEARCH : req.body.LegalResearch,
+    COMPARATIVE_STUDY : req.body.ComparativeStudy,
+    NEPALESE_STUDY : req.body.NepaleseStudy,
+    CIVIL_POLITICAL : req.body.CivilPolitical,
+    SID : req.body.SId
+  };
+
+  FirstyearHumanrights.create(HumanRights)
+      .then(data =>  {
+          res.send(data);
+              })
+      .catch(err => {
+          res.status(500).send({
+              message:
+              err.message || "Some error occurred while entering marks."
+          });
+        })
 }
 
 exports.Search=async (req,res)=>{
