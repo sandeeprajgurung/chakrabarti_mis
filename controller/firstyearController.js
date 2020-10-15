@@ -1,5 +1,6 @@
 const db = require("../connect/Connect");
 const Firstyear = db.FIRSTYEAR;
+const Llbstudent = db.LLBSTUDENT;
 const Op = db.Sequelize.Op;
 
 exports.FindAll=(req,res)=>{
@@ -30,7 +31,62 @@ exports.Create = (req, res) => {
 
   Firstyear.create(firstyear)
   .then(data => {
-    res.send(data);
+  var totalMarks = 0;
+    if(data.POLITICAL != 'I' && data.ECONOMIC != 'I' && data.HISTORY_OF_NEPAL != 'I' && data.SOCOLOGY != 'I' && data.PRINCIPLE_OF_LAW != 'I'
+        && data.CONCEPT_OF_LAW != 'I' && data.LOGIC_LEGAL_REASONING != 'I' && data.CLINICAL_WORK != 'I'){
+            totalMarks = parseInt(data.POLITICAL) + parseInt(data.ECONOMIC) + parseInt(data.HISTORY_OF_NEPAL) + parseInt(data.SOCOLOGY) + parseInt(data.PRINCIPLE_OF_LAW)
+                              + parseInt(data.CONCEPT_OF_LAW) + parseInt(data.LOGIC_LEGAL_REASONING) + parseInt(data.CLINICAL_WORK);  
+    }
+    else if(data.POLITICAL == 'I' && data.ECONOMIC != 'I' && data.HISTORY_OF_NEPAL != 'I' && data.SOCOLOGY != 'I' && data.PRINCIPLE_OF_LAW != 'I'
+        && data.CONCEPT_OF_LAW != 'I' && data.LOGIC_LEGAL_REASONING != 'I' && data.CLINICAL_WORK != 'I'){
+            totalMarks = parseInt(data.ECONOMIC) + parseInt(data.HISTORY_OF_NEPAL) + parseInt(data.SOCOLOGY) + parseInt(data.PRINCIPLE_OF_LAW)
+                              + parseInt(data.CONCEPT_OF_LAW) + parseInt(data.LOGIC_LEGAL_REASONING) + parseInt(data.CLINICAL_WORK);         
+    }
+    else if(data.POLITICAL == 'I' && data.ECONOMIC == 'I' && data.HISTORY_OF_NEPAL != 'I' && data.SOCOLOGY != 'I' && data.PRINCIPLE_OF_LAW != 'I'
+    && data.CONCEPT_OF_LAW != 'I' && data.LOGIC_LEGAL_REASONING != 'I' && data.CLINICAL_WORK != 'I'){
+        totalMarks = parseInt(data.HISTORY_OF_NEPAL) + parseInt(data.SOCOLOGY) + parseInt(data.PRINCIPLE_OF_LAW)
+                          + parseInt(data.CONCEPT_OF_LAW) + parseInt(data.LOGIC_LEGAL_REASONING) + parseInt(data.CLINICAL_WORK);    
+    }
+    else if(data.POLITICAL == 'I' && data.ECONOMIC == 'I' && data.HISTORY_OF_NEPAL == 'I' && data.SOCOLOGY != 'I' && data.PRINCIPLE_OF_LAW != 'I'
+    && data.CONCEPT_OF_LAW != 'I' && data.LOGIC_LEGAL_REASONING != 'I' && data.CLINICAL_WORK != 'I'){
+        totalMarks = parseInt(data.SOCOLOGY) + parseInt(data.PRINCIPLE_OF_LAW)
+                          + parseInt(data.CONCEPT_OF_LAW) + parseInt(data.LOGIC_LEGAL_REASONING) + parseInt(data.CLINICAL_WORK);    
+    }
+    else if(data.POLITICAL == 'I' && data.ECONOMIC == 'I' && data.HISTORY_OF_NEPAL == 'I' && data.SOCOLOGY == 'I' && data.PRINCIPLE_OF_LAW != 'I'
+    && data.CONCEPT_OF_LAW != 'I' && data.LOGIC_LEGAL_REASONING != 'I' && data.CLINICAL_WORK != 'I'){
+        totalMarks = parseInt(data.PRINCIPLE_OF_LAW) + parseInt(data.CONCEPT_OF_LAW) + parseInt(data.LOGIC_LEGAL_REASONING) + parseInt(data.CLINICAL_WORK);    
+    }
+    else if(data.POLITICAL == 'I' && data.ECONOMIC == 'I' && data.HISTORY_OF_NEPAL == 'I' && data.SOCOLOGY == 'I' && data.PRINCIPLE_OF_LAW == 'I'
+    && data.CONCEPT_OF_LAW != 'I' && data.LOGIC_LEGAL_REASONING != 'I' && data.CLINICAL_WORK != 'I'){
+        totalMarks = parseInt(data.CONCEPT_OF_LAW) + parseInt(data.LOGIC_LEGAL_REASONING) + parseInt(data.CLINICAL_WORK);    
+    }
+    else if(data.POLITICAL == 'I' && data.ECONOMIC == 'I' && data.HISTORY_OF_NEPAL == 'I' && data.SOCOLOGY == 'I' && data.PRINCIPLE_OF_LAW == 'I'
+    && data.CONCEPT_OF_LAW == 'I' && data.LOGIC_LEGAL_REASONING != 'I' && data.CLINICAL_WORK != 'I'){
+        totalMarks = parseInt(data.LOGIC_LEGAL_REASONING) + parseInt(data.CLINICAL_WORK);    
+    }
+    else if(data.POLITICAL == 'I' && data.ECONOMIC == 'I' && data.HISTORY_OF_NEPAL == 'I' && data.SOCOLOGY == 'I' && data.PRINCIPLE_OF_LAW == 'I'
+    && data.CONCEPT_OF_LAW == 'I' && data.LOGIC_LEGAL_REASONING == 'I' && data.CLINICAL_WORK != 'I'){
+        totalMarks = parseInt(data.CLINICAL_WORK);
+    }
+    else if(data.POLITICAL == 'I' && data.ECONOMIC == 'I' && data.HISTORY_OF_NEPAL == 'I' && data.SOCOLOGY == 'I' && data.PRINCIPLE_OF_LAW == 'I'
+    && data.CONCEPT_OF_LAW == 'I' && data.LOGIC_LEGAL_REASONING == 'I' && data.CLINICAL_WORK == 'I'){
+        totalMarks = 0;
+    }
+
+    const percent = (totalMarks / 650) * 100 ;
+
+        Llbstudent.update(req.body, {
+          where: { FIRSTYEARID: id }
+      })
+      .then(num => {
+        res.send(data);
+      })
+      .catch(err => {
+          res.status(500).send({
+          message: 
+          err.message || "Error updating Student with id=" + id
+          });
+      });
   })
   .catch(err => {
       res.status(500).send({
@@ -124,3 +180,6 @@ exports.Delete = (req, res) => {
         });
     
 }
+
+
+

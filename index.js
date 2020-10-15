@@ -172,15 +172,15 @@ app.get('/', (req, res, next) => {
   //  router.delete("/Firstyear/HumanRights/:Id", (req, res) => { masterfirstyearBusinessController.Delete(req, res)});
    // region end
 
-   // region for LLM Human Rights first year student result
+   // region for LLM Human Rights Second year student result
   router.post("/Secondyear/HumanRights", (req, res) => { mastersecondyearHumanController.Create(req, res)});
   // region end
 
-   // region for LLM Criminal First year student result
+   // region for LLM Criminal Second year student result
    router.post("/Secondyear/Criminal", (req, res) => { mastersecondyearCriminalController.Create(req, res)});
    // region end
 
-   // region for LLM Business first year student result
+   // region for LLM Business Second year student result
   router.post("/Secondyear/Business", (req, res) => { mastersecondyearBusinessController.Create(req, res)});
    // region end
 
