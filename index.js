@@ -1,7 +1,6 @@
 const userController = require("./controller/userController");
 const studentController = require("./controller/studentController");
 const programmeController = require("./controller/programmeController");
-const resultController = require("./controller/resultController");
 const firstyearController = require("./controller/firstyearController");
 const groupController = require("./controller/groupController");
 const secondyearController = require("./controller/secondyearController")
@@ -121,6 +120,10 @@ app.get('/', (req, res, next) => {
 
   // region for fourth year student result
   router.get("/Fourthyear", (req, res) => { fourthyearController.FindAll(req, res)});
+  router.post("/Fourthyear/Criminal", (req, res) => { fourthyearController.CreateCriminal(req, res)});
+  router.post("/Fourthyear/Business", (req, res) => { fourthyearController.CreateBusiness(req, res)});
+  router.post("/Fourthyear/Constitutional", (req, res) => { fourthyearController.CreateConstitution(req, res)});
+  router.post("/Fourthyear/Environment", (req, res) => { fourthyearController.CreateEnvironment(req, res)});
   // router.get("/Fourthyear/Search", (req, res) => { fourthyearController.Search(req, res)});
   router.put("/Fourthyear/Criminal/:Id/:CId", (req, res) => { fourthyearController.UpdateCriminal(req, res)});
   router.put("/Fourthyear/Business/:Id/:BId", (req, res) => { fourthyearController.UpdateBusiness(req, res)});
