@@ -47,23 +47,40 @@ export default {
         return this.execute('GET', '/Student');
     },
 
-    getPosts() {
-        return this.execute('get', '/posts')
+    searchLlbStudents(data) {
+        if (data.PrgId <= 3) {
+            data.GrpId = 0;
+        }
+        return this.execute('GET', `/LLBStudent/Search?prgid=${data.PrgId}&grpid=${data.GrpId}`);
     },
 
-    getPost(id) {
-        return this.execute('get', `/posts/${id}`)
+    searchLlmStudents(data) {
+        return this.execute('GET', `/LLMStudent/Search?prgid=${data.PrgId}&grpid=${data.GrpId}`);
     },
 
-    createPost(data) {
-        return this.execute('post', '/posts', data)
+    postLlmStudentMarks(data) {
+        if (data.program === '1') {
+            return this.execute('POST', '/Firstyear', data);
+        }
     },
 
-    updatePost(id, data) {
-        return this.execute('put', `/posts/${id}`, data)
-    },
+    // getPosts() {
+    //     return this.execute('get', '/posts')
+    // },
 
-    deletePost(id) {
-        return this.execute('delete', `/posts/${id}`)
-    }
+    // getPost(id) {
+    //     return this.execute('get', `/posts/${id}`)
+    // },
+
+    // createPost(data) {
+    //     return this.execute('post', '/posts', data)
+    // },
+
+    // updatePost(id, data) {
+    //     return this.execute('put', `/posts/${id}`, data)
+    // },
+
+    // deletePost(id) {
+    //     return this.execute('delete', `/posts/${id}`)
+    // }
 }

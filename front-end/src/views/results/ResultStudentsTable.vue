@@ -11,149 +11,94 @@
         hide-details
       ></v-text-field>
     </v-card-title>
-    <v-data-table
-      :headers="headers"
-      :items="desserts"
-      :search="search"
-    >
-    <template v-slot:[`item.iron`]="{ item }">
-      <!-- <v-chip
-        color="green"
-        dark
-      > -->
-        <v-icon
-        color="green"
-        @click="deleteItem(item)"
-      >
-        mdi-checkbox-marked-circle
+
+    <v-data-table :headers="headers" :items="students" :search="search">
+      <template v-slot:[`item.RESULT`]="{ item }">
+        <v-icon color="green" @click="deleteItem(item)">
+          mdi-checkbox-marked-circle
         </v-icon>
-      <!-- </v-chip> -->
-    </template>
-    <template v-slot:[`item.actions`]="{ item }">
-      <v-icon
-        color="primary"
-        class="mr-2"
-        @click="editItem(item)"
-      >
-         mdi-plus-circle
-      </v-icon>
-      <v-icon
-        color="error"
-        @click="deleteItem(item)"
-      >
-        mdi-delete
-      </v-icon>
-    </template>
+      </template>
+
+      <template v-slot:[`item.ACTIONS`]="{ item }">
+        <v-icon color="primary" class="mr-2" @click.prevent="addMarks(item)">
+          mdi-plus-circle
+        </v-icon>
+        <v-icon
+          color="primary"
+          class="mr-2"
+          @click.prevent="openResultViewModal = true"
+        >
+          mdi-information
+        </v-icon>
+        <v-icon color="error" @click="deleteItem(item)"> mdi-delete </v-icon>
+      </template>
     </v-data-table>
+
+    <add-results-modal
+      :studentId="id"
+      :program="programId"
+      :openPostResultModal="openPostResultModal"
+      @closePostResultModal="closePostResultModalStatus"
+    />
+
+    <result-view-modal :openResultViewModal.sync="openResultViewModal" />
   </v-card>
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        search: '',
-        headers: [
-          {
-            text: 'Name',
-            align: 'start',
-            sortable: false,
-            value: 'name',
-          },
-          { text: 'Roll no.', value: 'carbs' },
-          { text: 'Program', value: 'calories' },
-          { text: 'Batch', value: 'fat' },
-          { text: 'Result', value: 'iron' },
-          { text: 'Action', value: 'actions' },
-        ],
-        desserts: [
-          {
-            name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24,
-            protein: 4.0,
-            iron: '1%',
-          },
-          {
-            name: 'Ice cream sandwich',
-            calories: 237,
-            fat: 9.0,
-            carbs: 37,
-            protein: 4.3,
-            iron: '1%',
-          },
-          {
-            name: 'Eclair',
-            calories: 262,
-            fat: 16.0,
-            carbs: 23,
-            protein: 6.0,
-            iron: '7%',
-          },
-          {
-            name: 'Cupcake',
-            calories: 305,
-            fat: 3.7,
-            carbs: 67,
-            protein: 4.3,
-            iron: '8%',
-          },
-          {
-            name: 'Gingerbread',
-            calories: 356,
-            fat: 16.0,
-            carbs: 49,
-            protein: 3.9,
-            iron: '16%',
-          },
-          {
-            name: 'Jelly bean',
-            calories: 375,
-            fat: 0.0,
-            carbs: 94,
-            protein: 0.0,
-            iron: '0%',
-          },
-          {
-            name: 'Lollipop',
-            calories: 392,
-            fat: 0.2,
-            carbs: 98,
-            protein: 0,
-            iron: '2%',
-          },
-          {
-            name: 'Honeycomb',
-            calories: 408,
-            fat: 3.2,
-            carbs: 87,
-            protein: 6.5,
-            iron: '45%',
-          },
-          {
-            name: 'Donut',
-            calories: 452,
-            fat: 25.0,
-            carbs: 51,
-            protein: 4.9,
-            iron: '22%',
-          },
-          {
-            name: 'KitKat',
-            calories: 518,
-            fat: 26.0,
-            carbs: 65,
-            protein: 7,
-            iron: '6%',
-          },
-        ],
-      }
+import AddResultsModal from "./AddResultsModal.vue";
+import ResultViewModal from "./ResultViewModal.vue";
+
+export default {
+  props: {
+    students: {
+      type: Array,
+      required: true,
+    },
+  },
+
+  components: {
+    AddResultsModal,
+    ResultViewModal,
+  },
+
+  data() {
+    return {
+      programId: 0,
+      id: 0,
+      sound: true,
+      widgets: false,
+      openResultViewModal: false,
+      openPostResultModal: false,
+      search: "",
+      headers: [
+        {
+          text: "Name",
+          align: "start",
+          sortable: true,
+          value: "SNAME",
+        },
+        { text: "Roll no.", value: "ROLL_NO" },
+        { text: "Batch", value: "BATCH" },
+        { text: "Result", value: "RESULT" },
+        { text: "Action", value: "ACTIONS" },
+      ],
+    };
+  },
+
+  methods: {
+    addMarks(item) {
+      this.studentDetails = Object.assign({}, item);
+      this.id = this.studentDetails.SID;
+      this.programId = this.studentDetails.PRGID;
+      this.openPostResultModal = true;
     },
 
-    methods: {
-        editItem() {},
-        deleteItem() {},
+     closePostResultModalStatus(value) {
+      this.openPostResultModal = value;
     },
-  }
+
+    deleteItem() {},
+  },
+};
 </script>

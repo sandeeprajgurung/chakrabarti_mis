@@ -16,7 +16,7 @@
               item-text="PRGNAME"
               item-value="PRGID"
               @change="selectedProgram"
-              :rules="[(v) => !!v || 'PRGID is required']"
+              :rules="[(v) => !!v || 'Program is required']"
               label="Programme"
               outlined
               dense
@@ -24,12 +24,13 @@
           </v-col>
           <v-col cols="12" sm="6">
             <v-select
+              v-if="visible"
               v-model="student.GrpId"
               :items="group"
+              :rules="[(v) => !!v || 'Group is required']"
               item-text="grpname"
               item-value="grpid"
               label="Group id"
-              :disabled="disable"
               dense
               outlined
             ></v-select>
@@ -40,7 +41,7 @@
       </v-form>
     </v-card>
 
-    <result-students-table />
+    <result-students-table v-if="getStudents.length > 0" :students="getStudents" />
   </section>
 </template>
 
@@ -54,12 +55,14 @@ export default {
   },
   data: () => ({
     student: {},
+    students: {},
     group: [],
     values: ["foo", "bar"],
     value: null,
     programmes: [],
-    valid: null,
-    disable: true,
+    valid: true,
+    visible: false,
+    getStudents: [],
   }),
 
   async created() {
@@ -69,19 +72,29 @@ export default {
   methods: {
     async selectedProgram() {
       if (this.student.PrgId > 5) {
-        this.disable = false;
+        this.visible = true;
         this.group = await api.getLlmGroup();
       } else if (this.student.PrgId > 3) {
-        this.disable = false;
+        this.visible = true;
         this.group = await api.getLlbGroup();
       } else {
-        this.disable = true;
+        this.visible = false;
         this.group = [];
       }
     },
 
     async searchFormSubmit() {
+      this.$refs.searchStudents.validate();
+      if(this.$refs.searchStudents.validate() === true) {
 
+        if(this.student.PrgId <= 3) {
+         return this.getStudents = await api.searchLlbStudents(this.student);
+        }
+        if(this.student.PrgId >= 6) {
+         return this.getStudents = await api.searchLlmStudents(this.student);
+        }
+        return this.getStudents = await api.searchLlbStudents(this.student);
+      }
     },
 
     clear() {

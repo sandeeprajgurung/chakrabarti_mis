@@ -314,7 +314,6 @@ export default {
   methods: {
     resultFormSubmit() {
       this.$refs.viewResultsForm.validate();
-      console.log(this.result);
     },
 
     selectedAcademic() {
