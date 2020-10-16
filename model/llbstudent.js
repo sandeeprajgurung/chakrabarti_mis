@@ -28,9 +28,6 @@ module.exports = (sequelize, Sequelize) => {
       BATCH: {
         type: Sequelize.INTEGER
       },
-      YEAR: {
-          type: Sequelize.INTEGER
-      },
       PERCENT:{
         type: Sequelize.FLOAT
       },
