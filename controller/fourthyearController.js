@@ -5,6 +5,7 @@ const FourthyearCriminal = db.FOURTHYEAR_CRIMINAL;
 const FourthyearBusiness = db.FOURTHYEAR_BUSINESS;
 const FourthyearConstitutional = db.FOURTHYEAR_CONSTITUTIONAL;
 const FourthyearEnvironment = db.FOURTHYEAR_ENVIRONMENT;
+const Llbstudent = db.LLBSTUDENT;
 const Op = db.Sequelize.Op;
 
 exports.FindAll= async (req,res)=>{
