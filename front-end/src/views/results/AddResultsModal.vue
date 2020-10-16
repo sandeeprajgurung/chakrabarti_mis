@@ -68,6 +68,7 @@ export default {
       openModal: true,
       snackbar: false,
       text: "",
+      timeout: 3000,
     };
   },
 
