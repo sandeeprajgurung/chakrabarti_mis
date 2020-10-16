@@ -215,7 +215,7 @@
 </template>
 
 <script>
-// import api from "@/api";
+import api from "@/api";
 
 export default {
   props: {
@@ -238,13 +238,19 @@ export default {
 
   methods: {
     async marksFormSubmit() {
-    //   if (this.$refs.marksForm.validate() === true) {
-    //    this.marks.SId = `${this.studentDetails.SID}`;
-    //    this.marks.program = `${this.studentDetails.PRGID}`;
-    //     await api.postLlmStudentMarks(this.marks);
-    //     this.resetAll();
-    //     this.close();
-    //   }
+      if (this.$refs.marksForm.validate() === true) {
+        this.marks.SId = `${this.studentDetails.SID}`;
+        this.marks.program = `${this.studentDetails.PRGID}`;
+        this.marks.group = `${this.studentDetails.GRPID}`;
+        await api.postLlmStudentMarks(this.marks);
+        this.resetAll();
+        this.close();
+        let msg = {
+          status: "true",
+          text: "Marks added successfully",
+        };
+        this.$emit("childToParent", msg);
+      }
     },
 
     close() {

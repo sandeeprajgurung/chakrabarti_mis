@@ -15,15 +15,30 @@
         <first-year
           v-if="studentInfo.PRGID === 1"
           :studentDetails="studentInfo"
+          v-on:childToParent="onChildClick"
           @openModalStatus="closePostResultModal"
         />
         <fourth-year
           v-if="studentInfo.PRGID === 4"
           :studentDetails="studentInfo"
+          v-on:childToParent="onChildClick"
           @openModalStatus="closePostResultModal"
         />
       </v-card>
     </v-dialog>
+    <v-snackbar
+      class="white--text"
+      color="green darken-2"
+      v-model="snackbar"
+      :timeout="timeout"
+    >
+      {{ text }}
+      <template v-slot:action="{ attrs }">
+        <v-btn color="red" text v-bind="attrs" @click="snackbar = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-row>
 </template>
 
@@ -51,6 +66,9 @@ export default {
   data() {
     return {
       openModal: true,
+      snackbar: false,
+      text: "",
+      timeout: 3000,
     };
   },
 
@@ -70,6 +88,11 @@ export default {
 
     closePostResultModal(value) {
       this.$emit("closePostResultModal", value);
+    },
+
+    onChildClick(value) {
+      this.snackbar = value.status;
+      this.text = value.text;
     },
   },
 };

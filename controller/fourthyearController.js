@@ -289,8 +289,8 @@ exports.CreateConstitution = (req, res) => {
     Fourthyear.create(fourthyear)
         .then(data => {
             const fourthyearconstitution = {
-                GOOD_GONERNANCE : req.body.Constitution.GoodGovernance,
-                ELECTORAL_LAW : req.body.Constitution.ElectroalLaw,
+                GOOD_GONERNANCE : req.body.GoodGovernance,
+                ELECTORAL_LAW : req.body.ElectroalLaw,
                 FOURTHYEARID : data.FOURTHYEARID
             };
 
@@ -413,8 +413,8 @@ exports.CreateEnvironment = (req, res) => {
     Fourthyear.create(fourthyear)
         .then(data => {
             const fourthyearenvironment = {
-                WATER_RIVER : req.body.Environment.WaterRiver,
-                ENVIRONMENT_LAW : req.body.Environment.EnvironmentLaw,
+                WATER_RIVER : req.body.WaterRiver,
+                ENVIRONMENT_LAW : req.body.EnvironmentLaw,
                 FOURTHYEARID : data.FOURTHYEARID
             };
 

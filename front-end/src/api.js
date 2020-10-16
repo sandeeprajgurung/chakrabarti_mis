@@ -60,7 +60,6 @@ export default {
 
     postLlmStudentMarks(data) {
         if (data.program === '1') {
-            // console.log(data);
             return this.execute('POST', '/Firstyear', data);
         }
         if (data.program === '2') {
@@ -70,7 +69,16 @@ export default {
             return this.execute('POST', '/Thirdyear', data);
         }
         if (data.program === '4') {
-            return this.execute('POST', '/Fourthyear/Criminal', data);
+            if (data.group === '1') {
+                return this.execute('POST', '/Fourthyear/Criminal', data);
+            }
+            if (data.group === '2') {
+                return this.execute('POST', '/Fourthyear/Business', data);
+            }
+            if (data.group === '3') {
+                return this.execute('POST', '/Fourthyear/Constitutional', data);
+            }
+            return this.execute('POST', '/Fourthyear/Environment', data);
         }
     },
 
