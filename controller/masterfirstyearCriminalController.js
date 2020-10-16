@@ -1,5 +1,6 @@
 const db = require("../connect/Connect");
 const FirstyearCriminal = db.FIRSTYEAR_CRIMINALLAW;
+const Llmstudent = db.LLMSTUDENT;
 const Op = db.Sequelize.Op;
 
 // exports.Search=async (req,res)=>{
@@ -29,15 +30,57 @@ exports.Create = (req, res) => {
   const Criminal = {
     LEGAL_RESEARCH : req.body.LegalResearch,
     COMPARATIVE_STUDY : req.body.ComparativeStudy,
-    CONTRACT_LAW : req.body.ContractLaw,
-    INTELLECTUAL_PROPERTY : req.body.IntellectualProperty,
+    CRIMINAL_LAW : req.body.CriminalLaw,
+    FORENSIC : req.body.Forensic,
+    JUVINAL_JUSTICE : req.body.JuvinalJustice,
     SID : req.body.SId
   };
 
   FirstyearCriminal.create(Criminal)
       .then(data =>  {
+         
+        var totalMarks = 0;
+        var percent = 0;
+
+        if(data.LEGAL_RESEARCH != 'I' && data.COMPARATIVE_STUDY != 'I' && data.CRIMINAL_LAW != 'I' && data.FORENSIC != 'I' && data.JUVINAL_JUSTICE != 'I'){
+          totalMarks = parseInt(data.LEGAL_RESEARCH) + parseInt(data.COMPARATIVE_STUDY) + parseInt(data.CRIMINAL_LAW) + parseInt(data.FORENSIC) + parseInt(data.JUVINAL_JUSTICE);
+          percent = (totalMarks / 400) * 100;
+        }
+        else if(data.LEGAL_RESEARCH == 'I' && data.COMPARATIVE_STUDY != 'I' && data.CRIMINAL_LAW != 'I' && data.FORENSIC != 'I' && data.JUVINAL_JUSTICE != 'I'){
+          totalMarks = parseInt(data.COMPARATIVE_STUDY) + parseInt(data.CRIMINAL_LAW) + parseInt(data.FORENSIC) + parseInt(data.JUVINAL_JUSTICE);
+          percent = (totalMarks / 400) * 100;
+        }
+        else if(data.LEGAL_RESEARCH == 'I' && data.COMPARATIVE_STUDY == 'I' && data.CRIMINAL_LAW != 'I' && data.FORENSIC != 'I' && data.JUVINAL_JUSTICE != 'I'){
+          totalMarks = parseInt(data.CRIMINAL_LAW) + parseInt(data.FORENSIC) + parseInt(data.JUVINAL_JUSTICE);
+          percent = (totalMarks / 400) * 100;
+        }
+        else if(data.LEGAL_RESEARCH == 'I' && data.COMPARATIVE_STUDY == 'I' && data.CRIMINAL_LAW == 'I' && data.FORENSIC != 'I' && data.JUVINAL_JUSTICE != 'I'){
+          totalMarks = parseInt(data.FORENSIC) + parseInt(data.JUVINAL_JUSTICE);
+          percent = (totalMarks / 400) * 100;
+        }
+        else if(data.LEGAL_RESEARCH == 'I' && data.COMPARATIVE_STUDY == 'I' && data.CRIMINAL_LAW == 'I' && data.FORENSIC == 'I' && data.JUVINAL_JUSTICE != 'I'){
+          totalMarks = parseInt(data.JUVINAL_JUSTICE);
+          percent = (totalMarks / 400) * 100;
+        }
+        else if(data.LEGAL_RESEARCH == 'I' && data.COMPARATIVE_STUDY == 'I' && data.CRIMINAL_LAW == 'I' && data.FORENSIC == 'I' && data.JUVINAL_JUSTICE == 'I'){
+          percent = 0;
+        }
+
+        Llmstudent.update(
+          { PERCENT : percent}, 
+          {where : {SID : req.body.SId}}
+        )
+        .then (data1 => {
           res.send(data);
-              })
+        })
+        .catch(err => {
+          res.status(500).send({
+              message:
+              err.message || "Some error occurred while entering marks."
+          });
+        });
+
+      })
       .catch(err => {
           res.status(500).send({
               message:
