@@ -157,15 +157,19 @@
             </v-dialog>
             <v-dialog v-model="dialogDelete" max-width="500px">
               <v-card>
-                <v-card-title class="headline"
-                  >Are you sure you want to delete this item?</v-card-title
-                >
+                <v-card-title class="text--h6">
+                  Are you sure you want to delete
+                  <v-chip class="ma-2" color="red" outlined pill>
+                    <v-icon left> mdi-account-outline </v-icon>
+                    {{ deleteStudent.SNAME }}
+                  </v-chip>
+                </v-card-title>
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="blue darken-1" text @click="closeDelete"
+                  <v-btn color="warning darken-1" text @click="closeDelete"
                     >Cancel</v-btn
                   >
-                  <v-btn color="blue darken-1" text @click="deleteItemConfirm"
+                  <v-btn color="red darken-1" text @click="deleteItemConfirm"
                     >OK</v-btn
                   >
                   <v-spacer></v-spacer>
@@ -221,26 +225,27 @@ export default {
       (v) =>
         Number.isInteger(Number(v)) || "The value must be an integer number",
     ],
-    emailRules: [ 
-      v => {
-        if(v.length > 0) {
-        const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return pattern.test(v) || 'Invalid E-mail';
-        }
-      }
+    emailRules: [
+      // v => {
+      //   if(v.length > 0) {
+      //   const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      //   return pattern.test(v) || 'Invalid E-mail';
+      //   }
+      // }
     ],
-    phoneNoRules:[
-      v => {
-        if(v.length > 0) {
-        const pattern = /^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/;
-        return pattern.test(v) || 'Invalid Phone Number';
-        }
-      }
+    phoneNoRules: [
+      // v => {
+      //   if(v.length > 0) {
+      //   const pattern = /^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/;
+      //   return pattern.test(v) || 'Invalid Phone Number';
+      //   }
+      // }
     ],
 
     search: "",
     dialog: false,
     dialogDelete: false,
+    deleteStudent: {},
     headers: [
       {
         text: "Name",
@@ -365,26 +370,27 @@ export default {
     },
 
     deleteItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
-      this.editedItem = Object.assign({}, item);
+      this.deleteStudent = Object.assign({}, item);
       this.dialogDelete = true;
-    },
-
-    deleteItemConfirm() {
-      this.desserts.splice(this.editedIndex, 1);
-      this.closeDelete();
-    },
-
-    close() {
-      this.dialog = false;
-      this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem);
-        this.editedIndex = -1;
-      });
     },
 
     closeDelete() {
       this.dialogDelete = false;
+    },
+
+    async deleteItemConfirm() {
+      console.log(this.deleteStudent.SID);
+      await api.deleteLlbStudent(this.deleteStudent.SID);
+      this.closeDelete();
+      let msg = {
+        status: "true",
+        text: "Student has been deleted",
+      };
+      this.$emit("childToParent", msg);
+    },
+
+    close() {
+      this.dialog = false;
       this.$nextTick(() => {
         this.editedItem = Object.assign({}, this.defaultItem);
         this.editedIndex = -1;

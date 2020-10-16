@@ -117,7 +117,11 @@ export default {
             }
             return this.execute('POST', '/Secondyear/Criminal', data);
         }
-    }
+    },
+
+    deleteLlbStudent(id) {
+        return this.execute('DELETE', `/LLBStudent/${id}`);
+    },
 
     // getPosts() {
     //     return this.execute('get', '/posts')
