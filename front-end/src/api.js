@@ -62,12 +62,15 @@ export default {
         if (data.program === '1') {
             return this.execute('POST', '/Firstyear', data);
         }
+
         if (data.program === '2') {
             return this.execute('POST', '/Secondyear', data);
         }
+
         if (data.program === '3') {
             return this.execute('POST', '/Thirdyear', data);
         }
+
         if (data.program === '4') {
             if (data.group === '1') {
                 return this.execute('POST', '/Fourthyear/Criminal', data);
@@ -79,6 +82,19 @@ export default {
                 return this.execute('POST', '/Fourthyear/Constitutional', data);
             }
             return this.execute('POST', '/Fourthyear/Environment', data);
+        }
+
+        if (data.program === '5') {
+            if (data.group === '1') {
+                return this.execute('POST', '/Fifthyear/Criminal', data);
+            }
+            if (data.group === '2') {
+                return this.execute('POST', '/Fifthyear/Business', data);
+            }
+            if (data.group === '3') {
+                return this.execute('POST', '/Fifthyear/Constitutional', data);
+            }
+            return this.execute('POST', '/Fifthyear/Environment', data);
         }
     },
 

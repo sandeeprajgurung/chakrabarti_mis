@@ -18,8 +18,26 @@
           v-on:childToParent="onChildClick"
           @openModalStatus="closePostResultModal"
         />
+        <second-year
+          v-if="studentInfo.PRGID === 2"
+          :studentDetails="studentInfo"
+          v-on:childToParent="onChildClick"
+          @openModalStatus="closePostResultModal"
+        />
+        <third-year
+          v-if="studentInfo.PRGID === 3"
+          :studentDetails="studentInfo"
+          v-on:childToParent="onChildClick"
+          @openModalStatus="closePostResultModal"
+        />
         <fourth-year
           v-if="studentInfo.PRGID === 4"
+          :studentDetails="studentInfo"
+          v-on:childToParent="onChildClick"
+          @openModalStatus="closePostResultModal"
+        />
+        <fifth-year
+          v-if="studentInfo.PRGID === 5"
           :studentDetails="studentInfo"
           v-on:childToParent="onChildClick"
           @openModalStatus="closePostResultModal"
@@ -44,7 +62,10 @@
 
 <script>
 import FirstYear from "./subjectsForm/llb/FirstYear.vue";
+import SecondYear from './subjectsForm/llb/SecondYear.vue';
+import ThirdYear from './subjectsForm/llb/ThirdYear.vue';
 import FourthYear from "./subjectsForm/llb/FourthYear.vue";
+import FifthYear from './subjectsForm/llb/FifthYear.vue';
 
 export default {
   props: {
@@ -60,7 +81,10 @@ export default {
 
   components: {
     FirstYear,
+    SecondYear,
+    ThirdYear,
     FourthYear,
+    FifthYear
   },
 
   data() {
@@ -77,10 +101,16 @@ export default {
       if (programId === 1) {
         return "First Year";
       }
+      if (programId === 2) {
+        return "Second Year";
+      }
       if (programId === 4) {
         return "Fourth Year";
       }
-      return;
+      if (programId === 5) {
+        return "Fifth Year";
+      }
+      return "Third Year";
     },
     close() {
       this.$emit("closePostResultModal", false);
