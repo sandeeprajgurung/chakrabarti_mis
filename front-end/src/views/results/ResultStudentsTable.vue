@@ -35,8 +35,7 @@
     </v-data-table>
 
     <add-results-modal
-      :studentId="id"
-      :program="programId"
+      :studentInfo="studentDetails"
       :openPostResultModal="openPostResultModal"
       @closePostResultModal="closePostResultModalStatus"
     />
@@ -89,8 +88,8 @@ export default {
   methods: {
     addMarks(item) {
       this.studentDetails = Object.assign({}, item);
-      this.id = this.studentDetails.SID;
-      this.programId = this.studentDetails.PRGID;
+      // this.id = this.studentDetails;
+      // this.programId = this.studentDetails.PRGID;
       this.openPostResultModal = true;
     },
 

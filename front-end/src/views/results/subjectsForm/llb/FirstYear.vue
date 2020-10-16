@@ -119,14 +119,10 @@ import api from "@/api";
 
 export default {
   props: {
-    SId: {
-      type: Number,
+    studentDetails: {
+      type: Object,
       required: true,
-    },
-    programId: {
-      type: Number,
-      required: true,
-    },
+    }
   },
 
   data: () => ({
@@ -143,8 +139,9 @@ export default {
   methods: {
     async marksFormSubmit() {
       if (this.$refs.marksForm.validate() === true) {
-        this.marks.SId = `${this.SId}`;
-        this.marks.program = `${this.programId}`;
+        this.marks.SId = `${this.studentDetails.SID}`;
+        this.marks.program = `${this.studentDetails.PRGID}`;
+        // console.log(this.marks);
         await api.postLlmStudentMarks(this.marks);
         this.resetAll();
         this.close();
