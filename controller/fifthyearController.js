@@ -22,6 +22,168 @@ exports.FindAll= async (req,res)=>{
     }
 }
 
+exports.CreateCriminal = (req, res) => {
+    const fifthyear = {
+        LEGAL_PHILOSOPHY : req.body.LegalPhilosophy,
+        AGRARIAN : req.body.Agrarian,
+        INTERNATIONAL_HUMANITARIAN : req.body.InternationalHumanitarian,
+        CONSERVATION_LAW : req.body.ConservationLaw,
+        INTERNATIONAL_LAW : req.body.InternationalLaw,
+        PRE_TRIAL_PRESENTATION : req.body.PreTrialPresentation,
+        CLINICAL_EDUCATION : req.body.ClinicalEducation,
+        DISSERTATION : req.body.Dissertation,
+        SID : req.body.SId
+    };
+
+    Fifthyear.create(fifthyear)
+        .then(data =>  {
+            
+                const fifthyearcriminal = {
+                    ORGANIZED_CRIME : req.body.OrganizedCrime,
+                    FISCAL_CRIME : req.body.FiscalCrime,
+                    FIFTHYEARID : data.FIFTHYEARID
+                };
+    
+                FifthyearCriminal.create(fifthyearcriminal)
+                .then(data1 => {
+                  res.send(data1);
+                })
+                .catch(err => {
+                    res.status(500).send({
+                        message:
+                        err.message || "Some error occurred while entering marks."
+                    });
+                })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                err.message || "Some error occurred while entering marks."
+            });
+        });
+
+    })
+}
+
+exports.CreateBusiness = (req, res) => {
+    const fifthyear = {
+        LEGAL_PHILOSOPHY : req.body.LegalPhilosophy,
+        AGRARIAN : req.body.Agrarian,
+        INTERNATIONAL_HUMANITARIAN : req.body.InternationalHumanitarian,
+        CONSERVATION_LAW : req.body.ConservationLaw,
+        INTERNATIONAL_LAW : req.body.InternationalLaw,
+        PRE_TRIAL_PRESENTATION : req.body.PreTrialPresentation,
+        CLINICAL_EDUCATION : req.body.ClinicalEducation,
+        DISSERTATION : req.body.Dissertation,
+        SID : req.body.SId
+    };
+
+        Fifthyear.create(fifthyear)
+        .then(data => {
+                const fifthyearbusiness = {
+                    INTELLECTUAL_PROPERTY : req.body.IntellectualProperty,
+                    TAXATION : req.body.Taxation,
+                    FIFTHYEARID : data.FIFTHYEARID
+                };
+    
+                FifthyearBusiness.create(fifthyearbusiness)
+                .then(data2 => {
+                  res.send(data2);
+                })
+                .catch(err => {
+                    res.status(500).send({
+                        message:
+                        err.message || "Some error occurred while entering marks."
+                    });
+                });
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message:
+                    err.message || "Some error occurred while entering marks."
+                });
+            });
+}
+
+exports.CreateConstitution = (req, res) => {
+    const fifthyear = {
+        LEGAL_PHILOSOPHY : req.body.LegalPhilosophy,
+        AGRARIAN : req.body.Agrarian,
+        INTERNATIONAL_HUMANITARIAN : req.body.InternationalHumanitarian,
+        CONSERVATION_LAW : req.body.ConservationLaw,
+        INTERNATIONAL_LAW : req.body.InternationalLaw,
+        PRE_TRIAL_PRESENTATION : req.body.PreTrialPresentation,
+        CLINICAL_EDUCATION : req.body.ClinicalEducation,
+        DISSERTATION : req.body.Dissertation,
+        SID : req.body.SId
+    };
+
+    Fifthyear.create(fifthyear)
+        .then(data => {
+            const fifthyearconstitution = {
+                LAW_OF_EQUITY : req.body.LawOfEquity,
+                LAW_ON_GENDER : req.body.LawOfGender,
+                FIFTHYEARID : data.FIFTHYEARID
+            };
+
+            FifthyearConstitutional.create(fifthyearconstitution)
+            .then(data3 => {
+              res.send(data3);
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message:
+                    err.message || "Some error occurred while entering marks."
+                });
+            });
+            })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                err.message || "Some error occurred while entering marks."
+            });
+        });
+}
+
+exports.CreateEnvironment = (req, res) => {
+    const fifthyear = {
+        LEGAL_PHILOSOPHY : req.body.LegalPhilosophy,
+        AGRARIAN : req.body.Agrarian,
+        INTERNATIONAL_HUMANITARIAN : req.body.InternationalHumanitarian,
+        CONSERVATION_LAW : req.body.ConservationLaw,
+        INTERNATIONAL_LAW : req.body.InternationalLaw,
+        PRE_TRIAL_PRESENTATION : req.body.PreTrialPresentation,
+        CLINICAL_EDUCATION : req.body.ClinicalEducation,
+        DISSERTATION : req.body.Dissertation,
+        SID : req.body.SId
+    };
+
+    Fifthyear.create(fifthyear)
+        .then(data => {
+            const fifthyearenvironment = {
+                ENERGY_LAW : req.body.EnergyLaw,
+                CIVIL_AVIATION : req.body.CivilAviation,
+                FIFTHYEARID : data.FIFTHYEARID
+            };
+
+            FifthyearEnvironment.create(fifthyearenvironment)
+            .then(data3 => {
+              res.send(data3);
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message:
+                    err.message || "Some error occurred while entering marks."
+                });
+            });
+            })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                err.message || "Some error occurred while entering marks."
+            });
+        });
+}
+
 exports.Search=async (req,res)=>{
     try{
         const student = await db.sequelize.query('SELECT LS.SNAME,FY.LEGAL_PHILOSOPHY,FY.AGRARIAN,FY.INTERNATIONAL_HUMANITARIAN,FY.CONSERVATION_LAW,FY.INTERNATIONAL_LAW,FY.PRE_TRIAL_PRESENTATION,FY.CLINICAL_EDUCATION,FY.DISSERTATION,IFNULL(FYC.ORGANIZED_CRIME,0),IFNULL(FYC.FISCAL_CRIME,0),IFNULL(FYB.INTELLECTUAL_PROPERTY,0),IFNULL(FYB.TAXATION,0),IFNULL(FYCN.LAW_OF_EQUITY,0),IFNULL(FYCN.LAW_ON_GENDER,0),IFNULL(FYE.ENERGY_LAW,0),IFNULL(FYE.CIVIL_AVIATION,0) FROM llbstudent AS LS join fifthyear AS FY on LS.SID = FY.SID left join FIFTHYEAR_CRIMINAL FYC on FYC.FIFTHYEARID = FY.FIFTHYEARID left join FIFTHYEAR_BUSINESS FYB ON FYB.FIFTHYEARID = FY.FIFTHYEARID left join FIFTHYEAR_CONSTITUTIONAL FYCN ON FYCN.FIFTHYEARID = FY.FIFTHYEARID left join FIFTHYEAR_ENVIRONMENT FYE ON FYE.FIFTHYEARID = FY.FIFTHYEARID WHERE LS.PRGID = (:prgid) AND LS.GRPID = (:grpid)', {
