@@ -128,7 +128,7 @@
                             item-value="PRGID"
                             @change="selectedProgram"
                             :rules="[(v) => !!v || 'Program is required']"
-                            label="Programme"
+                            label="Program"
                             dense
                           ></v-select>
                         </v-col>
