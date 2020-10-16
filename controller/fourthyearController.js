@@ -46,7 +46,92 @@ exports.CreateCriminal = (req, res) => {
     
                 FourthyearCriminal.create(fourthyearcriminal)
                 .then(data1 => {
-                  res.send(data1);
+                  
+                    var totalMarks = 0;
+                    var percent = 0;
+
+                    if(data.CLINICAL_EDUCATION != 'I' && data.ADVANCED_JURISPRUDENCE != 'I' && data.CONTRACT_LAW != 'I' && data.COMPANY_LAW != 'I'
+                        && data.ADMINISTATIVE_LAW != 'I' && data.CLINICAL_LEGAL_EDUCATION != 'I' && data.INTERNATIONAL_DISPUTES != 'I'
+                        && data1.FORENSIC != 'I' && data1.CRIMINOLOGY != 'I') {
+                            totalMarks = parseInt(data.CLINICAL_EDUCATION) + parseInt(data.ADVANCED_JURISPRUDENCE) + parseInt(data.CONTRACT_LAW)
+                                        + parseInt(data.COMPANY_LAW) + parseInt(data.ADMINISTATIVE_LAW) + parseInt(data.CLINICAL_LEGAL_EDUCATION)
+                                        + parseInt(data.INTERNATIONAL_DISPUTES) + parseInt(data1.FORENSIC) + parseInt(data1.CRIMINOLOGY);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE != 'I' && data.CONTRACT_LAW != 'I' && data.COMPANY_LAW != 'I'
+                    && data.ADMINISTATIVE_LAW != 'I' && data.CLINICAL_LEGAL_EDUCATION != 'I' && data.INTERNATIONAL_DISPUTES != 'I'
+                    && data1.FORENSIC != 'I' && data1.CRIMINOLOGY != 'I') {
+                        totalMarks = parseInt(data.ADVANCED_JURISPRUDENCE) + parseInt(data.CONTRACT_LAW)
+                                    + parseInt(data.COMPANY_LAW) + parseInt(data.ADMINISTATIVE_LAW) + parseInt(data.CLINICAL_LEGAL_EDUCATION)
+                                    + parseInt(data.INTERNATIONAL_DISPUTES) + parseInt(data1.FORENSIC) + parseInt(data1.CRIMINOLOGY);
+                        percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE == 'I' && data.CONTRACT_LAW != 'I' && data.COMPANY_LAW != 'I'
+                    && data.ADMINISTATIVE_LAW != 'I' && data.CLINICAL_LEGAL_EDUCATION != 'I' && data.INTERNATIONAL_DISPUTES != 'I'
+                    && data1.FORENSIC != 'I' && data1.CRIMINOLOGY != 'I') {
+                        totalMarks = parseInt(data.CONTRACT_LAW) + parseInt(data.COMPANY_LAW) + parseInt(data.ADMINISTATIVE_LAW) + parseInt(data.CLINICAL_LEGAL_EDUCATION)
+                                    + parseInt(data.INTERNATIONAL_DISPUTES) + parseInt(data1.FORENSIC) + parseInt(data1.CRIMINOLOGY);
+                        percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE == 'I' && data.CONTRACT_LAW == 'I' && data.COMPANY_LAW != 'I'
+                    && data.ADMINISTATIVE_LAW != 'I' && data.CLINICAL_LEGAL_EDUCATION != 'I' && data.INTERNATIONAL_DISPUTES != 'I'
+                    && data1.FORENSIC != 'I' && data1.CRIMINOLOGY != 'I') {
+                        totalMarks = parseInt(data.COMPANY_LAW) + parseInt(data.ADMINISTATIVE_LAW) + parseInt(data.CLINICAL_LEGAL_EDUCATION)
+                                    + parseInt(data.INTERNATIONAL_DISPUTES) + parseInt(data1.FORENSIC) + parseInt(data1.CRIMINOLOGY);
+                        percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE == 'I' && data.CONTRACT_LAW == 'I' && data.COMPANY_LAW == 'I'
+                    && data.ADMINISTATIVE_LAW != 'I' && data.CLINICAL_LEGAL_EDUCATION != 'I' && data.INTERNATIONAL_DISPUTES != 'I'
+                    && data1.FORENSIC != 'I' && data1.CRIMINOLOGY != 'I') {
+                        totalMarks = parseInt(data.ADMINISTATIVE_LAW) + parseInt(data.CLINICAL_LEGAL_EDUCATION)
+                                    + parseInt(data.INTERNATIONAL_DISPUTES) + parseInt(data1.FORENSIC) + parseInt(data1.CRIMINOLOGY);
+                        percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE == 'I' && data.CONTRACT_LAW == 'I' && data.COMPANY_LAW == 'I'
+                    && data.ADMINISTATIVE_LAW == 'I' && data.CLINICAL_LEGAL_EDUCATION != 'I' && data.INTERNATIONAL_DISPUTES != 'I'
+                    && data1.FORENSIC != 'I' && data1.CRIMINOLOGY != 'I') {
+                        totalMarks = parseInt(data.CLINICAL_LEGAL_EDUCATION)
+                                    + parseInt(data.INTERNATIONAL_DISPUTES) + parseInt(data1.FORENSIC) + parseInt(data1.CRIMINOLOGY);
+                        percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE == 'I' && data.CONTRACT_LAW == 'I' && data.COMPANY_LAW == 'I'
+                    && data.ADMINISTATIVE_LAW == 'I' && data.CLINICAL_LEGAL_EDUCATION == 'I' && data.INTERNATIONAL_DISPUTES != 'I'
+                    && data1.FORENSIC != 'I' && data1.CRIMINOLOGY != 'I') {
+                        totalMarks = parseInt(data.INTERNATIONAL_DISPUTES) + parseInt(data1.FORENSIC) + parseInt(data1.CRIMINOLOGY);
+                        percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE == 'I' && data.CONTRACT_LAW == 'I' && data.COMPANY_LAW == 'I'
+                    && data.ADMINISTATIVE_LAW == 'I' && data.CLINICAL_LEGAL_EDUCATION == 'I' && data.INTERNATIONAL_DISPUTES == 'I'
+                    && data1.FORENSIC != 'I' && data1.CRIMINOLOGY != 'I') {
+                        totalMarks = parseInt(data1.FORENSIC) + parseInt(data1.CRIMINOLOGY);
+                        percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE == 'I' && data.CONTRACT_LAW == 'I' && data.COMPANY_LAW == 'I'
+                    && data.ADMINISTATIVE_LAW == 'I' && data.CLINICAL_LEGAL_EDUCATION == 'I' && data.INTERNATIONAL_DISPUTES == 'I'
+                    && data1.FORENSIC == 'I' && data1.CRIMINOLOGY != 'I') {
+                        totalMarks = parseInt(data1.CRIMINOLOGY);
+                        percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE == 'I' && data.CONTRACT_LAW == 'I' && data.COMPANY_LAW == 'I'
+                    && data.ADMINISTATIVE_LAW == 'I' && data.CLINICAL_LEGAL_EDUCATION == 'I' && data.INTERNATIONAL_DISPUTES == 'I'
+                    && data1.FORENSIC == 'I' && data1.CRIMINOLOGY == 'I') {
+                        percent = 0;
+                    }
+
+                    Llbstudent.update(
+                        { PERCENT : percent}, 
+                        {where : {SID : req.body.SId}}
+                      )
+                      .then (data1 => {
+                        res.send(data);
+                      })
+                      .catch(err => {
+                        res.status(500).send({
+                            message:
+                            err.message || "Some error occurred while entering marks."
+                        });
+                    });
+
                 })
                 .catch(err => {
                     res.status(500).send({
@@ -79,14 +164,99 @@ exports.CreateBusiness = (req, res) => {
         Fourthyear.create(fourthyear)
         .then(data => {
                 const fourthyearbusiness = {
-                    BANKING_INSURANCE : req.body.Business.BankingInsurance,
-                    INTERNATIONAL_TRADE : req.body.Business.InternationalTrade,
+                    BANKING_INSURANCE : req.body.BankingInsurance,
+                    INTERNATIONAL_TRADE : req.body.InternationalTrade,
                     FOURTHYEARID : data.FOURTHYEARID
                 };
     
                 FourthyearBusiness.create(fourthyearbusiness)
-                .then(data2 => {
-                  res.send(data2);
+                .then(data1 => {
+                  
+                    var totalMarks = 0;
+                    var percent = 0;
+
+                    if(data.CLINICAL_EDUCATION != 'I' && data.ADVANCED_JURISPRUDENCE != 'I' && data.CONTRACT_LAW != 'I' && data.COMPANY_LAW != 'I'
+                        && data.ADMINISTATIVE_LAW != 'I' && data.CLINICAL_LEGAL_EDUCATION != 'I' && data.INTERNATIONAL_DISPUTES != 'I'
+                        && data1.BANKING_INSURANCE != 'I' && data1.INTERNATIONAL_TRADE != 'I') {
+                            totalMarks = parseInt(data.CLINICAL_EDUCATION) + parseInt(data.ADVANCED_JURISPRUDENCE) + parseInt(data.CONTRACT_LAW)
+                                        + parseInt(data.COMPANY_LAW) + parseInt(data.ADMINISTATIVE_LAW) + parseInt(data.CLINICAL_LEGAL_EDUCATION)
+                                        + parseInt(data.INTERNATIONAL_DISPUTES) + parseInt(data1.BANKING_INSURANCE) + parseInt(data1.INTERNATIONAL_TRADE);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE != 'I' && data.CONTRACT_LAW != 'I' && data.COMPANY_LAW != 'I'
+                    && data.ADMINISTATIVE_LAW != 'I' && data.CLINICAL_LEGAL_EDUCATION != 'I' && data.INTERNATIONAL_DISPUTES != 'I'
+                    && data1.BANKING_INSURANCE != 'I' && data1.INTERNATIONAL_TRADE != 'I') {
+                        totalMarks = parseInt(data.ADVANCED_JURISPRUDENCE) + parseInt(data.CONTRACT_LAW)
+                                    + parseInt(data.COMPANY_LAW) + parseInt(data.ADMINISTATIVE_LAW) + parseInt(data.CLINICAL_LEGAL_EDUCATION)
+                                    + parseInt(data.INTERNATIONAL_DISPUTES) + parseInt(data1.BANKING_INSURANCE) + parseInt(data1.INTERNATIONAL_TRADE);
+                        percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE == 'I' && data.CONTRACT_LAW != 'I' && data.COMPANY_LAW != 'I'
+                    && data.ADMINISTATIVE_LAW != 'I' && data.CLINICAL_LEGAL_EDUCATION != 'I' && data.INTERNATIONAL_DISPUTES != 'I'
+                    && data1.BANKING_INSURANCE != 'I' && data1.INTERNATIONAL_TRADE != 'I') {
+                        totalMarks = parseInt(data.CONTRACT_LAW) + parseInt(data.COMPANY_LAW) + parseInt(data.ADMINISTATIVE_LAW) + parseInt(data.CLINICAL_LEGAL_EDUCATION)
+                                    + parseInt(data.INTERNATIONAL_DISPUTES) + parseInt(data1.BANKING_INSURANCE) + parseInt(data1.INTERNATIONAL_TRADE);
+                        percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE == 'I' && data.CONTRACT_LAW == 'I' && data.COMPANY_LAW != 'I'
+                    && data.ADMINISTATIVE_LAW != 'I' && data.CLINICAL_LEGAL_EDUCATION != 'I' && data.INTERNATIONAL_DISPUTES != 'I'
+                    && data1.BANKING_INSURANCE != 'I' && data1.INTERNATIONAL_TRADE != 'I') {
+                        totalMarks = parseInt(data.COMPANY_LAW) + parseInt(data.ADMINISTATIVE_LAW) + parseInt(data.CLINICAL_LEGAL_EDUCATION)
+                                    + parseInt(data.INTERNATIONAL_DISPUTES) + parseInt(data1.BANKING_INSURANCE) + parseInt(data1.INTERNATIONAL_TRADE);
+                        percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE == 'I' && data.CONTRACT_LAW == 'I' && data.COMPANY_LAW == 'I'
+                    && data.ADMINISTATIVE_LAW != 'I' && data.CLINICAL_LEGAL_EDUCATION != 'I' && data.INTERNATIONAL_DISPUTES != 'I'
+                    && data1.BANKING_INSURANCE != 'I' && data1.INTERNATIONAL_TRADE != 'I') {
+                        totalMarks = parseInt(data.ADMINISTATIVE_LAW) + parseInt(data.CLINICAL_LEGAL_EDUCATION)
+                                    + parseInt(data.INTERNATIONAL_DISPUTES) + parseInt(data1.BANKING_INSURANCE) + parseInt(data1.INTERNATIONAL_TRADE);
+                        percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE == 'I' && data.CONTRACT_LAW == 'I' && data.COMPANY_LAW == 'I'
+                    && data.ADMINISTATIVE_LAW == 'I' && data.CLINICAL_LEGAL_EDUCATION != 'I' && data.INTERNATIONAL_DISPUTES != 'I'
+                    && data1.BANKING_INSURANCE != 'I' && data1.INTERNATIONAL_TRADE != 'I') {
+                        totalMarks = parseInt(data.CLINICAL_LEGAL_EDUCATION)
+                                    + parseInt(data.INTERNATIONAL_DISPUTES) + parseInt(data1.BANKING_INSURANCE) + parseInt(data1.INTERNATIONAL_TRADE);
+                        percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE == 'I' && data.CONTRACT_LAW == 'I' && data.COMPANY_LAW == 'I'
+                    && data.ADMINISTATIVE_LAW == 'I' && data.CLINICAL_LEGAL_EDUCATION == 'I' && data.INTERNATIONAL_DISPUTES != 'I'
+                    && data1.BANKING_INSURANCE != 'I' && data1.INTERNATIONAL_TRADE != 'I') {
+                        totalMarks = parseInt(data.INTERNATIONAL_DISPUTES) + parseInt(data1.BANKING_INSURANCE) + parseInt(data1.INTERNATIONAL_TRADE);
+                        percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE == 'I' && data.CONTRACT_LAW == 'I' && data.COMPANY_LAW == 'I'
+                    && data.ADMINISTATIVE_LAW == 'I' && data.CLINICAL_LEGAL_EDUCATION == 'I' && data.INTERNATIONAL_DISPUTES == 'I'
+                    && data1.BANKING_INSURANCE != 'I' && data1.INTERNATIONAL_TRADE != 'I') {
+                        totalMarks = parseInt(data1.BANKING_INSURANCE) + parseInt(data1.INTERNATIONAL_TRADE);
+                        percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE == 'I' && data.CONTRACT_LAW == 'I' && data.COMPANY_LAW == 'I'
+                    && data.ADMINISTATIVE_LAW == 'I' && data.CLINICAL_LEGAL_EDUCATION == 'I' && data.INTERNATIONAL_DISPUTES == 'I'
+                    && data1.BANKING_INSURANCE == 'I' && data1.INTERNATIONAL_TRADE != 'I') {
+                        totalMarks = parseInt(data1.INTERNATIONAL_TRADE);
+                        percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE == 'I' && data.CONTRACT_LAW == 'I' && data.COMPANY_LAW == 'I'
+                    && data.ADMINISTATIVE_LAW == 'I' && data.CLINICAL_LEGAL_EDUCATION == 'I' && data.INTERNATIONAL_DISPUTES == 'I'
+                    && data1.BANKING_INSURANCE == 'I' && data1.INTERNATIONAL_TRADE == 'I') {
+                        percent = 0;
+                    }
+
+                    Llbstudent.update(
+                        { PERCENT : percent}, 
+                        {where : {SID : req.body.SId}}
+                      )
+                      .then (data1 => {
+                        res.send(data);
+                      })
+                      .catch(err => {
+                        res.status(500).send({
+                            message:
+                            err.message || "Some error occurred while entering marks."
+                        });
+                    });
+
                 })
                 .catch(err => {
                     res.status(500).send({
@@ -124,8 +294,93 @@ exports.CreateConstitution = (req, res) => {
             };
 
             FourthyearConstitutional.create(fourthyearconstitution)
-            .then(data3 => {
-              res.send(data3);
+            .then(data1 => {
+              
+                var totalMarks = 0;
+                    var percent = 0;
+
+                    if(data.CLINICAL_EDUCATION != 'I' && data.ADVANCED_JURISPRUDENCE != 'I' && data.CONTRACT_LAW != 'I' && data.COMPANY_LAW != 'I'
+                        && data.ADMINISTATIVE_LAW != 'I' && data.CLINICAL_LEGAL_EDUCATION != 'I' && data.INTERNATIONAL_DISPUTES != 'I'
+                        && data1.GOOD_GONERNANCE != 'I' && data1.ELECTORAL_LAW != 'I') {
+                            totalMarks = parseInt(data.CLINICAL_EDUCATION) + parseInt(data.ADVANCED_JURISPRUDENCE) + parseInt(data.CONTRACT_LAW)
+                                        + parseInt(data.COMPANY_LAW) + parseInt(data.ADMINISTATIVE_LAW) + parseInt(data.CLINICAL_LEGAL_EDUCATION)
+                                        + parseInt(data.INTERNATIONAL_DISPUTES) + parseInt(data1.GOOD_GONERNANCE) + parseInt(data1.ELECTORAL_LAW);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE != 'I' && data.CONTRACT_LAW != 'I' && data.COMPANY_LAW != 'I'
+                    && data.ADMINISTATIVE_LAW != 'I' && data.CLINICAL_LEGAL_EDUCATION != 'I' && data.INTERNATIONAL_DISPUTES != 'I'
+                    && data1.GOOD_GONERNANCE != 'I' && data1.ELECTORAL_LAW != 'I') {
+                        totalMarks = parseInt(data.ADVANCED_JURISPRUDENCE) + parseInt(data.CONTRACT_LAW)
+                                    + parseInt(data.COMPANY_LAW) + parseInt(data.ADMINISTATIVE_LAW) + parseInt(data.CLINICAL_LEGAL_EDUCATION)
+                                    + parseInt(data.INTERNATIONAL_DISPUTES) + parseInt(data1.GOOD_GONERNANCE) + parseInt(data1.ELECTORAL_LAW);
+                        percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE == 'I' && data.CONTRACT_LAW != 'I' && data.COMPANY_LAW != 'I'
+                    && data.ADMINISTATIVE_LAW != 'I' && data.CLINICAL_LEGAL_EDUCATION != 'I' && data.INTERNATIONAL_DISPUTES != 'I'
+                    && data1.GOOD_GONERNANCE != 'I' && data1.ELECTORAL_LAW != 'I') {
+                        totalMarks = parseInt(data.CONTRACT_LAW) + parseInt(data.COMPANY_LAW) + parseInt(data.ADMINISTATIVE_LAW) + parseInt(data.CLINICAL_LEGAL_EDUCATION)
+                                    + parseInt(data.INTERNATIONAL_DISPUTES) + parseInt(data1.GOOD_GONERNANCE) + parseInt(data1.ELECTORAL_LAW);
+                        percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE == 'I' && data.CONTRACT_LAW == 'I' && data.COMPANY_LAW != 'I'
+                    && data.ADMINISTATIVE_LAW != 'I' && data.CLINICAL_LEGAL_EDUCATION != 'I' && data.INTERNATIONAL_DISPUTES != 'I'
+                    && data1.GOOD_GONERNANCE != 'I' && data1.ELECTORAL_LAW != 'I') {
+                        totalMarks = parseInt(data.COMPANY_LAW) + parseInt(data.ADMINISTATIVE_LAW) + parseInt(data.CLINICAL_LEGAL_EDUCATION)
+                                    + parseInt(data.INTERNATIONAL_DISPUTES) + parseInt(data1.GOOD_GONERNANCE) + parseInt(data1.ELECTORAL_LAW);
+                        percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE == 'I' && data.CONTRACT_LAW == 'I' && data.COMPANY_LAW == 'I'
+                    && data.ADMINISTATIVE_LAW != 'I' && data.CLINICAL_LEGAL_EDUCATION != 'I' && data.INTERNATIONAL_DISPUTES != 'I'
+                    && data1.GOOD_GONERNANCE != 'I' && data1.ELECTORAL_LAW != 'I') {
+                        totalMarks = parseInt(data.ADMINISTATIVE_LAW) + parseInt(data.CLINICAL_LEGAL_EDUCATION)
+                                    + parseInt(data.INTERNATIONAL_DISPUTES) + parseInt(data1.GOOD_GONERNANCE) + parseInt(data1.ELECTORAL_LAW);
+                        percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE == 'I' && data.CONTRACT_LAW == 'I' && data.COMPANY_LAW == 'I'
+                    && data.ADMINISTATIVE_LAW == 'I' && data.CLINICAL_LEGAL_EDUCATION != 'I' && data.INTERNATIONAL_DISPUTES != 'I'
+                    && data1.GOOD_GONERNANCE != 'I' && data1.ELECTORAL_LAW != 'I') {
+                        totalMarks = parseInt(data.CLINICAL_LEGAL_EDUCATION)
+                                    + parseInt(data.INTERNATIONAL_DISPUTES) + parseInt(data1.GOOD_GONERNANCE) + parseInt(data1.ELECTORAL_LAW);
+                        percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE == 'I' && data.CONTRACT_LAW == 'I' && data.COMPANY_LAW == 'I'
+                    && data.ADMINISTATIVE_LAW == 'I' && data.CLINICAL_LEGAL_EDUCATION == 'I' && data.INTERNATIONAL_DISPUTES != 'I'
+                    && data1.GOOD_GONERNANCE != 'I' && data1.ELECTORAL_LAW != 'I') {
+                        totalMarks = parseInt(data.INTERNATIONAL_DISPUTES) + parseInt(data1.GOOD_GONERNANCE) + parseInt(data1.ELECTORAL_LAW);
+                        percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE == 'I' && data.CONTRACT_LAW == 'I' && data.COMPANY_LAW == 'I'
+                    && data.ADMINISTATIVE_LAW == 'I' && data.CLINICAL_LEGAL_EDUCATION == 'I' && data.INTERNATIONAL_DISPUTES == 'I'
+                    && data1.GOOD_GONERNANCE != 'I' && data1.ELECTORAL_LAW != 'I') {
+                        totalMarks = parseInt(data1.GOOD_GONERNANCE) + parseInt(data1.ELECTORAL_LAW);
+                        percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE == 'I' && data.CONTRACT_LAW == 'I' && data.COMPANY_LAW == 'I'
+                    && data.ADMINISTATIVE_LAW == 'I' && data.CLINICAL_LEGAL_EDUCATION == 'I' && data.INTERNATIONAL_DISPUTES == 'I'
+                    && data1.GOOD_GONERNANCE == 'I' && data1.ELECTORAL_LAW != 'I') {
+                        totalMarks = parseInt(data1.ELECTORAL_LAW);
+                        percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE == 'I' && data.CONTRACT_LAW == 'I' && data.COMPANY_LAW == 'I'
+                    && data.ADMINISTATIVE_LAW == 'I' && data.CLINICAL_LEGAL_EDUCATION == 'I' && data.INTERNATIONAL_DISPUTES == 'I'
+                    && data1.GOOD_GONERNANCE == 'I' && data1.ELECTORAL_LAW == 'I') {
+                        percent = 0;
+                    }
+
+                    Llbstudent.update(
+                        { PERCENT : percent}, 
+                        {where : {SID : req.body.SId}}
+                      )
+                      .then (data1 => {
+                        res.send(data);
+                      })
+                      .catch(err => {
+                        res.status(500).send({
+                            message:
+                            err.message || "Some error occurred while entering marks."
+                        });
+                    });
+
             })
             .catch(err => {
                 res.status(500).send({
@@ -163,8 +418,93 @@ exports.CreateEnvironment = (req, res) => {
             };
 
             FourthyearEnvironment.create(fourthyearenvironment)
-            .then(data3 => {
-              res.send(data3);
+            .then(data1 => {
+              
+                var totalMarks = 0;
+                    var percent = 0;
+
+                    if(data.CLINICAL_EDUCATION != 'I' && data.ADVANCED_JURISPRUDENCE != 'I' && data.CONTRACT_LAW != 'I' && data.COMPANY_LAW != 'I'
+                        && data.ADMINISTATIVE_LAW != 'I' && data.CLINICAL_LEGAL_EDUCATION != 'I' && data.INTERNATIONAL_DISPUTES != 'I'
+                        && data1.WATER_RIVER != 'I' && data1.ENVIRONMENT_LAW != 'I') {
+                            totalMarks = parseInt(data.CLINICAL_EDUCATION) + parseInt(data.ADVANCED_JURISPRUDENCE) + parseInt(data.CONTRACT_LAW)
+                                        + parseInt(data.COMPANY_LAW) + parseInt(data.ADMINISTATIVE_LAW) + parseInt(data.CLINICAL_LEGAL_EDUCATION)
+                                        + parseInt(data.INTERNATIONAL_DISPUTES) + parseInt(data1.WATER_RIVER) + parseInt(data1.ENVIRONMENT_LAW);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE != 'I' && data.CONTRACT_LAW != 'I' && data.COMPANY_LAW != 'I'
+                    && data.ADMINISTATIVE_LAW != 'I' && data.CLINICAL_LEGAL_EDUCATION != 'I' && data.INTERNATIONAL_DISPUTES != 'I'
+                    && data1.WATER_RIVER != 'I' && data1.ENVIRONMENT_LAW != 'I') {
+                        totalMarks = parseInt(data.ADVANCED_JURISPRUDENCE) + parseInt(data.CONTRACT_LAW)
+                                    + parseInt(data.COMPANY_LAW) + parseInt(data.ADMINISTATIVE_LAW) + parseInt(data.CLINICAL_LEGAL_EDUCATION)
+                                    + parseInt(data.INTERNATIONAL_DISPUTES) + parseInt(data1.WATER_RIVER) + parseInt(data1.ENVIRONMENT_LAW);
+                        percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE == 'I' && data.CONTRACT_LAW != 'I' && data.COMPANY_LAW != 'I'
+                    && data.ADMINISTATIVE_LAW != 'I' && data.CLINICAL_LEGAL_EDUCATION != 'I' && data.INTERNATIONAL_DISPUTES != 'I'
+                    && data1.WATER_RIVER != 'I' && data1.ENVIRONMENT_LAW != 'I') {
+                        totalMarks = parseInt(data.CONTRACT_LAW) + parseInt(data.COMPANY_LAW) + parseInt(data.ADMINISTATIVE_LAW) + parseInt(data.CLINICAL_LEGAL_EDUCATION)
+                                    + parseInt(data.INTERNATIONAL_DISPUTES) + parseInt(data1.WATER_RIVER) + parseInt(data1.ENVIRONMENT_LAW);
+                        percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE == 'I' && data.CONTRACT_LAW == 'I' && data.COMPANY_LAW != 'I'
+                    && data.ADMINISTATIVE_LAW != 'I' && data.CLINICAL_LEGAL_EDUCATION != 'I' && data.INTERNATIONAL_DISPUTES != 'I'
+                    && data1.WATER_RIVER != 'I' && data1.ENVIRONMENT_LAW != 'I') {
+                        totalMarks = parseInt(data.COMPANY_LAW) + parseInt(data.ADMINISTATIVE_LAW) + parseInt(data.CLINICAL_LEGAL_EDUCATION)
+                                    + parseInt(data.INTERNATIONAL_DISPUTES) + parseInt(data1.WATER_RIVER) + parseInt(data1.ENVIRONMENT_LAW);
+                        percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE == 'I' && data.CONTRACT_LAW == 'I' && data.COMPANY_LAW == 'I'
+                    && data.ADMINISTATIVE_LAW != 'I' && data.CLINICAL_LEGAL_EDUCATION != 'I' && data.INTERNATIONAL_DISPUTES != 'I'
+                    && data1.WATER_RIVER != 'I' && data1.ENVIRONMENT_LAW != 'I') {
+                        totalMarks = parseInt(data.ADMINISTATIVE_LAW) + parseInt(data.CLINICAL_LEGAL_EDUCATION)
+                                    + parseInt(data.INTERNATIONAL_DISPUTES) + parseInt(data1.WATER_RIVER) + parseInt(data1.ENVIRONMENT_LAW);
+                        percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE == 'I' && data.CONTRACT_LAW == 'I' && data.COMPANY_LAW == 'I'
+                    && data.ADMINISTATIVE_LAW == 'I' && data.CLINICAL_LEGAL_EDUCATION != 'I' && data.INTERNATIONAL_DISPUTES != 'I'
+                    && data1.WATER_RIVER != 'I' && data1.ENVIRONMENT_LAW != 'I') {
+                        totalMarks = parseInt(data.CLINICAL_LEGAL_EDUCATION)
+                                    + parseInt(data.INTERNATIONAL_DISPUTES) + parseInt(data1.WATER_RIVER) + parseInt(data1.ENVIRONMENT_LAW);
+                        percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE == 'I' && data.CONTRACT_LAW == 'I' && data.COMPANY_LAW == 'I'
+                    && data.ADMINISTATIVE_LAW == 'I' && data.CLINICAL_LEGAL_EDUCATION == 'I' && data.INTERNATIONAL_DISPUTES != 'I'
+                    && data1.WATER_RIVER != 'I' && data1.ENVIRONMENT_LAW != 'I') {
+                        totalMarks = parseInt(data.INTERNATIONAL_DISPUTES) + parseInt(data1.WATER_RIVER) + parseInt(data1.ENVIRONMENT_LAW);
+                        percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE == 'I' && data.CONTRACT_LAW == 'I' && data.COMPANY_LAW == 'I'
+                    && data.ADMINISTATIVE_LAW == 'I' && data.CLINICAL_LEGAL_EDUCATION == 'I' && data.INTERNATIONAL_DISPUTES == 'I'
+                    && data1.WATER_RIVER != 'I' && data1.ENVIRONMENT_LAW != 'I') {
+                        totalMarks = parseInt(data1.WATER_RIVER) + parseInt(data1.ENVIRONMENT_LAW);
+                        percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE == 'I' && data.CONTRACT_LAW == 'I' && data.COMPANY_LAW == 'I'
+                    && data.ADMINISTATIVE_LAW == 'I' && data.CLINICAL_LEGAL_EDUCATION == 'I' && data.INTERNATIONAL_DISPUTES == 'I'
+                    && data1.WATER_RIVER == 'I' && data1.ENVIRONMENT_LAW != 'I') {
+                        totalMarks = parseInt(data1.ENVIRONMENT_LAW);
+                        percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.CLINICAL_EDUCATION == 'I' && data.ADVANCED_JURISPRUDENCE == 'I' && data.CONTRACT_LAW == 'I' && data.COMPANY_LAW == 'I'
+                    && data.ADMINISTATIVE_LAW == 'I' && data.CLINICAL_LEGAL_EDUCATION == 'I' && data.INTERNATIONAL_DISPUTES == 'I'
+                    && data1.WATER_RIVER == 'I' && data1.ENVIRONMENT_LAW == 'I') {
+                        percent = 0;
+                    }
+
+                    Llbstudent.update(
+                        { PERCENT : percent}, 
+                        {where : {SID : req.body.SId}}
+                      )
+                      .then (data1 => {
+                        res.send(data);
+                      })
+                      .catch(err => {
+                        res.status(500).send({
+                            message:
+                            err.message || "Some error occurred while entering marks."
+                        });
+                    });
+
             })
             .catch(err => {
                 res.status(500).send({

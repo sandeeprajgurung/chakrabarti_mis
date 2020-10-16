@@ -31,7 +31,7 @@ module.exports = (sequelize, Sequelize) => {
       YEAR: {
           type: Sequelize.INTEGER
       },
-      GPA:{
+      PERCENT:{
         type: Sequelize.FLOAT
       },
       PRGID: {

@@ -4,6 +4,7 @@ const FifthyearCriminal = db.FIFTHYEAR_CRIMINAL;
 const FifthyearBusiness = db.FIFTHYEAR_BUSINESS;
 const FifthyearConstitutional = db.FIFTHYEAR_CONSTITUTIONAL;
 const FifthyearEnvironment = db.FIFTHYEAR_ENVIRONMENT;
+const Llbstudent = db.LLBSTUDENT;
 const Op = db.Sequelize.Op;
 
 exports.FindAll= async (req,res)=>{
@@ -46,7 +47,99 @@ exports.CreateCriminal = (req, res) => {
     
                 FifthyearCriminal.create(fifthyearcriminal)
                 .then(data1 => {
-                  res.send(data1);
+                  
+                    var totalMarks = 0;
+                    var percent = 0;
+
+                    if(data.LEGAL_PHILOSOPHY != 'I' && data.AGRARIAN != 'I' && data.INTERNATIONAL_HUMANITARIAN != 'I' && data.CONSERVATION_LAW != 'I'
+                        && data.INTERNATIONAL_LAW != 'I' && data.PRE_TRIAL_PRESENTATION != 'I' && data.CLINICAL_EDUCATION != 'I' && data.DISSERTATION != 'I'
+                        && data1.ORGANIZED_CRIME != 'I' && data1.FISCAL_CRIME != 'I') {
+                            totalMarks = parseInt(data.LEGAL_PHILOSOPHY) + parseInt(data.AGRARIAN) + parseInt(data.INTERNATIONAL_HUMANITARIAN) + parseInt(data.CONSERVATION_LAW)
+                                        + parseInt(data.INTERNATIONAL_LAW) + parseInt(data.PRE_TRIAL_PRESENTATION) + parseInt(data.CLINICAL_EDUCATION)
+                                        + parseInt(data.DISSERTATION) + parseInt(data1.ORGANIZED_CRIME) + parseInt(data1.FISCAL_CRIME);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN != 'I' && data.INTERNATIONAL_HUMANITARIAN != 'I' && data.CONSERVATION_LAW != 'I'
+                        && data.INTERNATIONAL_LAW != 'I' && data.PRE_TRIAL_PRESENTATION != 'I' && data.CLINICAL_EDUCATION != 'I' && data.DISSERTATION != 'I'
+                        && data1.ORGANIZED_CRIME != 'I' && data1.FISCAL_CRIME != 'I') {
+                            totalMarks = parseInt(data.AGRARIAN) + parseInt(data.INTERNATIONAL_HUMANITARIAN) + parseInt(data.CONSERVATION_LAW)
+                                        + parseInt(data.INTERNATIONAL_LAW) + parseInt(data.PRE_TRIAL_PRESENTATION) + parseInt(data.CLINICAL_EDUCATION)
+                                        + parseInt(data.DISSERTATION) + parseInt(data1.ORGANIZED_CRIME) + parseInt(data1.FISCAL_CRIME);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN != 'I' && data.CONSERVATION_LAW != 'I'
+                        && data.INTERNATIONAL_LAW != 'I' && data.PRE_TRIAL_PRESENTATION != 'I' && data.CLINICAL_EDUCATION != 'I' && data.DISSERTATION != 'I'
+                        && data1.ORGANIZED_CRIME != 'I' && data1.FISCAL_CRIME != 'I') {
+                            totalMarks = parseInt(data.INTERNATIONAL_HUMANITARIAN) + parseInt(data.CONSERVATION_LAW)
+                                        + parseInt(data.INTERNATIONAL_LAW) + parseInt(data.PRE_TRIAL_PRESENTATION) + parseInt(data.CLINICAL_EDUCATION)
+                                        + parseInt(data.DISSERTATION) + parseInt(data1.ORGANIZED_CRIME) + parseInt(data1.FISCAL_CRIME);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN == 'I' && data.CONSERVATION_LAW != 'I'
+                        && data.INTERNATIONAL_LAW != 'I' && data.PRE_TRIAL_PRESENTATION != 'I' && data.CLINICAL_EDUCATION != 'I' && data.DISSERTATION != 'I'
+                        && data1.ORGANIZED_CRIME != 'I' && data1.FISCAL_CRIME != 'I') {
+                            totalMarks = parseInt(data.CONSERVATION_LAW) + parseInt(data.INTERNATIONAL_LAW) + parseInt(data.PRE_TRIAL_PRESENTATION) + parseInt(data.CLINICAL_EDUCATION)
+                                        + parseInt(data.DISSERTATION) + parseInt(data1.ORGANIZED_CRIME) + parseInt(data1.FISCAL_CRIME);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN == 'I' && data.CONSERVATION_LAW == 'I'
+                        && data.INTERNATIONAL_LAW != 'I' && data.PRE_TRIAL_PRESENTATION != 'I' && data.CLINICAL_EDUCATION != 'I' && data.DISSERTATION != 'I'
+                        && data1.ORGANIZED_CRIME != 'I' && data1.FISCAL_CRIME != 'I') {
+                            totalMarks = parseInt(data.INTERNATIONAL_LAW) + parseInt(data.PRE_TRIAL_PRESENTATION) + parseInt(data.CLINICAL_EDUCATION)
+                                        + parseInt(data.DISSERTATION) + parseInt(data1.ORGANIZED_CRIME) + parseInt(data1.FISCAL_CRIME);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN == 'I' && data.CONSERVATION_LAW == 'I'
+                        && data.INTERNATIONAL_LAW == 'I' && data.PRE_TRIAL_PRESENTATION != 'I' && data.CLINICAL_EDUCATION != 'I' && data.DISSERTATION != 'I'
+                        && data1.ORGANIZED_CRIME != 'I' && data1.FISCAL_CRIME != 'I') {
+                            totalMarks = parseInt(data.PRE_TRIAL_PRESENTATION) + parseInt(data.CLINICAL_EDUCATION)
+                                        + parseInt(data.DISSERTATION) + parseInt(data1.ORGANIZED_CRIME) + parseInt(data1.FISCAL_CRIME);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN == 'I' && data.CONSERVATION_LAW == 'I'
+                        && data.INTERNATIONAL_LAW == 'I' && data.PRE_TRIAL_PRESENTATION == 'I' && data.CLINICAL_EDUCATION != 'I' && data.DISSERTATION != 'I'
+                        && data1.ORGANIZED_CRIME != 'I' && data1.FISCAL_CRIME != 'I') {
+                            totalMarks = parseInt(data.CLINICAL_EDUCATION) + parseInt(data.DISSERTATION) + parseInt(data1.ORGANIZED_CRIME) + parseInt(data1.FISCAL_CRIME);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN == 'I' && data.CONSERVATION_LAW == 'I'
+                        && data.INTERNATIONAL_LAW == 'I' && data.PRE_TRIAL_PRESENTATION == 'I' && data.CLINICAL_EDUCATION == 'I' && data.DISSERTATION != 'I'
+                        && data1.ORGANIZED_CRIME != 'I' && data1.FISCAL_CRIME != 'I') {
+                            totalMarks = parseInt(data.DISSERTATION) + parseInt(data1.ORGANIZED_CRIME) + parseInt(data1.FISCAL_CRIME);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN == 'I' && data.CONSERVATION_LAW == 'I'
+                        && data.INTERNATIONAL_LAW == 'I' && data.PRE_TRIAL_PRESENTATION == 'I' && data.CLINICAL_EDUCATION == 'I' && data.DISSERTATION == 'I'
+                        && data1.ORGANIZED_CRIME != 'I' && data1.FISCAL_CRIME != 'I') {
+                            totalMarks = parseInt(data1.ORGANIZED_CRIME) + parseInt(data1.FISCAL_CRIME);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN == 'I' && data.CONSERVATION_LAW == 'I'
+                        && data.INTERNATIONAL_LAW == 'I' && data.PRE_TRIAL_PRESENTATION == 'I' && data.CLINICAL_EDUCATION == 'I' && data.DISSERTATION == 'I'
+                        && data1.ORGANIZED_CRIME == 'I' && data1.FISCAL_CRIME != 'I') {
+                            totalMarks = parseInt(data1.FISCAL_CRIME);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN == 'I' && data.CONSERVATION_LAW == 'I'
+                        && data.INTERNATIONAL_LAW == 'I' && data.PRE_TRIAL_PRESENTATION == 'I' && data.CLINICAL_EDUCATION == 'I' && data.DISSERTATION == 'I'
+                        && data1.ORGANIZED_CRIME == 'I' && data1.FISCAL_CRIME == 'I') {
+                            percent = 0;
+                    }
+
+                    Llbstudent.update(
+                        { PERCENT : percent}, 
+                        {where : {SID : req.body.SId}}
+                      )
+                      .then (data1 => {
+                        res.send(data);
+                      })
+                      .catch(err => {
+                        res.status(500).send({
+                            message:
+                            err.message || "Some error occurred while entering marks."
+                        });
+                    });
+
                 })
                 .catch(err => {
                     res.status(500).send({
@@ -86,8 +179,100 @@ exports.CreateBusiness = (req, res) => {
                 };
     
                 FifthyearBusiness.create(fifthyearbusiness)
-                .then(data2 => {
-                  res.send(data2);
+                .then(data1 => {
+                  
+                    var totalMarks = 0;
+                    var percent = 0;
+
+                    if(data.LEGAL_PHILOSOPHY != 'I' && data.AGRARIAN != 'I' && data.INTERNATIONAL_HUMANITARIAN != 'I' && data.CONSERVATION_LAW != 'I'
+                        && data.INTERNATIONAL_LAW != 'I' && data.PRE_TRIAL_PRESENTATION != 'I' && data.CLINICAL_EDUCATION != 'I' && data.DISSERTATION != 'I'
+                        && data1.INTELLECTUAL_PROPERTY != 'I' && data1.TAXATION != 'I') {
+                            totalMarks = parseInt(data.LEGAL_PHILOSOPHY) + parseInt(data.AGRARIAN) + parseInt(data.INTERNATIONAL_HUMANITARIAN) + parseInt(data.CONSERVATION_LAW)
+                                        + parseInt(data.INTERNATIONAL_LAW) + parseInt(data.PRE_TRIAL_PRESENTATION) + parseInt(data.CLINICAL_EDUCATION)
+                                        + parseInt(data.DISSERTATION) + parseInt(data1.INTELLECTUAL_PROPERTY) + parseInt(data1.TAXATION);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN != 'I' && data.INTERNATIONAL_HUMANITARIAN != 'I' && data.CONSERVATION_LAW != 'I'
+                        && data.INTERNATIONAL_LAW != 'I' && data.PRE_TRIAL_PRESENTATION != 'I' && data.CLINICAL_EDUCATION != 'I' && data.DISSERTATION != 'I'
+                        && data1.INTELLECTUAL_PROPERTY != 'I' && data1.TAXATION != 'I') {
+                            totalMarks = parseInt(data.AGRARIAN) + parseInt(data.INTERNATIONAL_HUMANITARIAN) + parseInt(data.CONSERVATION_LAW)
+                                        + parseInt(data.INTERNATIONAL_LAW) + parseInt(data.PRE_TRIAL_PRESENTATION) + parseInt(data.CLINICAL_EDUCATION)
+                                        + parseInt(data.DISSERTATION) + parseInt(data1.INTELLECTUAL_PROPERTY) + parseInt(data1.TAXATION);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN != 'I' && data.CONSERVATION_LAW != 'I'
+                        && data.INTERNATIONAL_LAW != 'I' && data.PRE_TRIAL_PRESENTATION != 'I' && data.CLINICAL_EDUCATION != 'I' && data.DISSERTATION != 'I'
+                        && data1.INTELLECTUAL_PROPERTY != 'I' && data1.TAXATION != 'I') {
+                            totalMarks = parseInt(data.INTERNATIONAL_HUMANITARIAN) + parseInt(data.CONSERVATION_LAW)
+                                        + parseInt(data.INTERNATIONAL_LAW) + parseInt(data.PRE_TRIAL_PRESENTATION) + parseInt(data.CLINICAL_EDUCATION)
+                                        + parseInt(data.DISSERTATION) + parseInt(data1.INTELLECTUAL_PROPERTY) + parseInt(data1.TAXATION);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN == 'I' && data.CONSERVATION_LAW != 'I'
+                        && data.INTERNATIONAL_LAW != 'I' && data.PRE_TRIAL_PRESENTATION != 'I' && data.CLINICAL_EDUCATION != 'I' && data.DISSERTATION != 'I'
+                        && data1.INTELLECTUAL_PROPERTY != 'I' && data1.TAXATION != 'I') {
+                            totalMarks = parseInt(data.CONSERVATION_LAW) + parseInt(data.INTERNATIONAL_LAW) + parseInt(data.PRE_TRIAL_PRESENTATION) + parseInt(data.CLINICAL_EDUCATION)
+                                        + parseInt(data.DISSERTATION) + parseInt(data1.INTELLECTUAL_PROPERTY) + parseInt(data1.TAXATION);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN == 'I' && data.CONSERVATION_LAW == 'I'
+                        && data.INTERNATIONAL_LAW != 'I' && data.PRE_TRIAL_PRESENTATION != 'I' && data.CLINICAL_EDUCATION != 'I' && data.DISSERTATION != 'I'
+                        && data1.INTELLECTUAL_PROPERTY != 'I' && data1.TAXATION != 'I') {
+                            totalMarks = parseInt(data.INTERNATIONAL_LAW) + parseInt(data.PRE_TRIAL_PRESENTATION) + parseInt(data.CLINICAL_EDUCATION)
+                                        + parseInt(data.DISSERTATION) + parseInt(data1.INTELLECTUAL_PROPERTY) + parseInt(data1.TAXATION);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN == 'I' && data.CONSERVATION_LAW == 'I'
+                        && data.INTERNATIONAL_LAW == 'I' && data.PRE_TRIAL_PRESENTATION != 'I' && data.CLINICAL_EDUCATION != 'I' && data.DISSERTATION != 'I'
+                        && data1.INTELLECTUAL_PROPERTY != 'I' && data1.TAXATION != 'I') {
+                            totalMarks = parseInt(data.PRE_TRIAL_PRESENTATION) + parseInt(data.CLINICAL_EDUCATION)
+                                        + parseInt(data.DISSERTATION) + parseInt(data1.INTELLECTUAL_PROPERTY) + parseInt(data1.TAXATION);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN == 'I' && data.CONSERVATION_LAW == 'I'
+                        && data.INTERNATIONAL_LAW == 'I' && data.PRE_TRIAL_PRESENTATION == 'I' && data.CLINICAL_EDUCATION != 'I' && data.DISSERTATION != 'I'
+                        && data1.INTELLECTUAL_PROPERTY != 'I' && data1.TAXATION != 'I') {
+                            totalMarks = parseInt(data.CLINICAL_EDUCATION) + parseInt(data.DISSERTATION) + parseInt(data1.INTELLECTUAL_PROPERTY) + parseInt(data1.TAXATION);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN == 'I' && data.CONSERVATION_LAW == 'I'
+                        && data.INTERNATIONAL_LAW == 'I' && data.PRE_TRIAL_PRESENTATION == 'I' && data.CLINICAL_EDUCATION == 'I' && data.DISSERTATION != 'I'
+                        && data1.INTELLECTUAL_PROPERTY != 'I' && data1.TAXATION != 'I') {
+                            totalMarks = parseInt(data.DISSERTATION) + parseInt(data1.INTELLECTUAL_PROPERTY) + parseInt(data1.TAXATION);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN == 'I' && data.CONSERVATION_LAW == 'I'
+                        && data.INTERNATIONAL_LAW == 'I' && data.PRE_TRIAL_PRESENTATION == 'I' && data.CLINICAL_EDUCATION == 'I' && data.DISSERTATION == 'I'
+                        && data1.INTELLECTUAL_PROPERTY != 'I' && data1.TAXATION != 'I') {
+                            totalMarks = parseInt(data1.INTELLECTUAL_PROPERTY) + parseInt(data1.TAXATION);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN == 'I' && data.CONSERVATION_LAW == 'I'
+                        && data.INTERNATIONAL_LAW == 'I' && data.PRE_TRIAL_PRESENTATION == 'I' && data.CLINICAL_EDUCATION == 'I' && data.DISSERTATION == 'I'
+                        && data1.INTELLECTUAL_PROPERTY == 'I' && data1.TAXATION != 'I') {
+                            totalMarks = parseInt(data1.TAXATION);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN == 'I' && data.CONSERVATION_LAW == 'I'
+                        && data.INTERNATIONAL_LAW == 'I' && data.PRE_TRIAL_PRESENTATION == 'I' && data.CLINICAL_EDUCATION == 'I' && data.DISSERTATION == 'I'
+                        && data1.INTELLECTUAL_PROPERTY == 'I' && data1.TAXATION == 'I') {
+                            percent = 0;
+                    }
+
+                    Llbstudent.update(
+                        { PERCENT : percent}, 
+                        {where : {SID : req.body.SId}}
+                      )
+                      .then (data1 => {
+                        res.send(data);
+                      })
+                      .catch(err => {
+                        res.status(500).send({
+                            message:
+                            err.message || "Some error occurred while entering marks."
+                        });
+                    });
+
                 })
                 .catch(err => {
                     res.status(500).send({
@@ -126,8 +311,100 @@ exports.CreateConstitution = (req, res) => {
             };
 
             FifthyearConstitutional.create(fifthyearconstitution)
-            .then(data3 => {
-              res.send(data3);
+            .then(data1 => {
+              
+                var totalMarks = 0;
+                    var percent = 0;
+
+                    if(data.LEGAL_PHILOSOPHY != 'I' && data.AGRARIAN != 'I' && data.INTERNATIONAL_HUMANITARIAN != 'I' && data.CONSERVATION_LAW != 'I'
+                        && data.INTERNATIONAL_LAW != 'I' && data.PRE_TRIAL_PRESENTATION != 'I' && data.CLINICAL_EDUCATION != 'I' && data.DISSERTATION != 'I'
+                        && data1.LAW_OF_EQUITY != 'I' && data1.LAW_ON_GENDER != 'I') {
+                            totalMarks = parseInt(data.LEGAL_PHILOSOPHY) + parseInt(data.AGRARIAN) + parseInt(data.INTERNATIONAL_HUMANITARIAN) + parseInt(data.CONSERVATION_LAW)
+                                        + parseInt(data.INTERNATIONAL_LAW) + parseInt(data.PRE_TRIAL_PRESENTATION) + parseInt(data.CLINICAL_EDUCATION)
+                                        + parseInt(data.DISSERTATION) + parseInt(data1.LAW_OF_EQUITY) + parseInt(data1.LAW_ON_GENDER);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN != 'I' && data.INTERNATIONAL_HUMANITARIAN != 'I' && data.CONSERVATION_LAW != 'I'
+                        && data.INTERNATIONAL_LAW != 'I' && data.PRE_TRIAL_PRESENTATION != 'I' && data.CLINICAL_EDUCATION != 'I' && data.DISSERTATION != 'I'
+                        && data1.LAW_OF_EQUITY != 'I' && data1.LAW_ON_GENDER != 'I') {
+                            totalMarks = parseInt(data.AGRARIAN) + parseInt(data.INTERNATIONAL_HUMANITARIAN) + parseInt(data.CONSERVATION_LAW)
+                                        + parseInt(data.INTERNATIONAL_LAW) + parseInt(data.PRE_TRIAL_PRESENTATION) + parseInt(data.CLINICAL_EDUCATION)
+                                        + parseInt(data.DISSERTATION) + parseInt(data1.LAW_OF_EQUITY) + parseInt(data1.LAW_ON_GENDER);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN != 'I' && data.CONSERVATION_LAW != 'I'
+                        && data.INTERNATIONAL_LAW != 'I' && data.PRE_TRIAL_PRESENTATION != 'I' && data.CLINICAL_EDUCATION != 'I' && data.DISSERTATION != 'I'
+                        && data1.LAW_OF_EQUITY != 'I' && data1.LAW_ON_GENDER != 'I') {
+                            totalMarks = parseInt(data.INTERNATIONAL_HUMANITARIAN) + parseInt(data.CONSERVATION_LAW)
+                                        + parseInt(data.INTERNATIONAL_LAW) + parseInt(data.PRE_TRIAL_PRESENTATION) + parseInt(data.CLINICAL_EDUCATION)
+                                        + parseInt(data.DISSERTATION) + parseInt(data1.LAW_OF_EQUITY) + parseInt(data1.LAW_ON_GENDER);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN == 'I' && data.CONSERVATION_LAW != 'I'
+                        && data.INTERNATIONAL_LAW != 'I' && data.PRE_TRIAL_PRESENTATION != 'I' && data.CLINICAL_EDUCATION != 'I' && data.DISSERTATION != 'I'
+                        && data1.LAW_OF_EQUITY != 'I' && data1.LAW_ON_GENDER != 'I') {
+                            totalMarks = parseInt(data.CONSERVATION_LAW) + parseInt(data.INTERNATIONAL_LAW) + parseInt(data.PRE_TRIAL_PRESENTATION) + parseInt(data.CLINICAL_EDUCATION)
+                                        + parseInt(data.DISSERTATION) + parseInt(data1.LAW_OF_EQUITY) + parseInt(data1.LAW_ON_GENDER);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN == 'I' && data.CONSERVATION_LAW == 'I'
+                        && data.INTERNATIONAL_LAW != 'I' && data.PRE_TRIAL_PRESENTATION != 'I' && data.CLINICAL_EDUCATION != 'I' && data.DISSERTATION != 'I'
+                        && data1.LAW_OF_EQUITY != 'I' && data1.LAW_ON_GENDER != 'I') {
+                            totalMarks = parseInt(data.INTERNATIONAL_LAW) + parseInt(data.PRE_TRIAL_PRESENTATION) + parseInt(data.CLINICAL_EDUCATION)
+                                        + parseInt(data.DISSERTATION) + parseInt(data1.LAW_OF_EQUITY) + parseInt(data1.LAW_ON_GENDER);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN == 'I' && data.CONSERVATION_LAW == 'I'
+                        && data.INTERNATIONAL_LAW == 'I' && data.PRE_TRIAL_PRESENTATION != 'I' && data.CLINICAL_EDUCATION != 'I' && data.DISSERTATION != 'I'
+                        && data1.LAW_OF_EQUITY != 'I' && data1.LAW_ON_GENDER != 'I') {
+                            totalMarks = parseInt(data.PRE_TRIAL_PRESENTATION) + parseInt(data.CLINICAL_EDUCATION)
+                                        + parseInt(data.DISSERTATION) + parseInt(data1.LAW_OF_EQUITY) + parseInt(data1.LAW_ON_GENDER);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN == 'I' && data.CONSERVATION_LAW == 'I'
+                        && data.INTERNATIONAL_LAW == 'I' && data.PRE_TRIAL_PRESENTATION == 'I' && data.CLINICAL_EDUCATION != 'I' && data.DISSERTATION != 'I'
+                        && data1.LAW_OF_EQUITY != 'I' && data1.LAW_ON_GENDER != 'I') {
+                            totalMarks = parseInt(data.CLINICAL_EDUCATION) + parseInt(data.DISSERTATION) + parseInt(data1.LAW_OF_EQUITY) + parseInt(data1.LAW_ON_GENDER);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN == 'I' && data.CONSERVATION_LAW == 'I'
+                        && data.INTERNATIONAL_LAW == 'I' && data.PRE_TRIAL_PRESENTATION == 'I' && data.CLINICAL_EDUCATION == 'I' && data.DISSERTATION != 'I'
+                        && data1.LAW_OF_EQUITY != 'I' && data1.LAW_ON_GENDER != 'I') {
+                            totalMarks = parseInt(data.DISSERTATION) + parseInt(data1.LAW_OF_EQUITY) + parseInt(data1.LAW_ON_GENDER);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN == 'I' && data.CONSERVATION_LAW == 'I'
+                        && data.INTERNATIONAL_LAW == 'I' && data.PRE_TRIAL_PRESENTATION == 'I' && data.CLINICAL_EDUCATION == 'I' && data.DISSERTATION == 'I'
+                        && data1.LAW_OF_EQUITY != 'I' && data1.LAW_ON_GENDER != 'I') {
+                            totalMarks = parseInt(data1.LAW_OF_EQUITY) + parseInt(data1.LAW_ON_GENDER);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN == 'I' && data.CONSERVATION_LAW == 'I'
+                        && data.INTERNATIONAL_LAW == 'I' && data.PRE_TRIAL_PRESENTATION == 'I' && data.CLINICAL_EDUCATION == 'I' && data.DISSERTATION == 'I'
+                        && data1.LAW_OF_EQUITY == 'I' && data1.LAW_ON_GENDER != 'I') {
+                            totalMarks = parseInt(data1.LAW_ON_GENDER);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN == 'I' && data.CONSERVATION_LAW == 'I'
+                        && data.INTERNATIONAL_LAW == 'I' && data.PRE_TRIAL_PRESENTATION == 'I' && data.CLINICAL_EDUCATION == 'I' && data.DISSERTATION == 'I'
+                        && data1.LAW_OF_EQUITY == 'I' && data1.LAW_ON_GENDER == 'I') {
+                            percent = 0;
+                    }
+
+                    Llbstudent.update(
+                        { PERCENT : percent}, 
+                        {where : {SID : req.body.SId}}
+                      )
+                      .then (data1 => {
+                        res.send(data);
+                      })
+                      .catch(err => {
+                        res.status(500).send({
+                            message:
+                            err.message || "Some error occurred while entering marks."
+                        });
+                    });
+
             })
             .catch(err => {
                 res.status(500).send({
@@ -166,8 +443,100 @@ exports.CreateEnvironment = (req, res) => {
             };
 
             FifthyearEnvironment.create(fifthyearenvironment)
-            .then(data3 => {
-              res.send(data3);
+            .then(data1 => {
+              
+                var totalMarks = 0;
+                    var percent = 0;
+
+                    if(data.LEGAL_PHILOSOPHY != 'I' && data.AGRARIAN != 'I' && data.INTERNATIONAL_HUMANITARIAN != 'I' && data.CONSERVATION_LAW != 'I'
+                        && data.INTERNATIONAL_LAW != 'I' && data.PRE_TRIAL_PRESENTATION != 'I' && data.CLINICAL_EDUCATION != 'I' && data.DISSERTATION != 'I'
+                        && data1.ENERGY_LAW != 'I' && data1.CIVIL_AVIATION != 'I') {
+                            totalMarks = parseInt(data.LEGAL_PHILOSOPHY) + parseInt(data.AGRARIAN) + parseInt(data.INTERNATIONAL_HUMANITARIAN) + parseInt(data.CONSERVATION_LAW)
+                                        + parseInt(data.INTERNATIONAL_LAW) + parseInt(data.PRE_TRIAL_PRESENTATION) + parseInt(data.CLINICAL_EDUCATION)
+                                        + parseInt(data.DISSERTATION) + parseInt(data1.ENERGY_LAW) + parseInt(data1.CIVIL_AVIATION);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN != 'I' && data.INTERNATIONAL_HUMANITARIAN != 'I' && data.CONSERVATION_LAW != 'I'
+                        && data.INTERNATIONAL_LAW != 'I' && data.PRE_TRIAL_PRESENTATION != 'I' && data.CLINICAL_EDUCATION != 'I' && data.DISSERTATION != 'I'
+                        && data1.ENERGY_LAW != 'I' && data1.CIVIL_AVIATION != 'I') {
+                            totalMarks = parseInt(data.AGRARIAN) + parseInt(data.INTERNATIONAL_HUMANITARIAN) + parseInt(data.CONSERVATION_LAW)
+                                        + parseInt(data.INTERNATIONAL_LAW) + parseInt(data.PRE_TRIAL_PRESENTATION) + parseInt(data.CLINICAL_EDUCATION)
+                                        + parseInt(data.DISSERTATION) + parseInt(data1.ENERGY_LAW) + parseInt(data1.CIVIL_AVIATION);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN != 'I' && data.CONSERVATION_LAW != 'I'
+                        && data.INTERNATIONAL_LAW != 'I' && data.PRE_TRIAL_PRESENTATION != 'I' && data.CLINICAL_EDUCATION != 'I' && data.DISSERTATION != 'I'
+                        && data1.ENERGY_LAW != 'I' && data1.CIVIL_AVIATION != 'I') {
+                            totalMarks = parseInt(data.INTERNATIONAL_HUMANITARIAN) + parseInt(data.CONSERVATION_LAW)
+                                        + parseInt(data.INTERNATIONAL_LAW) + parseInt(data.PRE_TRIAL_PRESENTATION) + parseInt(data.CLINICAL_EDUCATION)
+                                        + parseInt(data.DISSERTATION) + parseInt(data1.ENERGY_LAW) + parseInt(data1.CIVIL_AVIATION);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN == 'I' && data.CONSERVATION_LAW != 'I'
+                        && data.INTERNATIONAL_LAW != 'I' && data.PRE_TRIAL_PRESENTATION != 'I' && data.CLINICAL_EDUCATION != 'I' && data.DISSERTATION != 'I'
+                        && data1.ENERGY_LAW != 'I' && data1.CIVIL_AVIATION != 'I') {
+                            totalMarks = parseInt(data.CONSERVATION_LAW) + parseInt(data.INTERNATIONAL_LAW) + parseInt(data.PRE_TRIAL_PRESENTATION) + parseInt(data.CLINICAL_EDUCATION)
+                                        + parseInt(data.DISSERTATION) + parseInt(data1.ENERGY_LAW) + parseInt(data1.CIVIL_AVIATION);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN == 'I' && data.CONSERVATION_LAW == 'I'
+                        && data.INTERNATIONAL_LAW != 'I' && data.PRE_TRIAL_PRESENTATION != 'I' && data.CLINICAL_EDUCATION != 'I' && data.DISSERTATION != 'I'
+                        && data1.ENERGY_LAW != 'I' && data1.CIVIL_AVIATION != 'I') {
+                            totalMarks = parseInt(data.INTERNATIONAL_LAW) + parseInt(data.PRE_TRIAL_PRESENTATION) + parseInt(data.CLINICAL_EDUCATION)
+                                        + parseInt(data.DISSERTATION) + parseInt(data1.ENERGY_LAW) + parseInt(data1.CIVIL_AVIATION);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN == 'I' && data.CONSERVATION_LAW == 'I'
+                        && data.INTERNATIONAL_LAW == 'I' && data.PRE_TRIAL_PRESENTATION != 'I' && data.CLINICAL_EDUCATION != 'I' && data.DISSERTATION != 'I'
+                        && data1.ENERGY_LAW != 'I' && data1.CIVIL_AVIATION != 'I') {
+                            totalMarks = parseInt(data.PRE_TRIAL_PRESENTATION) + parseInt(data.CLINICAL_EDUCATION)
+                                        + parseInt(data.DISSERTATION) + parseInt(data1.ENERGY_LAW) + parseInt(data1.CIVIL_AVIATION);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN == 'I' && data.CONSERVATION_LAW == 'I'
+                        && data.INTERNATIONAL_LAW == 'I' && data.PRE_TRIAL_PRESENTATION == 'I' && data.CLINICAL_EDUCATION != 'I' && data.DISSERTATION != 'I'
+                        && data1.ENERGY_LAW != 'I' && data1.CIVIL_AVIATION != 'I') {
+                            totalMarks = parseInt(data.CLINICAL_EDUCATION) + parseInt(data.DISSERTATION) + parseInt(data1.ENERGY_LAW) + parseInt(data1.CIVIL_AVIATION);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN == 'I' && data.CONSERVATION_LAW == 'I'
+                        && data.INTERNATIONAL_LAW == 'I' && data.PRE_TRIAL_PRESENTATION == 'I' && data.CLINICAL_EDUCATION == 'I' && data.DISSERTATION != 'I'
+                        && data1.ENERGY_LAW != 'I' && data1.CIVIL_AVIATION != 'I') {
+                            totalMarks = parseInt(data.DISSERTATION) + parseInt(data1.ENERGY_LAW) + parseInt(data1.CIVIL_AVIATION);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN == 'I' && data.CONSERVATION_LAW == 'I'
+                        && data.INTERNATIONAL_LAW == 'I' && data.PRE_TRIAL_PRESENTATION == 'I' && data.CLINICAL_EDUCATION == 'I' && data.DISSERTATION == 'I'
+                        && data1.ENERGY_LAW != 'I' && data1.CIVIL_AVIATION != 'I') {
+                            totalMarks = parseInt(data1.ENERGY_LAW) + parseInt(data1.CIVIL_AVIATION);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN == 'I' && data.CONSERVATION_LAW == 'I'
+                        && data.INTERNATIONAL_LAW == 'I' && data.PRE_TRIAL_PRESENTATION == 'I' && data.CLINICAL_EDUCATION == 'I' && data.DISSERTATION == 'I'
+                        && data1.ENERGY_LAW == 'I' && data1.CIVIL_AVIATION != 'I') {
+                            totalMarks = parseInt(data1.CIVIL_AVIATION);
+                            percent = (totalMarks / 800) * 100;
+                    }
+                    else if(data.LEGAL_PHILOSOPHY == 'I' && data.AGRARIAN == 'I' && data.INTERNATIONAL_HUMANITARIAN == 'I' && data.CONSERVATION_LAW == 'I'
+                        && data.INTERNATIONAL_LAW == 'I' && data.PRE_TRIAL_PRESENTATION == 'I' && data.CLINICAL_EDUCATION == 'I' && data.DISSERTATION == 'I'
+                        && data1.ENERGY_LAW == 'I' && data1.CIVIL_AVIATION == 'I') {
+                            percent = 0;
+                    }
+
+                    Llbstudent.update(
+                        { PERCENT : percent}, 
+                        {where : {SID : req.body.SId}}
+                      )
+                      .then (data1 => {
+                        res.send(data);
+                      })
+                      .catch(err => {
+                        res.status(500).send({
+                            message:
+                            err.message || "Some error occurred while entering marks."
+                        });
+                    });
+
             })
             .catch(err => {
                 res.status(500).send({

@@ -34,9 +34,6 @@ module.exports = (sequelize, Sequelize) => {
       },
       SID:{
         type: Sequelize.INTEGER
-      },
-      PRGID: {
-        type: Sequelize.INTEGER
       }
     },
     {
