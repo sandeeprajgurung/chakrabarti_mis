@@ -1,5 +1,6 @@
 const db = require("../connect/Connect");
 const Secondyear = db.SECONDYEAR;
+const Llbstudent = db.LLBSTUDENT;
 const Op = db.Sequelize.Op;
 
 exports.FindAll=(req,res)=>{
@@ -30,7 +31,71 @@ exports.Create = (req, res) => {
 
   Secondyear.create(secondyear)
   .then(data => {
-    res.send(data);
+    var totalMarks = 0;
+      var percent = 0;
+
+      if(data.ENGLISH != 'I' && data.NEPALI != 'I' && data.INTERNATIONAL_RELATION != 'I' && data.LEGISLATIVE_PRINCIPLE != 'I' && data.PROCEDURE_LAW != 'I'
+        && data.SOCOLOGY != 'I' && data.CRIMINAL_LAW != 'I' && data.CLINICAL_COURSE != 'I') {
+          totalMarks = parseInt(data.ENGLISH) + parseInt(data.NEPALI) + parseInt(data.INTERNATIONAL_RELATION) + parseInt(data.LEGISLATIVE_PRINCIPLE)
+                        + parseInt(data.PROCEDURE_LAW) + parseInt(data.SOCOLOGY) + parseInt(data.CRIMINAL_LAW) + parseInt(data.CLINICAL_COURSE);
+          percent = (totalMarks / 750) * 100;
+        }
+        else if(data.ENGLISH == 'I' && data.NEPALI != 'I' && data.INTERNATIONAL_RELATION != 'I' && data.LEGISLATIVE_PRINCIPLE != 'I' && data.PROCEDURE_LAW != 'I'
+        && data.SOCOLOGY != 'I' && data.CRIMINAL_LAW != 'I' && data.CLINICAL_COURSE != 'I') {
+          totalMarks = parseInt(data.NEPALI) + parseInt(data.INTERNATIONAL_RELATION) + parseInt(data.LEGISLATIVE_PRINCIPLE)
+          + parseInt(data.PROCEDURE_LAW) + parseInt(data.SOCOLOGY) + parseInt(data.CRIMINAL_LAW) + parseInt(data.CLINICAL_COURSE);
+          percent = (totalMarks / 750) * 100;
+        }
+        else if(data.ENGLISH == 'I' && data.NEPALI == 'I' && data.INTERNATIONAL_RELATION != 'I' && data.LEGISLATIVE_PRINCIPLE != 'I' && data.PROCEDURE_LAW != 'I'
+        && data.SOCOLOGY != 'I' && data.CRIMINAL_LAW != 'I' && data.CLINICAL_COURSE != 'I') {
+          totalMarks = parseInt(data.INTERNATIONAL_RELATION) + parseInt(data.LEGISLATIVE_PRINCIPLE) + parseInt(data.PROCEDURE_LAW)
+                        + parseInt(data.SOCOLOGY) + parseInt(data.CRIMINAL_LAW) + parseInt(data.CLINICAL_COURSE);
+          percent = (totalMarks / 750) * 100;
+        }
+        else if(data.ENGLISH == 'I' && data.NEPALI == 'I' && data.INTERNATIONAL_RELATION == 'I' && data.LEGISLATIVE_PRINCIPLE != 'I' && data.PROCEDURE_LAW != 'I'
+        && data.SOCOLOGY != 'I' && data.CRIMINAL_LAW != 'I' && data.CLINICAL_COURSE != 'I') {
+          totalMarks = parseInt(data.LEGISLATIVE_PRINCIPLE) + parseInt(data.PROCEDURE_LAW)
+                        + parseInt(data.SOCOLOGY) + parseInt(data.CRIMINAL_LAW) + parseInt(data.CLINICAL_COURSE);
+          percent = (totalMarks / 750) * 100;
+        }
+        else if(data.ENGLISH == 'I' && data.NEPALI == 'I' && data.INTERNATIONAL_RELATION == 'I' && data.LEGISLATIVE_PRINCIPLE == 'I' && data.PROCEDURE_LAW != 'I'
+        && data.SOCOLOGY != 'I' && data.CRIMINAL_LAW != 'I' && data.CLINICAL_COURSE != 'I') {
+          totalMarks =  parseInt(data.PROCEDURE_LAW) + parseInt(data.SOCOLOGY) + parseInt(data.CRIMINAL_LAW) + parseInt(data.CLINICAL_COURSE);
+          percent = (totalMarks / 750) * 100;
+        }
+        else if(data.ENGLISH == 'I' && data.NEPALI == 'I' && data.INTERNATIONAL_RELATION == 'I' && data.LEGISLATIVE_PRINCIPLE == 'I' && data.PROCEDURE_LAW == 'I'
+        && data.SOCOLOGY != 'I' && data.CRIMINAL_LAW != 'I' && data.CLINICAL_COURSE != 'I') {
+          totalMarks = parseInt(data.SOCOLOGY) + parseInt(data.CRIMINAL_LAW) + parseInt(data.CLINICAL_COURSE);
+          percent = (totalMarks / 750) * 100;
+        }
+        else if(data.ENGLISH == 'I' && data.NEPALI == 'I' && data.INTERNATIONAL_RELATION == 'I' && data.LEGISLATIVE_PRINCIPLE == 'I' && data.PROCEDURE_LAW == 'I'
+        && data.SOCOLOGY == 'I' && data.CRIMINAL_LAW != 'I' && data.CLINICAL_COURSE != 'I') {
+          totalMarks = parseInt(data.CRIMINAL_LAW) + parseInt(data.CLINICAL_COURSE);
+          percent = (totalMarks / 750) * 100;
+        }
+        else if(data.ENGLISH == 'I' && data.NEPALI == 'I' && data.INTERNATIONAL_RELATION == 'I' && data.LEGISLATIVE_PRINCIPLE == 'I' && data.PROCEDURE_LAW == 'I'
+        && data.SOCOLOGY == 'I' && data.CRIMINAL_LAW == 'I' && data.CLINICAL_COURSE != 'I') {
+          totalMarks = parseInt(data.CLINICAL_COURSE);
+          percent = (totalMarks / 750) * 100;
+        }
+        else if(data.ENGLISH == 'I' && data.NEPALI == 'I' && data.INTERNATIONAL_RELATION == 'I' && data.LEGISLATIVE_PRINCIPLE == 'I' && data.PROCEDURE_LAW == 'I'
+        && data.SOCOLOGY == 'I' && data.CRIMINAL_LAW == 'I' && data.CLINICAL_COURSE == 'I') {
+          percent = 0;
+        }
+
+        Llbstudent.update(
+          { PERCENT : percent}, 
+          {where : {SID : req.body.SId}}
+        )
+        .then (data1 => {
+          res.send(data);
+        })
+        .catch(err => {
+          res.status(500).send({
+              message:
+              err.message || "Some error occurred while entering marks."
+          });
+      });
   })
   .catch(err => {
       res.status(500).send({

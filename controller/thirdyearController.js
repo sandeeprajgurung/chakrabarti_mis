@@ -1,5 +1,6 @@
 const db = require("../connect/Connect");
 const Thirdyear = db.THIRDYEAR;
+const Llbstudent = db.LLBSTUDENT;
 const Op = db.Sequelize.Op;
 
 exports.FindAll=(req,res)=>{
@@ -26,13 +27,97 @@ exports.Create = (req, res) => {
     PROFESSIONAL_ETHICS : req.body.ProfessionalEthics,
     CLINICAL_LEGAL_EDUCATION : req.body.ClinicalLegalEducation,
     CLINICAL_WORK : req.body.ClinicalWork,
-    SID : req.body.SId,
-    PRGID : req.body.PrgId
+    SID : req.body.SId
   };
 
   Thirdyear.create(thirdyear)
   .then(data => {
-    res.send(data);
+    
+    var totalMarks = 0;
+    var percent = 0;
+
+    if(data.INTERNATIONAL_HUMAN_RIGHT != 'I' && data.INTERPRETATION != 'I' && data.LAW_EVIDENCE != 'I' && data.INTERNATIONAL_LAW != 'I'
+      && data.CONSTITUTIONAL_LAW != 'I' && data.LEGAL_RESEARCH != 'I' && data.PROFESSIONAL_ETHICS != 'I' && data.CLINICAL_LEGAL_EDUCATION != 'I'
+      && data.CLINICAL_WORK != 'I') {
+        totalMarks = parseInt(data.INTERNATIONAL_HUMAN_RIGHT) + parseInt(data.INTERPRETATION) + parseInt(data.LAW_EVIDENCE) + parseInt(data.INTERNATIONAL_LAW)
+                      + parseInt(data.CONSTITUTIONAL_LAW) + parseInt(data.LEGAL_RESEARCH) + parseInt(data.PROFESSIONAL_ETHICS) + parseInt(data.CLINICAL_LEGAL_EDUCATION)
+                      + parseInt(data.CLINICAL_WORK);
+        percent = (totalMarks / 700) * 100;
+    }
+    else if(data.INTERNATIONAL_HUMAN_RIGHT == 'I' && data.INTERPRETATION != 'I' && data.LAW_EVIDENCE != 'I' && data.INTERNATIONAL_LAW != 'I'
+    && data.CONSTITUTIONAL_LAW != 'I' && data.LEGAL_RESEARCH != 'I' && data.PROFESSIONAL_ETHICS != 'I' && data.CLINICAL_LEGAL_EDUCATION != 'I'
+    && data.CLINICAL_WORK != 'I') {
+      totalMarks = parseInt(data.INTERPRETATION) + parseInt(data.LAW_EVIDENCE) + parseInt(data.INTERNATIONAL_LAW)
+                    + parseInt(data.CONSTITUTIONAL_LAW) + parseInt(data.LEGAL_RESEARCH) + parseInt(data.PROFESSIONAL_ETHICS) + parseInt(data.CLINICAL_LEGAL_EDUCATION)
+                    + parseInt(data.CLINICAL_WORK);
+      percent = (totalMarks / 700) * 100;
+    }
+    else if(data.INTERNATIONAL_HUMAN_RIGHT == 'I' && data.INTERPRETATION == 'I' && data.LAW_EVIDENCE != 'I' && data.INTERNATIONAL_LAW != 'I'
+    && data.CONSTITUTIONAL_LAW != 'I' && data.LEGAL_RESEARCH != 'I' && data.PROFESSIONAL_ETHICS != 'I' && data.CLINICAL_LEGAL_EDUCATION != 'I'
+    && data.CLINICAL_WORK != 'I') {
+      totalMarks = parseInt(data.LAW_EVIDENCE) + parseInt(data.INTERNATIONAL_LAW)
+                    + parseInt(data.CONSTITUTIONAL_LAW) + parseInt(data.LEGAL_RESEARCH) + parseInt(data.PROFESSIONAL_ETHICS) + parseInt(data.CLINICAL_LEGAL_EDUCATION)
+                    + parseInt(data.CLINICAL_WORK);
+      percent = (totalMarks / 700) * 100;
+    }
+    else if(data.INTERNATIONAL_HUMAN_RIGHT == 'I' && data.INTERPRETATION == 'I' && data.LAW_EVIDENCE == 'I' && data.INTERNATIONAL_LAW != 'I'
+    && data.CONSTITUTIONAL_LAW != 'I' && data.LEGAL_RESEARCH != 'I' && data.PROFESSIONAL_ETHICS != 'I' && data.CLINICAL_LEGAL_EDUCATION != 'I'
+    && data.CLINICAL_WORK != 'I') {
+      totalMarks = parseInt(data.INTERNATIONAL_LAW) + parseInt(data.CONSTITUTIONAL_LAW) + parseInt(data.LEGAL_RESEARCH) 
+      + parseInt(data.PROFESSIONAL_ETHICS) + parseInt(data.CLINICAL_LEGAL_EDUCATION) + parseInt(data.CLINICAL_WORK);
+      percent = (totalMarks / 700) * 100;
+    }
+    else if(data.INTERNATIONAL_HUMAN_RIGHT == 'I' && data.INTERPRETATION == 'I' && data.LAW_EVIDENCE == 'I' && data.INTERNATIONAL_LAW == 'I'
+    && data.CONSTITUTIONAL_LAW != 'I' && data.LEGAL_RESEARCH != 'I' && data.PROFESSIONAL_ETHICS != 'I' && data.CLINICAL_LEGAL_EDUCATION != 'I'
+    && data.CLINICAL_WORK != 'I') {
+      totalMarks = parseInt(data.CONSTITUTIONAL_LAW) + parseInt(data.LEGAL_RESEARCH) 
+      + parseInt(data.PROFESSIONAL_ETHICS) + parseInt(data.CLINICAL_LEGAL_EDUCATION) + parseInt(data.CLINICAL_WORK);
+      percent = (totalMarks / 700) * 100;
+    }
+    else if(data.INTERNATIONAL_HUMAN_RIGHT == 'I' && data.INTERPRETATION == 'I' && data.LAW_EVIDENCE == 'I' && data.INTERNATIONAL_LAW == 'I'
+    && data.CONSTITUTIONAL_LAW == 'I' && data.LEGAL_RESEARCH != 'I' && data.PROFESSIONAL_ETHICS != 'I' && data.CLINICAL_LEGAL_EDUCATION != 'I'
+    && data.CLINICAL_WORK != 'I') {
+      totalMarks = parseInt(data.LEGAL_RESEARCH) + parseInt(data.PROFESSIONAL_ETHICS) + parseInt(data.CLINICAL_LEGAL_EDUCATION) + parseInt(data.CLINICAL_WORK);
+      percent = (totalMarks / 700) * 100;
+    }
+    else if(data.INTERNATIONAL_HUMAN_RIGHT == 'I' && data.INTERPRETATION == 'I' && data.LAW_EVIDENCE == 'I' && data.INTERNATIONAL_LAW == 'I'
+    && data.CONSTITUTIONAL_LAW == 'I' && data.LEGAL_RESEARCH == 'I' && data.PROFESSIONAL_ETHICS != 'I' && data.CLINICAL_LEGAL_EDUCATION != 'I'
+    && data.CLINICAL_WORK != 'I') {
+      totalMarks = parseInt(data.PROFESSIONAL_ETHICS) + parseInt(data.CLINICAL_LEGAL_EDUCATION) + parseInt(data.CLINICAL_WORK);
+      percent = (totalMarks / 700) * 100;
+    }
+    else if(data.INTERNATIONAL_HUMAN_RIGHT == 'I' && data.INTERPRETATION == 'I' && data.LAW_EVIDENCE == 'I' && data.INTERNATIONAL_LAW == 'I'
+    && data.CONSTITUTIONAL_LAW == 'I' && data.LEGAL_RESEARCH == 'I' && data.PROFESSIONAL_ETHICS == 'I' && data.CLINICAL_LEGAL_EDUCATION != 'I'
+    && data.CLINICAL_WORK != 'I') {
+      totalMarks = parseInt(data.CLINICAL_LEGAL_EDUCATION) + parseInt(data.CLINICAL_WORK);
+      percent = (totalMarks / 700) * 100;
+    }
+    else if(data.INTERNATIONAL_HUMAN_RIGHT == 'I' && data.INTERPRETATION == 'I' && data.LAW_EVIDENCE == 'I' && data.INTERNATIONAL_LAW == 'I'
+    && data.CONSTITUTIONAL_LAW == 'I' && data.LEGAL_RESEARCH == 'I' && data.PROFESSIONAL_ETHICS == 'I' && data.CLINICAL_LEGAL_EDUCATION == 'I'
+    && data.CLINICAL_WORK != 'I') {
+      totalMarks = parseInt(data.CLINICAL_WORK);
+      percent = (totalMarks / 700) * 100;
+    }
+    else if(data.INTERNATIONAL_HUMAN_RIGHT == 'I' && data.INTERPRETATION == 'I' && data.LAW_EVIDENCE == 'I' && data.INTERNATIONAL_LAW == 'I'
+    && data.CONSTITUTIONAL_LAW == 'I' && data.LEGAL_RESEARCH == 'I' && data.PROFESSIONAL_ETHICS == 'I' && data.CLINICAL_LEGAL_EDUCATION == 'I'
+    && data.CLINICAL_WORK == 'I') {
+      percent = 0;
+    }
+
+    Llbstudent.update(
+      { PERCENT : percent}, 
+      {where : {SID : req.body.SId}}
+    )
+    .then (data1 => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+          message:
+          err.message || "Some error occurred while entering marks."
+      });
+  });
+
   })
   .catch(err => {
       res.status(500).send({
