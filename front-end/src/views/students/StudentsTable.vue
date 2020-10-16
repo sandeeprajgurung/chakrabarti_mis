@@ -174,6 +174,9 @@
             </v-dialog>
           </v-toolbar>
         </template>
+        <template v-slot:[`item.PRGID`]="{ item }">
+          {{ program(item.PRGID) }}
+        </template>
         <template v-slot:[`item.actions`]="{ item }">
           <v-icon color="warning" class="mr-2" @click="editItem(item)">
             mdi-pencil
@@ -242,7 +245,6 @@ export default {
       {
         text: "Name",
         align: "start",
-        sortable: false,
         value: "SNAME",
       },
       {
@@ -252,20 +254,20 @@ export default {
       {
         text: "E-mail",
         value: "EMAIL",
+        sortable: false,
       },
       {
         text: "Phone no.",
         value: "PHONE_NO",
+        sortable: false,
       },
       {
         text: "Batch",
         value: "BATCH",
-        sortable: false,
       },
       {
         text: "Program",
         value: "PRGID",
-        sortable: false,
       },
       {
         text: "Action",
@@ -347,6 +349,11 @@ export default {
         this.$emit("childToParent", msg);
         this.load();
       }
+    },
+
+    program(programId) {
+      let x = this.programmes.find((element) => element.PRGID === programId);
+      return x.PRGNAME;
     },
 
     initialize() {},
