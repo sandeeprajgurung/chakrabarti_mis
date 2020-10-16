@@ -245,7 +245,6 @@ export default {
       {
         text: "Name",
         align: "start",
-        sortable: false,
         value: "SNAME",
       },
       {
@@ -255,20 +254,20 @@ export default {
       {
         text: "E-mail",
         value: "EMAIL",
+        sortable: false,
       },
       {
         text: "Phone no.",
         value: "PHONE_NO",
+        sortable: false,
       },
       {
         text: "Batch",
         value: "BATCH",
-        sortable: false,
       },
       {
         text: "Program",
         value: "PRGID",
-        sortable: false,
       },
       {
         text: "Action",
