@@ -60,7 +60,17 @@ export default {
 
     postLlmStudentMarks(data) {
         if (data.program === '1') {
+            // console.log(data);
             return this.execute('POST', '/Firstyear', data);
+        }
+        if (data.program === '2') {
+            return this.execute('POST', '/Secondyear', data);
+        }
+        if (data.program === '3') {
+            return this.execute('POST', '/Thirdyear', data);
+        }
+        if (data.program === '4') {
+            return this.execute('POST', '/Fourthyear/Criminal', data);
         }
     },
 

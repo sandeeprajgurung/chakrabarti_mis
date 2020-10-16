@@ -41,7 +41,10 @@
       </v-form>
     </v-card>
 
-    <result-students-table v-if="getStudents.length > 0" :students="getStudents" />
+    <result-students-table
+      v-if="getStudents.length > 0"
+      :students="getStudents"
+    />
   </section>
 </template>
 
@@ -85,20 +88,20 @@ export default {
 
     async searchFormSubmit() {
       this.$refs.searchStudents.validate();
-      if(this.$refs.searchStudents.validate() === true) {
-
-        if(this.student.PrgId <= 3) {
-         return this.getStudents = await api.searchLlbStudents(this.student);
+      if (this.$refs.searchStudents.validate() === true) {
+        if (this.student.PrgId <= 3) {
+          return (this.getStudents = await api.searchLlbStudents(this.student));
         }
-        if(this.student.PrgId >= 6) {
-         return this.getStudents = await api.searchLlmStudents(this.student);
+        if (this.student.PrgId >= 6) {
+          return (this.getStudents = await api.searchLlmStudents(this.student));
         }
-        return this.getStudents = await api.searchLlbStudents(this.student);
+        return (this.getStudents = await api.searchLlbStudents(this.student));
       }
     },
 
     clear() {
-
+      this.$refs.searchStudents.reset();
+      this.$refs.searchStudents.resetValidation();
     },
   },
 };
