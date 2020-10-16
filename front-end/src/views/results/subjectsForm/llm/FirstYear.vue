@@ -242,7 +242,7 @@ export default {
         this.marks.SId = `${this.studentDetails.SID}`;
         this.marks.program = `${this.studentDetails.PRGID}`;
         this.marks.group = `${this.studentDetails.GRPID}`;
-        await api.postLlbStudentMarks(this.marks);
+        await api.postLlmStudentMarks(this.marks);
         this.resetAll();
         this.close();
         let msg = {

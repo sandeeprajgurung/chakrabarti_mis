@@ -42,6 +42,18 @@
           v-on:childToParent="onChildClick"
           @openModalStatus="closePostResultModal"
         />
+        <llm-first-year
+          v-if="studentInfo.PRGID === 6"
+          :studentDetails="studentInfo"
+          v-on:childToParent="onChildClick"
+          @openModalStatus="closePostResultModal"
+        />
+        <llm-second-year
+          v-if="studentInfo.PRGID === 7"
+          :studentDetails="studentInfo"
+          v-on:childToParent="onChildClick"
+          @openModalStatus="closePostResultModal"
+        />
       </v-card>
     </v-dialog>
     <v-snackbar
@@ -67,6 +79,9 @@ import ThirdYear from './subjectsForm/llb/ThirdYear.vue';
 import FourthYear from "./subjectsForm/llb/FourthYear.vue";
 import FifthYear from './subjectsForm/llb/FifthYear.vue';
 
+import LlmFirstYear from './subjectsForm/llm/FirstYear.vue';
+import LlmSecondYear from './subjectsForm/llm/SecondYear.vue';
+
 export default {
   props: {
     openPostResultModal: {
@@ -84,7 +99,9 @@ export default {
     SecondYear,
     ThirdYear,
     FourthYear,
-    FifthYear
+    FifthYear,
+    LlmFirstYear,
+    LlmSecondYear
   },
 
   data() {
@@ -98,10 +115,10 @@ export default {
 
   methods: {
     programYear(programId) {
-      if (programId === 1) {
+      if (programId === 1 || programId === 6) {
         return "First Year";
       }
-      if (programId === 2) {
+      if (programId === 2 || programId === 7) {
         return "Second Year";
       }
       if (programId === 4) {

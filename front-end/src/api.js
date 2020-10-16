@@ -58,7 +58,7 @@ export default {
         return this.execute('GET', `/LLMStudent/Search?prgid=${data.PrgId}&grpid=${data.GrpId}`);
     },
 
-    postLlmStudentMarks(data) {
+    postLlbStudentMarks(data) {
         if (data.program === '1') {
             return this.execute('POST', '/Firstyear', data);
         }
@@ -97,6 +97,27 @@ export default {
             return this.execute('POST', '/Fifthyear/Environment', data);
         }
     },
+
+    postLlmStudentMarks(data) {
+        if (data.program === '6') {
+            if (data.group === '1') {
+                return this.execute('POST', '/Firstyear/HumanRights', data);
+            }
+            if (data.group === '2') {
+                return this.execute('POST', '/Firstyear/Business', data);
+            }
+            return this.execute('POST', '/Firstyear/Criminal', data);
+        }
+        if (data.program === '7') {
+            if (data.group === '1') {
+                return this.execute('POST', '/Secondyear/HumanRights', data);
+            }
+            if (data.group === '2') {
+                return this.execute('POST', '/Secondyear/Business', data);
+            }
+            return this.execute('POST', '/Secondyear/Criminal', data);
+        }
+    }
 
     // getPosts() {
     //     return this.execute('get', '/posts')
