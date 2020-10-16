@@ -1,5 +1,6 @@
 const db = require("../connect/Connect");
 const FirstyearHumanrights = db.FIRSTYEAR_HUMANRIGHTS;
+const Llmstudent = db.LLMSTUDENT;
 const Op = db.Sequelize.Op;
 
 exports.FindAll= async (req,res)=>{
@@ -29,7 +30,44 @@ exports.Create = (req, res) => {
 
   FirstyearHumanrights.create(HumanRights)
       .then(data =>  {
+         
+        var totalMarks = 0;
+        var percent = 0;
+
+        if(data.LEGAL_RESEARCH != 'I' && data.COMPARATIVE_STUDY != 'I' && data.NEPALESE_STUDY != 'I' && data.CIVIL_POLITICAL != 'I'){
+          totalMarks = parseInt(data.LEGAL_RESEARCH) + parseInt(data.COMPARATIVE_STUDY) + parseInt(data.NEPALESE_STUDY) + parseInt(data.CIVIL_POLITICAL);
+          percent = (totalMarks / 400) * 100;
+        }
+        else if(data.LEGAL_RESEARCH == 'I' && data.COMPARATIVE_STUDY != 'I' && data.NEPALESE_STUDY != 'I' && data.CIVIL_POLITICAL != 'I'){
+          totalMarks = parseInt(data.COMPARATIVE_STUDY) + parseInt(data.NEPALESE_STUDY) + parseInt(data.CIVIL_POLITICAL);
+          percent = (totalMarks / 400) * 100;
+        }
+        else if(data.LEGAL_RESEARCH == 'I' && data.COMPARATIVE_STUDY == 'I' && data.NEPALESE_STUDY != 'I' && data.CIVIL_POLITICAL != 'I'){
+          totalMarks = parseInt(data.NEPALESE_STUDY) + parseInt(data.CIVIL_POLITICAL);
+          percent = (totalMarks / 400) * 100;
+        }
+        else if(data.LEGAL_RESEARCH == 'I' && data.COMPARATIVE_STUDY == 'I' && data.NEPALESE_STUDY == 'I' && data.CIVIL_POLITICAL != 'I'){
+          totalMarks = parseInt(data.CIVIL_POLITICAL);
+          percent = (totalMarks / 400) * 100;
+        }
+        else if(data.LEGAL_RESEARCH == 'I' && data.COMPARATIVE_STUDY == 'I' && data.NEPALESE_STUDY == 'I' && data.CIVIL_POLITICAL == 'I'){
+          percent = 0;
+        }
+
+        Llmstudent.update(
+          { PERCENT : percent}, 
+          {where : {SID : req.body.SId}}
+        )
+        .then (data1 => {
           res.send(data);
+        })
+        .catch(err => {
+          res.status(500).send({
+              message:
+              err.message || "Some error occurred while entering marks."
+          });
+        });
+
               })
       .catch(err => {
           res.status(500).send({

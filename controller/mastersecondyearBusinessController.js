@@ -1,5 +1,6 @@
 const db = require("../connect/Connect");
 const SecondyearBusiness = db.SECONDYEAR_BUSINESS;
+const Llmstudent = db.LLMSTUDENT;
 const Op = db.Sequelize.Op;
 
 exports.Create = (req, res) => {
@@ -15,8 +16,53 @@ exports.Create = (req, res) => {
 
   SecondyearBusiness.create(Business)
       .then(data =>  {
+          
+        var totalMarks = 0;
+        var percent = 0;
+
+        if(data.BANKING_LAW != 'I' && data.CORPORATE_MANAGEMENT != 'I' && data.TRADE_LAW != 'I' && data.TAXATION != 'I' && data.INSURANCE != 'I' && data.DISSERTATION != 'I') {
+          totalMarks = parseInt(data.BANKING_LAW) + parseInt(data.CORPORATE_MANAGEMENT) + parseInt(data.TRADE_LAW) + parseInt(data.TAXATION) + parseInt(data.INSURANCE) + parseInt(data.DISSERTATION);
+          percent = ( totalMarks / 400) * 100;
+        }
+        else if(data.BANKING_LAW == 'I' && data.CORPORATE_MANAGEMENT != 'I' && data.TRADE_LAW != 'I' && data.TAXATION != 'I' && data.INSURANCE != 'I' && data.DISSERTATION != 'I') {
+          totalMarks = parseInt(data.CORPORATE_MANAGEMENT) + parseInt(data.TRADE_LAW) + parseInt(data.TAXATION) + parseInt(data.INSURANCE) + parseInt(data.DISSERTATION);
+          percent = ( totalMarks / 400) * 100;
+        }
+        else if(data.BANKING_LAW == 'I' && data.CORPORATE_MANAGEMENT == 'I' && data.TRADE_LAW != 'I' && data.TAXATION != 'I' && data.INSURANCE != 'I' && data.DISSERTATION != 'I') {
+          totalMarks = parseInt(data.TRADE_LAW) + parseInt(data.TAXATION) + parseInt(data.INSURANCE) + parseInt(data.DISSERTATION);
+          percent = ( totalMarks / 400) * 100;
+        }
+        else if(data.BANKING_LAW == 'I' && data.CORPORATE_MANAGEMENT == 'I' && data.TRADE_LAW == 'I' && data.TAXATION != 'I' && data.INSURANCE != 'I' && data.DISSERTATION != 'I') {
+          totalMarks = parseInt(data.TAXATION) + parseInt(data.INSURANCE) + parseInt(data.DISSERTATION);
+          percent = ( totalMarks / 400) * 100;
+        }
+        else if(data.BANKING_LAW == 'I' && data.CORPORATE_MANAGEMENT == 'I' && data.TRADE_LAW == 'I' && data.TAXATION == 'I' && data.INSURANCE != 'I' && data.DISSERTATION != 'I') {
+          totalMarks = parseInt(data.INSURANCE) + parseInt(data.DISSERTATION);
+          percent = ( totalMarks / 400) * 100;
+        }
+        else if(data.BANKING_LAW == 'I' && data.CORPORATE_MANAGEMENT == 'I' && data.TRADE_LAW == 'I' && data.TAXATION == 'I' && data.INSURANCE == 'I' && data.DISSERTATION != 'I') {
+          totalMarks = parseInt(data.DISSERTATION);
+          percent = ( totalMarks / 400) * 100;
+        }
+        else if(data.BANKING_LAW == 'I' && data.CORPORATE_MANAGEMENT == 'I' && data.TRADE_LAW == 'I' && data.TAXATION == 'I' && data.INSURANCE == 'I' && data.DISSERTATION == 'I') {
+          percent = 0;
+        }
+
+        Llmstudent.update(
+          { PERCENT : percent}, 
+          {where : {SID : req.body.SId}}
+        )
+        .then (data1 => {
           res.send(data);
-              })
+        })
+        .catch(err => {
+          res.status(500).send({
+              message:
+              err.message || "Some error occurred while entering marks."
+          });
+        });
+
+      })
       .catch(err => {
           res.status(500).send({
               message:

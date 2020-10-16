@@ -1,5 +1,6 @@
 const db = require("../connect/Connect");
 const FirstyearBusiness = db.FIRSTYEAR_BUSINESS;
+const Llmstudent = db.LLMSTUDENT;
 const Op = db.Sequelize.Op;
 
 exports.Search=async (req,res)=>{
@@ -36,8 +37,45 @@ exports.Create = (req, res) => {
 
   FirstyearBusiness.create(Business)
       .then(data =>  {
+          
+        var totalMarks = 0;
+        var percent = 0;
+
+        if(data.LEGAL_RESEARCH != 'I' && data.COMPARATIVE_STUDY != 'I' && data.CONTRACT_LAW != 'I' && data.INTELLECTUAL_PROPERTY != 'I'){
+          totalMarks = parseInt(data.LEGAL_RESEARCH) + parseInt(data.COMPARATIVE_STUDY) + parseInt(data.CONTRACT_LAW) + parseInt(data.INTELLECTUAL_PROPERTY);
+          percent = (totalMarks / 400) * 100;
+        }
+        else if(data.LEGAL_RESEARCH == 'I' && data.COMPARATIVE_STUDY != 'I' && data.CONTRACT_LAW != 'I' && data.INTELLECTUAL_PROPERTY != 'I'){
+          totalMarks = parseInt(data.COMPARATIVE_STUDY) + parseInt(data.CONTRACT_LAW) + parseInt(data.INTELLECTUAL_PROPERTY);
+          percent = (totalMarks / 400) * 100;
+        }
+        else if(data.LEGAL_RESEARCH == 'I' && data.COMPARATIVE_STUDY == 'I' && data.CONTRACT_LAW != 'I' && data.INTELLECTUAL_PROPERTY != 'I'){
+          totalMarks = parseInt(data.CONTRACT_LAW) + parseInt(data.INTELLECTUAL_PROPERTY);
+          percent = (totalMarks / 400) * 100;
+        }
+        else if(data.LEGAL_RESEARCH == 'I' && data.COMPARATIVE_STUDY == 'I' && data.CONTRACT_LAW == 'I' && data.INTELLECTUAL_PROPERTY != 'I'){
+          totalMarks = parseInt(data.INTELLECTUAL_PROPERTY);
+          percent = (totalMarks / 400) * 100;
+        }
+        else if(data.LEGAL_RESEARCH == 'I' && data.COMPARATIVE_STUDY == 'I' && data.CONTRACT_LAW == 'I' && data.INTELLECTUAL_PROPERTY == 'I'){
+          percent = 0;
+        }
+
+        Llmstudent.update(
+          { PERCENT : percent}, 
+          {where : {SID : req.body.SId}}
+        )
+        .then (data1 => {
           res.send(data);
-              })
+        })
+        .catch(err => {
+          res.status(500).send({
+              message:
+              err.message || "Some error occurred while entering marks."
+          });
+      });
+
+      })
       .catch(err => {
           res.status(500).send({
               message:
