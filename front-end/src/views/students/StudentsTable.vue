@@ -172,6 +172,9 @@
             </v-dialog>
           </v-toolbar>
         </template>
+        <template v-slot:[`item.PRGID`]="{ item }">
+          {{ program(item.PRGID) }}
+        </template>
         <template v-slot:[`item.actions`]="{ item }">
           <v-icon color="warning" class="mr-2" @click="editItem(item)">
             mdi-pencil
@@ -329,6 +332,11 @@ export default {
         this.$emit("childToParent", msg);
         this.load();
       }
+    },
+
+    program(programId) {
+      let x = this.programmes.find((element) => element.PRGID === programId);
+      return x.PRGNAME;
     },
 
     initialize() {},
