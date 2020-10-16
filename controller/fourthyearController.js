@@ -79,8 +79,8 @@ exports.CreateBusiness = (req, res) => {
         Fourthyear.create(fourthyear)
         .then(data => {
                 const fourthyearbusiness = {
-                    BANKING_INSURANCE : req.body.Business.BankingInsurance,
-                    INTERNATIONAL_TRADE : req.body.Business.InternationalTrade,
+                    BANKING_INSURANCE : req.body.BankingInsurance,
+                    INTERNATIONAL_TRADE : req.body.InternationalTrade,
                     FOURTHYEARID : data.FOURTHYEARID
                 };
     
@@ -118,8 +118,8 @@ exports.CreateConstitution = (req, res) => {
     Fourthyear.create(fourthyear)
         .then(data => {
             const fourthyearconstitution = {
-                GOOD_GONERNANCE : req.body.Constitution.GoodGovernance,
-                ELECTORAL_LAW : req.body.Constitution.ElectroalLaw,
+                GOOD_GONERNANCE : req.body.GoodGovernance,
+                ELECTORAL_LAW : req.body.ElectroalLaw,
                 FOURTHYEARID : data.FOURTHYEARID
             };
 
@@ -157,8 +157,8 @@ exports.CreateEnvironment = (req, res) => {
     Fourthyear.create(fourthyear)
         .then(data => {
             const fourthyearenvironment = {
-                WATER_RIVER : req.body.Environment.WaterRiver,
-                ENVIRONMENT_LAW : req.body.Environment.EnvironmentLaw,
+                WATER_RIVER : req.body.WaterRiver,
+                ENVIRONMENT_LAW : req.body.EnvironmentLaw,
                 FOURTHYEARID : data.FOURTHYEARID
             };
 
