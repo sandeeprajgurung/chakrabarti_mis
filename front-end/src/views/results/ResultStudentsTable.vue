@@ -69,6 +69,7 @@ export default {
       widgets: false,
       openResultViewModal: false,
       openPostResultModal: false,
+      studentDetails: {},
       search: "",
       headers: [
         {
