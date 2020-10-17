@@ -39,6 +39,14 @@ export default {
         return this.execute('POST', '/LLMStudent', data);
     },
 
+    updateLlbStudent(data) {
+        return this.execute('PUT', `/LLBStudent/${data.SID}`, data);
+    },
+
+    updateLlmStudent(data) {
+        return this.execute('PUT', `/LLMStudent/${data.SID}`, data);
+    },
+
     getLlmStudents() {
         return this.execute('GET', '/LLMStudent');
     },

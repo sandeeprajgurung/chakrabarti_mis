@@ -6,16 +6,16 @@ const Op = db.Sequelize.Op;
 
 exports.CreateLLB = (req, res) => {
     const student = {
-        SNAME : req.body.Name,
-        EXAM_NO : req.body.ExamNo,
-        ROLL_NO : req.body.RollNo,
-        EMAIL : req.body.Email,
-        PHONE_NO : req.body.Phone,
-        GENDER : req.body.Gender,
-        BATCH : req.body.Batch,
-        YEAR : req.body.Year,
-        PRGID : req.body.PrgId,
-        GRPID : req.body.GrpId
+        SNAME : req.body.SNAME,
+        EXAM_NO : req.body.EXAM_NO,
+        ROLL_NO : req.body.ROLL_NO,
+        EMAIL : req.body.EMAIL,
+        PHONE_NO : req.body.PHONE_NO,
+        GENDER : req.body.GENDER,
+        BATCH : req.body.BATCH,
+        YEAR : req.body.YEAR,
+        PRGID : req.body.PRGID,
+        GRPID : req.body.GRPID
     }; 
 
         Llbstudent.create(student)
@@ -32,16 +32,16 @@ exports.CreateLLB = (req, res) => {
 
 exports.CreateLLM = (req, res) => {
     const student = {
-        SNAME : req.body.Name,
-        EXAM_NO : req.body.ExamNo,
-        ROLL_NO : req.body.RollNo,
-        EMAIL : req.body.Email,
-        PHONE_NO : req.body.Phone,
-        GENDER : req.body.Gender,
-        BATCH : req.body.Batch,
-        YEAR : req.body.Year,
-        PRGID : req.body.PrgId,
-        GRPID : req.body.GrpId
+        SNAME : req.body.SNAME,
+        EXAM_NO : req.body.EXAM_NO,
+        ROLL_NO : req.body.ROLL_NO,
+        EMAIL : req.body.EMAIL,
+        PHONE_NO : req.body.PHONE_NO,
+        GENDER : req.body.GENDER,
+        BATCH : req.body.BATCH,
+        YEAR : req.body.YEAR,
+        PRGID : req.body.PRGID,
+        GRPID : req.body.GRPID
     }; 
 
         Llmstudent.create(student)

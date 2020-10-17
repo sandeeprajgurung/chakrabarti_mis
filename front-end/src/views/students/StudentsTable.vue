@@ -58,7 +58,7 @@
                       <v-row>
                         <v-col cols="12">
                           <v-text-field
-                            v-model="student.Name"
+                            v-model="student.SNAME"
                             label="Name"
                             :rules="[(v) => !!v || 'Name is required']"
                             dense
@@ -67,7 +67,7 @@
                         </v-col>
                         <v-col cols="12" sm="6">
                           <v-text-field
-                            v-model="student.ExamNo"
+                            v-model="student.EXAM_NO"
                             :rules="examNumberRules"
                             label="Exam number"
                             dense
@@ -76,7 +76,7 @@
                         </v-col>
                         <v-col cols="12" sm="6">
                           <v-text-field
-                            v-model="student.RollNo"
+                            v-model="student.ROLL_NO"
                             :rules="rollNumberRules"
                             label="Roll number"
                             dense
@@ -84,7 +84,7 @@
                         </v-col>
                         <v-col cols="12" sm="6">
                           <v-text-field
-                            v-model="student.Email"
+                            v-model="student.EMAIL"
                             :rules="emailRules"
                             label="E-mail"
                             dense
@@ -93,7 +93,7 @@
                         </v-col>
                         <v-col cols="12" sm="6">
                           <v-text-field
-                            v-model="student.Phone"
+                            v-model="student.PHONE_NO"
                             :rules="phoneNoRules"
                             label="Phone no."
                             dense
@@ -102,7 +102,7 @@
                         </v-col>
                         <v-col cols="12" sm="6">
                           <v-select
-                            v-model="student.Gender"
+                            v-model="student.GENDER"
                             :items="gender"
                             item-text="title"
                             item-value="value"
@@ -113,7 +113,7 @@
                         </v-col>
                         <v-col cols="12" sm="6">
                           <v-text-field
-                            v-model="student.Batch"
+                            v-model="student.BATCH"
                             :rules="batchRules"
                             label="Batch"
                             dense
@@ -122,7 +122,7 @@
                         </v-col>
                         <v-col cols="12" sm="6">
                           <v-select
-                            v-model="student.PrgId"
+                            v-model="student.PRGID"
                             :items="programmes"
                             item-text="PRGNAME"
                             item-value="PRGID"
@@ -134,7 +134,7 @@
                         </v-col>
                         <v-col cols="12" sm="6">
                           <v-select
-                            v-model="student.GrpId"
+                            v-model="student.GRPID"
                             :items="group"
                             item-text="grpname"
                             item-value="grpid"
@@ -185,7 +185,9 @@
           <v-icon color="warning" class="mr-2" @click="editItem(item)">
             mdi-pencil
           </v-icon>
-          <v-icon v-if="!item.PERCENT" color="error" @click="deleteItem(item)"> mdi-delete </v-icon>
+          <v-icon v-if="!item.PERCENT" color="error" @click="deleteItem(item)">
+            mdi-delete
+          </v-icon>
         </template>
         <template v-slot:no-data>
           <v-btn color="primary" @click="initialize"> Reset </v-btn>
@@ -209,7 +211,7 @@ export default {
     programmes: [],
     group: [],
     modal: [],
-    deleteStatus: '',
+    deleteStatus: "",
     disable: true,
     examNumberRules: [
       (v) => !!v || "Exam number is required",
@@ -227,20 +229,20 @@ export default {
         Number.isInteger(Number(v)) || "The value must be an integer number",
     ],
     emailRules: [
-      (v) => {
-        if (v && v.length > 0) {
-          const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-          return pattern.test(v) || "Invalid E-mail";
-        }
-      },
+      // (v) => {
+      //   if (v && v.length > 0) {
+      //     const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      //     return pattern.test(v) || "Invalid E-mail";
+      //   }
+      // },
     ],
     phoneNoRules: [
-      (v) => {
-        if (v && v.length > 0) {
-          const pattern = /^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/;
-          return pattern.test(v) || "Invalid Phone Number";
-        }
-      },
+      // (v) => {
+      //   if (v && v.length > 0) {
+      //     const pattern = /^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/;
+      //     return pattern.test(v) || "Invalid Phone Number";
+      //   }
+      // },
     ],
 
     search: "",
@@ -326,10 +328,10 @@ export default {
     },
 
     async selectedProgram() {
-      if (this.student.PrgId > 5) {
+      if (this.student.PRGID > 5) {
         this.disable = false;
         this.group = await api.getLlmGroup();
-      } else if (this.student.PrgId > 3) {
+      } else if (this.student.PRGID > 3) {
         this.disable = false;
         this.group = await api.getLlbGroup();
       } else {
@@ -340,10 +342,18 @@ export default {
 
     async studentFormSubmit() {
       if (this.$refs.studentForm.validate() === true) {
-        if (this.student.PrgId > 5) {
-          await api.createLlmStudent(this.student);
+        if (this.student.SID) {
+          if (this.student.PRGID > 5) {
+            await api.updateLlmStudent(this.student);
+          } else {
+            await api.updateLlbStudent(this.student);
+          }
         } else {
-          await api.createLlbStudent(this.student);
+          if (this.student.PRGID > 5) {
+            await api.createLlmStudent(this.student);
+          } else {
+            await api.createLlbStudent(this.student);
+          }
         }
         this.student = {}; // reset form
         this.$refs.studentForm.reset();
@@ -358,9 +368,11 @@ export default {
     },
 
     program(programId) {
-      let programInfo = this.programmes.find((element) => element.PRGID === programId);
-      if(programInfo === undefined) {
-        return '';
+      let programInfo = this.programmes.find(
+        (element) => element.PRGID === programId
+      );
+      if (programInfo === undefined) {
+        return "";
       }
       return programInfo.PRGNAME;
     },
@@ -368,8 +380,7 @@ export default {
     initialize() {},
 
     editItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
-      this.editedItem = Object.assign({}, item);
+      this.student = Object.assign({}, item);
       this.dialog = true;
     },
 
@@ -392,7 +403,7 @@ export default {
       this.load();
       let msg = {
         status: this.deleteStatus.status,
-        text: this.deleteStatus.message
+        text: this.deleteStatus.message,
       };
       this.$emit("childToParent", msg);
     },
