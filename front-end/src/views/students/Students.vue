@@ -1,6 +1,6 @@
 <template>
   <section>
-    <StudentsTable v-on:childToParent="onChildClick" />
+    <students-table v-on:childToParent="onChildClick" />
 
     <template>
       <div class="text-center">

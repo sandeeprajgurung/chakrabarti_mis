@@ -123,6 +123,10 @@ export default {
         return this.execute('DELETE', `/LLBStudent/${id}`);
     },
 
+    deleteLlmStudent(id) {
+        return this.execute('DELETE', `/LLMStudent/${id}`);
+    },
+
     // getPosts() {
     //     return this.execute('get', '/posts')
     // },

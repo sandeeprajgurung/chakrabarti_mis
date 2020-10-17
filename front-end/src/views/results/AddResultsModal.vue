@@ -51,7 +51,7 @@
         <llm-second-year
           v-if="studentInfo.PRGID === 7"
           :studentDetails="studentInfo"
-          v-on:childToParent="onChildClick"
+          @childToParent="onChildClick"
           @openModalStatus="closePostResultModal"
         />
       </v-card>
@@ -129,6 +129,7 @@ export default {
       }
       return "Third Year";
     },
+
     close() {
       this.$emit("closePostResultModal", false);
     },
@@ -140,6 +141,7 @@ export default {
     onChildClick(value) {
       this.snackbar = value.status;
       this.text = value.text;
+      this.$emit("resultStatus", value.status);
     },
   },
 };

@@ -121,7 +121,7 @@
                           </v-text-field>
                         </v-col>
                         <v-col cols="12" sm="6">
-                          <!-- <v-select
+                          <v-select
                             v-model="student.PrgId"
                             :items="programmes"
                             item-text="PRGNAME"
@@ -130,7 +130,7 @@
                             :rules="[(v) => !!v || 'Program is required']"
                             label="Program"
                             dense
-                          ></v-select> -->
+                          ></v-select>
                         </v-col>
                         <v-col cols="12" sm="6">
                           <v-select
@@ -185,7 +185,7 @@
           <v-icon color="warning" class="mr-2" @click="editItem(item)">
             mdi-pencil
           </v-icon>
-          <v-icon color="error" @click="deleteItem(item)"> mdi-delete </v-icon>
+          <v-icon v-if="!item.PERCENT" color="error" @click="deleteItem(item)"> mdi-delete </v-icon>
         </template>
         <template v-slot:no-data>
           <v-btn color="primary" @click="initialize"> Reset </v-btn>
@@ -209,6 +209,7 @@ export default {
     programmes: [],
     group: [],
     modal: [],
+    deleteStatus: '',
     disable: true,
     examNumberRules: [
       (v) => !!v || "Exam number is required",
@@ -382,12 +383,16 @@ export default {
     },
 
     async deleteItemConfirm() {
-      console.log(this.deleteStudent.SID);
-      await api.deleteLlbStudent(this.deleteStudent.SID);
+      if (this.deleteStudent.PRGID >= 6) {
+        this.deleteStatus = await api.deleteLlmStudent(this.deleteStudent.SID);
+      } else {
+        this.deleteStatus = await api.deleteLlbStudent(this.deleteStudent.SID);
+      }
       this.closeDelete();
+      this.load();
       let msg = {
-        status: "true",
-        text: "Student has been deleted",
+        status: this.deleteStatus.status,
+        text: this.deleteStatus.message
       };
       this.$emit("childToParent", msg);
     },

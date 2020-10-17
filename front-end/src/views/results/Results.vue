@@ -88,7 +88,6 @@ export default {
 
     async searchFormSubmit() {
       if (this.$refs.searchStudents.validate() === true) {
-        console.log(this.student);
         if (this.student.PrgId <= 3) {
           return (this.getStudents = await api.searchLlbStudents(this.student));
         }

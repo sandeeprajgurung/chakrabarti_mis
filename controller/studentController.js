@@ -116,17 +116,20 @@ exports.DeleteLLB = (req, res) => {
         .then(num => {
           if (num == 1) {
             res.send({
-              message: "Student was deleted successfully!"
+              message: "Student was deleted successfully!",
+              status: true
             });
           } else {
             res.send({
-              message: `Cannot delete Student with id=${id}. Maybe Student was not found!`
+              message: `Cannot delete Student with id=${id}. Maybe Student was not found!`,
+              status: false
             });
           }
         })
         .catch(err => {
           res.status(500).send({
-            message: "Could not delete Student with id=" + id
+            message: "Could not delete Student with id=" + id,
+            status: false
           });
         });
 }
@@ -140,11 +143,13 @@ exports.DeleteLLM = (req, res) => {
         .then(num => {
           if (num == 1) {
             res.send({
-              message: "Student was deleted successfully!"
+              message: "Student was deleted successfully!",
+              status: true
             });
           } else {
             res.send({
-              message: `Cannot delete Student with id=${id}. Maybe Student was not found!`
+              message: `Cannot delete Student with id=${id}. Maybe Student was not found!`,
+              status: false
             });
           }
         })
