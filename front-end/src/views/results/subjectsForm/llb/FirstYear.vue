@@ -147,6 +147,7 @@ export default {
         let msg = {
           status: "true",
           text: "Marks added successfully",
+          studentId: this.marks.SId,
         };
         this.$emit("childToParent", msg);
       }

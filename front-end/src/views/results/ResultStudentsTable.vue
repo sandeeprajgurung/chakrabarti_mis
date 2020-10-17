@@ -14,7 +14,7 @@
 
     <v-data-table :headers="headers" :items="students" :search="search">
       <template v-slot:[`item.RESULT`]="{ item }">
-        <v-icon v-if="item.PERCENT || resultAddedTrue" color="green">
+        <v-icon v-if="item.PERCENT || item.SID == resultAddedTrueId" color="green">
           mdi-checkbox-marked-circle
         </v-icon>
       </template>
@@ -68,6 +68,7 @@ export default {
       id: 0,
       sound: true,
       widgets: false,
+      resultAddedTrueId: '',
       openResultViewModal: false,
       openPostResultModal: false,
       studentDetails: {},
@@ -101,7 +102,8 @@ export default {
     },
 
     resultAdded(value) {
-      this.resultAddedTrue = value;
+      this.resultAddedTrue = value.status;
+      this.resultAddedTrueId = value.studentId;
     },
   },
 };

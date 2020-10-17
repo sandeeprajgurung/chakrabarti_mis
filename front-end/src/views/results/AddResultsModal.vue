@@ -141,7 +141,7 @@ export default {
     onChildClick(value) {
       this.snackbar = value.status;
       this.text = value.text;
-      this.$emit("resultStatus", value.status);
+      this.$emit("resultStatus", value);
     },
   },
 };
