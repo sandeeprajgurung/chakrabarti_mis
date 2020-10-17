@@ -144,6 +144,11 @@ export default {
         await api.postLlbStudentMarks(this.marks);
         this.resetAll();
         this.close();
+        let msg = {
+          status: "true",
+          text: "Marks added successfully",
+        };
+        this.$emit("childToParent", msg);
       }
     },
 
