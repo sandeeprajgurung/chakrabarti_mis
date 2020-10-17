@@ -121,7 +121,7 @@
                           </v-text-field>
                         </v-col>
                         <v-col cols="12" sm="6">
-                          <v-select
+                          <!-- <v-select
                             v-model="student.PrgId"
                             :items="programmes"
                             item-text="PRGNAME"
@@ -130,7 +130,7 @@
                             :rules="[(v) => !!v || 'Program is required']"
                             label="Program"
                             dense
-                          ></v-select>
+                          ></v-select> -->
                         </v-col>
                         <v-col cols="12" sm="6">
                           <v-select
@@ -226,20 +226,20 @@ export default {
         Number.isInteger(Number(v)) || "The value must be an integer number",
     ],
     emailRules: [
-      v => {
-        if(v && v.length > 0) {
-        const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return pattern.test(v) || 'Invalid E-mail';
+      (v) => {
+        if (v && v.length > 0) {
+          const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          return pattern.test(v) || "Invalid E-mail";
         }
-      }
+      },
     ],
     phoneNoRules: [
-      v => {
-        if(v && v.length > 0) {
-        const pattern = /^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/;
-        return pattern.test(v) || 'Invalid Phone Number';
+      (v) => {
+        if (v && v.length > 0) {
+          const pattern = /^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/;
+          return pattern.test(v) || "Invalid Phone Number";
         }
-      }
+      },
     ],
 
     search: "",
@@ -357,8 +357,11 @@ export default {
     },
 
     program(programId) {
-      let x = this.programmes.find((element) => element.PRGID === programId);
-      return x.PRGNAME;
+      let programInfo = this.programmes.find((element) => element.PRGID === programId);
+      if(programInfo === undefined) {
+        return '';
+      }
+      return programInfo.PRGNAME;
     },
 
     initialize() {},
