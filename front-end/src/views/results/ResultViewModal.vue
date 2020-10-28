@@ -19,82 +19,22 @@
       </v-toolbar>
       <v-card-text>
         <v-list>
-          <!-- <v-form ref="form" v-model="valid" lazy-validation>
-            <v-text-field
-              v-model="name"
-              :counter="10"
-              label="Name"
-              required
-            ></v-text-field>
-
-            <v-text-field
-              v-model="email"
-              label="E-mail"
-              required
-            ></v-text-field>
-
-            <v-select
-              v-model="select"
-              :items="items"
-              label="Item"
-              required
-            ></v-select>
-            <v-text-field
-              v-model="name"
-              :counter="10"
-              label="Name"
-              required
-            ></v-text-field>
-
-            <v-text-field
-              v-model="email"
-              label="E-mail"
-              required
-            ></v-text-field>
-
-            <v-select
-              v-model="select"
-              :items="items"
-              label="Item"
-              required
-            ></v-select>
-            <v-text-field
-              v-model="name"
-              :counter="10"
-              label="Name"
-              required
-            ></v-text-field>
-
-            <v-text-field
-              v-model="email"
-              label="E-mail"
-              required
-            ></v-text-field>
-
-            <v-select
-              v-model="select"
-              :items="items"
-              label="Item"
-              required
-            ></v-select>
-
-            <v-btn
-              :disabled="!valid"
-              color="success"
-              class="mr-4"
-              @click="validate"
-            >
-              Validate
-            </v-btn>
-
-            <v-btn color="error" class="mr-4" @click="reset">
-              Reset Form
-            </v-btn>
-
-            <v-btn color="warning" @click="resetValidation">
-              Reset Validation
-            </v-btn>
-          </v-form> -->
+          <v-simple-table>
+            <template v-slot:default>
+              <thead>
+                <tr>
+                  <th class="text-left">Subject</th>
+                  <th class="text-left">Calories</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="item in desserts" :key="item.name">
+                  <td>{{ item.name }}</td>
+                  <td>{{ item.calories }}</td>
+                </tr>
+              </tbody>
+            </template>
+          </v-simple-table>
         </v-list>
       </v-card-text>
       <div style="flex: 1 1 auto"></div>
@@ -104,7 +44,7 @@
 
 <script>
 export default {
-   props: {
+  props: {
     openResultViewModal: {
       type: Boolean,
       default: false,
@@ -113,18 +53,58 @@ export default {
 
   data() {
     return {
-      // resultViewModal: false,
+      desserts: [
+        {
+          name: "Frozen Yogurt",
+          calories: 159,
+        },
+        {
+          name: "Ice cream sandwich",
+          calories: 237,
+        },
+        {
+          name: "Eclair",
+          calories: 262,
+        },
+        {
+          name: "Cupcake",
+          calories: 305,
+        },
+        {
+          name: "Gingerbread",
+          calories: 356,
+        },
+        {
+          name: "Jelly bean",
+          calories: 375,
+        },
+        {
+          name: "Lollipop",
+          calories: 392,
+        },
+        {
+          name: "Honeycomb",
+          calories: 408,
+        },
+        {
+          name: "Donut",
+          calories: 452,
+        },
+        {
+          name: "KitKat",
+          calories: 518,
+        },
+      ],
     };
   },
 
   methods: {
     resetValidation() {},
     reset() {},
-    
+
     close() {
       this.$emit("update:openResultViewModal", false);
     },
-
-  }
+  },
 };
 </script>
