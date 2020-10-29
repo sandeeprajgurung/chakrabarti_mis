@@ -83,3 +83,28 @@ exports.Create = (req, res) => {
           });
         })
 }
+
+exports.Delete = (req, res) => {
+  const id = req.params.Id;
+
+  FirstyearBusiness.destroy({
+    where: { BUSINESSID: id }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "Student Result was deleted successfully!"
+        });
+      } else {
+        res.send({
+          message: `Cannot delete Student Result with id=${id}. Maybe Student was not found!`
+        });
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Could not delete Student Result with id=" + id
+      });
+    });
+
+}
