@@ -11,13 +11,13 @@
         <template v-slot:top>
           <v-toolbar flat>
             <v-toolbar-title
-              class="students-overview__card-title card-box-title"
+              class="students-overview__card-title card-box-title d-none d-md-block"
             >
               <v-icon large dark>mdi-account-multiple-outline</v-icon>
             </v-toolbar-title>
-            <v-divider class="mx-4" inset vertical></v-divider>
-            <span>Students</span>
-            <v-spacer></v-spacer>
+            <v-divider class="mx-4 d-none d-md-block" inset vertical></v-divider>
+            <span class="d-none d-md-block">Students</span>
+            <v-spacer class="d-none d-md-block"></v-spacer>
             <v-text-field
               v-model="search"
               append-icon="mdi-magnify"

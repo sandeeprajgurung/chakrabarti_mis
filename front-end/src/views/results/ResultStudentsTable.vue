@@ -20,7 +20,7 @@
       </template>
 
       <template v-slot:[`item.ACTIONS`]="{ item }">
-        <v-icon color="primary" class="mr-2" @click.prevent="addMarks(item)">
+        <v-icon color="primary" class="mr-2" @click.prevent="addMarks(item)" v-if="!item.PERCENT" >
           mdi-plus-circle
         </v-icon>
         <v-icon
