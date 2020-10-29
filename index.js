@@ -149,7 +149,10 @@ router.put("/Fifthyear/Criminal/:Id/:CId", (req, res) => { fifthyearController.U
 router.put("/Fifthyear/Business/:Id/:BId", (req, res) => { fifthyearController.UpdateBusiness(req, res) });
 router.put("/Fifthyear/Constitutional/:Id/:CUId", (req, res) => { fifthyearController.UpdateConstitutional(req, res) });
 router.put("/Fifthyear/Environment/:Id/:EId", (req, res) => { fifthyearController.UpdateEnvironment(req, res) });
-router.delete("/Fifthyear/:Id", (req, res) => { fifthyearController.Delete(req, res) });
+router.delete("/Fifthyear/Criminal/:Id", (req, res) => { fifthyearController.DeleteCriminal(req, res) });
+router.delete("/Fifthyear/Business/:Id", (req, res) => { fifthyearController.DeleteBusiness(req, res) });
+router.delete("/Fifthyear/Constitutional/:Id", (req, res) => { fifthyearController.DeleteConstitutional(req, res) });
+router.delete("/Fifthyear/Environment/:Id", (req, res) => { fifthyearController.DeleteEnvironment(req, res) });
 // region end
 
 // region for LLM Human Rights first year student result

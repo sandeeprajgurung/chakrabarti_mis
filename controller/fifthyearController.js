@@ -726,27 +726,174 @@ exports.UpdateEnvironment = (req, res) => {
     
 }
 
-exports.Delete = (req, res) => {
+exports.DeleteCriminal = (req, res) => {
     const id = req.params.Id;
-    
-        Fifthyear.destroy({
-            where: { FIFTHYEARID: id }
-        })
-        .then(num => {
-          if (num == 1) {
-            res.send({
-              message: "Student Result was deleted successfully!"
-            });
-          } else {
-            res.send({
-              message: `Cannot delete Student Result with id=${id}. Maybe Student was not found!`
-            });
-          }
+
+    FifthyearCriminal.findAll({
+        where: {
+            FIFTHYEARID: id
+        }
+    })
+        .then(data => {
+            FifthyearCriminal.destroy({
+                where: {
+                    CRIMINALID: data.CRIMINALID
+                }
+            })
+
+            Fifthyear.destroy({
+                where: { FIFTHYEARID: id }
+            })
+                .then(num => {
+                    if (num == 1) {
+                        res.send({
+                            message: "Student Result was deleted successfully!"
+                        });
+                    } else {
+                        res.send({
+                            message: `Cannot delete Student Result with id=${id}. Maybe Student was not found!`
+                        });
+                    }
+                })
+                .catch(err => {
+                    res.status(500).send({
+                        message: "Could not delete Student Result with id=" + id
+                    });
+                });
         })
         .catch(err => {
-          res.status(500).send({
-            message: "Could not delete Student Result with id=" + id
-          });
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving Student."
+            });
         });
-    
+}
+
+exports.DeleteBusiness = (req, res) => {
+    const id = req.params.Id;
+
+    FifthyearBusiness.findAll({
+        where: {
+            FIFTHYEARID: id
+        }
+    })
+        .then(data => {
+            FifthyearBusiness.destroy({
+                where: {
+                    BUSINESSID: data.BUSINESSID
+                }
+            })
+
+            Fifthyear.destroy({
+                where: { FIFTHYEARID: id }
+            })
+                .then(num => {
+                    if (num == 1) {
+                        res.send({
+                            message: "Student Result was deleted successfully!"
+                        });
+                    } else {
+                        res.send({
+                            message: `Cannot delete Student Result with id=${id}. Maybe Student was not found!`
+                        });
+                    }
+                })
+                .catch(err => {
+                    res.status(500).send({
+                        message: "Could not delete Student Result with id=" + id
+                    });
+                });
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving Student."
+            });
+        });
+}
+
+exports.DeleteConstitutional = (req, res) => {
+    const id = req.params.Id;
+
+    FifthyearConstitutional.findAll({
+        where: {
+            FIFTHYEARID: id
+        }
+    })
+        .then(data => {
+            FifthyearConstitutional.destroy({
+                where: {
+                    CONSTITUTIONALID: data.CONSTITUTIONALID
+                }
+            })
+
+            Fifthyear.destroy({
+                where: { FIFTHYEARID: id }
+            })
+                .then(num => {
+                    if (num == 1) {
+                        res.send({
+                            message: "Student Result was deleted successfully!"
+                        });
+                    } else {
+                        res.send({
+                            message: `Cannot delete Student Result with id=${id}. Maybe Student was not found!`
+                        });
+                    }
+                })
+                .catch(err => {
+                    res.status(500).send({
+                        message: "Could not delete Student Result with id=" + id
+                    });
+                });
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving Student."
+            });
+        });
+}
+
+exports.DeleteEnvironment = (req, res) => {
+    const id = req.params.Id;
+
+    FifthyearEnvironment.findAll({
+        where: {
+            FIFTHYEARID: id
+        }
+    })
+        .then(data => {
+            FifthyearEnvironment.destroy({
+                where: {
+                    ENVIRONMENTID: data.ENVIRONMENTID
+                }
+            })
+
+            Fifthyear.destroy({
+                where: { FIFTHYEARID: id }
+            })
+                .then(num => {
+                    if (num == 1) {
+                        res.send({
+                            message: "Student Result was deleted successfully!"
+                        });
+                    } else {
+                        res.send({
+                            message: `Cannot delete Student Result with id=${id}. Maybe Student was not found!`
+                        });
+                    }
+                })
+                .catch(err => {
+                    res.status(500).send({
+                        message: "Could not delete Student Result with id=" + id
+                    });
+                });
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving Student."
+            });
+        });
 }
