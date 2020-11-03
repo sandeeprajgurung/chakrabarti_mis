@@ -730,6 +730,7 @@ exports.DeleteCriminal = (req, res) => {
     const id = req.params.Id;
 
     FifthyearCriminal.findAll({
+        raw: true,
         where: {
             FIFTHYEARID: id
         }
@@ -737,7 +738,7 @@ exports.DeleteCriminal = (req, res) => {
         .then(data => {
             FifthyearCriminal.destroy({
                 where: {
-                    CRIMINALID: data.CRIMINALID
+                    CRIMINALID: data[0].CRIMINALID
                 }
             })
 
@@ -773,6 +774,7 @@ exports.DeleteBusiness = (req, res) => {
     const id = req.params.Id;
 
     FifthyearBusiness.findAll({
+        raw: true,
         where: {
             FIFTHYEARID: id
         }
@@ -780,7 +782,7 @@ exports.DeleteBusiness = (req, res) => {
         .then(data => {
             FifthyearBusiness.destroy({
                 where: {
-                    BUSINESSID: data.BUSINESSID
+                    BUSINESSID: data[0].BUSINESSID
                 }
             })
 
@@ -816,6 +818,7 @@ exports.DeleteConstitutional = (req, res) => {
     const id = req.params.Id;
 
     FifthyearConstitutional.findAll({
+        raw: true,
         where: {
             FIFTHYEARID: id
         }
@@ -823,7 +826,7 @@ exports.DeleteConstitutional = (req, res) => {
         .then(data => {
             FifthyearConstitutional.destroy({
                 where: {
-                    CONSTITUTIONALID: data.CONSTITUTIONALID
+                    CONSTITUTIONALID: data[0].CONSTITUTIONALID
                 }
             })
 
@@ -859,6 +862,7 @@ exports.DeleteEnvironment = (req, res) => {
     const id = req.params.Id;
 
     FifthyearEnvironment.findAll({
+        raw: true,
         where: {
             FIFTHYEARID: id
         }
@@ -866,7 +870,7 @@ exports.DeleteEnvironment = (req, res) => {
         .then(data => {
             FifthyearEnvironment.destroy({
                 where: {
-                    ENVIRONMENTID: data.ENVIRONMENTID
+                    ENVIRONMENTID: data[0].ENVIRONMENTID
                 }
             })
 

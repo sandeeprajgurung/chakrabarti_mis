@@ -699,6 +699,7 @@ exports.DeleteCriminal = (req, res) => {
     const id = req.params.Id;
 
     FourthyearCriminal.findAll({
+        raw: true,
         where: {
             FOURTHYEARID: id
         }
@@ -706,7 +707,7 @@ exports.DeleteCriminal = (req, res) => {
         .then(data => {
             FourthyearCriminal.destroy({
                 where: {
-                    CRIMINALID: data.CRIMINALID
+                    CRIMINALID: data[0].CRIMINALID
                 }
             })
 
@@ -742,12 +743,13 @@ exports.DeleteBusiness = (req, res) => {
     const id = req.params.Id;
 
     FourthyearBusiness.findAll({
+        raw: true,
         where: { FOURTHYEARID: id }
     })
         .then(data => {
             FourthyearBusiness.destroy({
                 where: {
-                    BUSINESSID: data.BUSINESSID
+                    BUSINESSID: data[0].BUSINESSID
                 }
             })
 
@@ -783,12 +785,13 @@ exports.DeleteConstitutional = (req, res) => {
     const id = req.params.Id;
 
     FourthyearConstitutional.findAll({
+        raw: true,
         where: { FOURTHYEARID: id }
     })
         .then(data => {
             FourthyearBusiness.destroy({
                 where: {
-                    CONSTITUTIONALID: data.CONSTITUTIONALID
+                    CONSTITUTIONALID: data[0].CONSTITUTIONALID
                 }
             })
 
@@ -824,12 +827,13 @@ exports.DeleteEnvironment = (req, res) => {
     const id = req.params.Id;
 
     FourthyearEnvironment.findAll({
+        raw: true,
         where: { FOURTHYEARID: id }
     })
         .then(data => {
             FourthyearEnvironment.destroy({
                 where: {
-                    ENVIRONMENTID: data.ENVIRONMENTID
+                    ENVIRONMENTID: data[0].ENVIRONMENTID
                 }
             })
 
