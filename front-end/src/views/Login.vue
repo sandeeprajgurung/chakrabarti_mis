@@ -160,6 +160,7 @@ export default {
       this.$refs.loginForm.validate();
       if (this.model) {
         await api.login(this.model);
+        this.$router.push('/');
       }
       this.model = {};
     },

@@ -52,7 +52,7 @@ exports.login = (req, res) => {
     User.findAll({
         where: {
             username: req.body.username
-     }
+        }
     })
         .then(user => {
             if (user.length < 1) {
@@ -76,7 +76,7 @@ exports.login = (req, res) => {
                         expiresIn: "1h"
                     }
                 );
-                return res.status(401).json({
+                return res.status(200).json({
                     message: "Auth Successfull",
                     token: "Bearer " + token
                 })
