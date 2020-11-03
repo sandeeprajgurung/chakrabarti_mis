@@ -34,7 +34,7 @@
 
         <template v-slot:append>
           <div class="pa-2">
-            <v-btn color="primary" block> Logout </v-btn>
+            <v-btn color="primary" block @click="logoutSubmit"> Logout </v-btn>
           </div>
         </template>
       </v-navigation-drawer>
@@ -65,7 +65,7 @@
             </v-btn>
             <v-spacer></v-spacer>
             <div class="pa-2">
-              <v-btn color="white" class="black--text" depressed rounded>
+              <v-btn color="white" class="black--text" depressed rounded @click="logoutSubmit" >
                 Logout
               </v-btn>
             </div>
@@ -129,6 +129,12 @@ export default {
         return true;
       }
       return false;
+    },
+  },
+
+  methods: {
+    async logoutSubmit() {
+      this.$router.push('/login');
     },
   },
 };

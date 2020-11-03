@@ -52,7 +52,7 @@ exports.login = (req, res) => {
     User.findAll({
         where: {
             username: req.body.username
-     }
+        }
     })
         .then(user => {
             if (user.length < 1) {
