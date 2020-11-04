@@ -729,7 +729,7 @@ exports.UpdateEnvironment = (req, res) => {
 exports.DeleteCriminal = (req, res) => {
     const id = req.params.Id;
 
-    FifthyearCriminal.findAll({
+    Fifthyear.findAll({
         raw: true,
         where: {
             FIFTHYEARID: id
@@ -773,7 +773,7 @@ exports.DeleteCriminal = (req, res) => {
 exports.DeleteBusiness = (req, res) => {
     const id = req.params.Id;
 
-    FifthyearBusiness.findAll({
+    Fifthyear.findAll({
         raw: true,
         where: {
             FIFTHYEARID: id
@@ -817,7 +817,7 @@ exports.DeleteBusiness = (req, res) => {
 exports.DeleteConstitutional = (req, res) => {
     const id = req.params.Id;
 
-    FifthyearConstitutional.findAll({
+    Fifthyear.findAll({
         raw: true,
         where: {
             FIFTHYEARID: id
@@ -861,7 +861,7 @@ exports.DeleteConstitutional = (req, res) => {
 exports.DeleteEnvironment = (req, res) => {
     const id = req.params.Id;
 
-    FifthyearEnvironment.findAll({
+    Fifthyear.findAll({
         raw: true,
         where: {
             FIFTHYEARID: id
