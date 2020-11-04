@@ -103,8 +103,60 @@ exports.getLLBFourthBusiness = async (req, res) => {
         const student = await db.sequelize.query(`SELECT LB.SNAME,LB.PERCENT,LB.ROLL_NO,LB.EXAM_NO,LB.BATCH,
         IFNULL(FY.CLINICAL_EDUCATION,0),IFNULL(FY.ADVANCED_JURISPRUDENCE,0),IFNULL(FY.CONTRACT_LAW,0),IFNULL(FY.COMPANY_LAW,0),
         IFNULL(FY.ADMINISTATIVE_LAW,0),IFNULL(FY.CLINICAL_LEGAL_EDUCATION,0),IFNULL(FY.INTERNATIONAL_DISPUTES,0),
-        IFNULL(FYC.FORENSIC,0),IFNULL(FYC.CRIMINOLOGY,0)
-        FROM llbstudent AS LB join FOURTHYEAR AS FY on LB.SID = FY.SID JOIN FOURTHYEAR_CRIMINAL AS FYC on FYC.FOURTHYEARID = FY.FOURTHYEARID
+        IFNULL(FYB.BANKING_INSURANCE,0),IFNULL(FYB.INTERNATIONAL_TRADE,0)
+        FROM llbstudent AS LB join FOURTHYEAR AS FY on LB.SID = FY.SID JOIN FOURTHYEAR_BUSINESS AS FYB on FYB.FOURTHYEARID = FY.FOURTHYEARID
+        WHERE LB.PRGID = (:prgid) AND LB.EXAM_NO = (:examno) AND LB.GRPID = (:grpid)`, {
+            replacements: {
+                prgid: req.query.prgid,
+                examno: req.query.examno,
+                grpid: req.query.grpid
+            },
+            type: db.sequelize.QueryTypes.SELECT
+        });
+
+        res.send(student);
+    }
+    catch (err) {
+        res.status(500).send({
+            message:
+                err.message || "Some error occurred while retrieving Student Result."
+        });
+    }
+}
+
+exports.getLLBFourthConstitutional = async (req, res) => {
+    try {
+        const student = await db.sequelize.query(`SELECT LB.SNAME,LB.PERCENT,LB.ROLL_NO,LB.EXAM_NO,LB.BATCH,
+        IFNULL(FY.CLINICAL_EDUCATION,0),IFNULL(FY.ADVANCED_JURISPRUDENCE,0),IFNULL(FY.CONTRACT_LAW,0),IFNULL(FY.COMPANY_LAW,0),
+        IFNULL(FY.ADMINISTATIVE_LAW,0),IFNULL(FY.CLINICAL_LEGAL_EDUCATION,0),IFNULL(FY.INTERNATIONAL_DISPUTES,0),
+        IFNULL(FYC.GOOD_GONERNANCE,0),IFNULL(FYC.ELECTORAL_LAW,0)
+        FROM llbstudent AS LB join FOURTHYEAR AS FY on LB.SID = FY.SID JOIN FOURTHYEAR_CONSTITUTIONAL AS FYC on FYC.FOURTHYEARID = FY.FOURTHYEARID
+        WHERE LB.PRGID = (:prgid) AND LB.EXAM_NO = (:examno) AND LB.GRPID = (:grpid)`, {
+            replacements: {
+                prgid: req.query.prgid,
+                examno: req.query.examno,
+                grpid: req.query.grpid
+            },
+            type: db.sequelize.QueryTypes.SELECT
+        });
+
+        res.send(student);
+    }
+    catch (err) {
+        res.status(500).send({
+            message:
+                err.message || "Some error occurred while retrieving Student Result."
+        });
+    }
+}
+
+exports.getLLBFourthEnvironment = async (req, res) => {
+    try {
+        const student = await db.sequelize.query(`SELECT LB.SNAME,LB.PERCENT,LB.ROLL_NO,LB.EXAM_NO,LB.BATCH,
+        IFNULL(FY.CLINICAL_EDUCATION,0),IFNULL(FY.ADVANCED_JURISPRUDENCE,0),IFNULL(FY.CONTRACT_LAW,0),IFNULL(FY.COMPANY_LAW,0),
+        IFNULL(FY.ADMINISTATIVE_LAW,0),IFNULL(FY.CLINICAL_LEGAL_EDUCATION,0),IFNULL(FY.INTERNATIONAL_DISPUTES,0),
+        IFNULL(FYE.ENVIRONMENT_LAW,0),IFNULL(FYE.WATER_RIVER,0)
+        FROM llbstudent AS LB join FOURTHYEAR AS FY on LB.SID = FY.SID JOIN FOURTHYEAR_ENVIRONMENT AS FYE on FYE.FOURTHYEARID = FY.FOURTHYEARID
         WHERE LB.PRGID = (:prgid) AND LB.EXAM_NO = (:examno) AND LB.GRPID = (:grpid)`, {
             replacements: {
                 prgid: req.query.prgid,

@@ -200,6 +200,9 @@ router.get("/Result/Firstyear", (req, res) => { resultController.getLLBFirst(req
 router.get("/Result/Secondyear", (req, res) => { resultController.getLLBSecond(req, res) });
 router.get("/Result/Thirdyear", (req, res) => { resultController.getLLBThird(req, res) });
 router.get("/Result/Fourthyear/Criminal", (req, res) => { resultController.getLLBFourthCriminal(req, res) });
+router.get("/Result/Fourthyear/Business", (req, res) => { resultController.getLLBFourthBusiness(req, res) });
+router.get("/Result/Fourthyear/Environment", (req, res) => { resultController.getLLBFourthEnvironment(req, res) });
+router.get("/Result/Fourthyear/Constitutional", (req, res) => { resultController.getLLBFourthConstitutional(req, res) });
 // region end
 
 //when api doesnt matches with above api list then status 400 bad request is sent
