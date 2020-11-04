@@ -14,6 +14,8 @@ const mastersecondyearBusinessController = require("./controller/mastersecondyea
 const mastersecondyearCriminalController = require("./controller/mastersecondyearCriminalController")
 const mastersecondyearHumanController = require("./controller/mastersecondyearHumanController")
 
+const resultController = require("./controller/resultController");
+
 const checkAuth = require("./middleware/check-auth");
 
 
@@ -191,6 +193,13 @@ router.delete("/Secondyear/Criminal/:Id", (req, res) => { mastersecondyearCrimin
 // region for LLM Business Second year student result
 router.post("/Secondyear/Business", (req, res) => { mastersecondyearBusinessController.Create(req, res) });
 router.delete("/Secondyear/Business/:Id", (req, res) => { mastersecondyearBusinessController.Delete(req, res) });
+// region end
+
+// region for result
+router.get("/Result/Firstyear", (req, res) => { resultController.getLLBFirst(req, res) });
+router.get("/Result/Secondyear", (req, res) => { resultController.getLLBSecond(req, res) });
+router.get("/Result/Thirdyear", (req, res) => { resultController.getLLBThird(req, res) });
+router.get("/Result/Fourthyear/Criminal", (req, res) => { resultController.getLLBFourthCriminal(req, res) });
 // region end
 
 //when api doesnt matches with above api list then status 400 bad request is sent
