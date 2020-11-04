@@ -196,13 +196,24 @@ router.delete("/Secondyear/Business/:Id", (req, res) => { mastersecondyearBusine
 // region end
 
 // region for result
-router.get("/Result/Firstyear", (req, res) => { resultController.getLLBFirst(req, res) });
-router.get("/Result/Secondyear", (req, res) => { resultController.getLLBSecond(req, res) });
-router.get("/Result/Thirdyear", (req, res) => { resultController.getLLBThird(req, res) });
-router.get("/Result/Fourthyear/Criminal", (req, res) => { resultController.getLLBFourthCriminal(req, res) });
-router.get("/Result/Fourthyear/Business", (req, res) => { resultController.getLLBFourthBusiness(req, res) });
-router.get("/Result/Fourthyear/Environment", (req, res) => { resultController.getLLBFourthEnvironment(req, res) });
-router.get("/Result/Fourthyear/Constitutional", (req, res) => { resultController.getLLBFourthConstitutional(req, res) });
+router.get("/Result/LLBFirstyear", (req, res) => { resultController.getLLBFirst(req, res) });
+router.get("/Result/LLBSecondyear", (req, res) => { resultController.getLLBSecond(req, res) });
+router.get("/Result/LLBThirdyear", (req, res) => { resultController.getLLBThird(req, res) });
+router.get("/Result/LLBFourthyear/Criminal", (req, res) => { resultController.getLLBFourthCriminal(req, res) });
+router.get("/Result/LLBFourthyear/Business", (req, res) => { resultController.getLLBFourthBusiness(req, res) });
+router.get("/Result/LLBFourthyear/Environment", (req, res) => { resultController.getLLBFourthEnvironment(req, res) });
+router.get("/Result/LLBFourthyear/Constitutional", (req, res) => { resultController.getLLBFourthConstitutional(req, res) });
+router.get("/Result/LLBFifthyear/Criminal", (req, res) => { resultController.getLLBFifthCriminal(req, res) });
+router.get("/Result/LLBFifthyear/Business", (req, res) => { resultController.getLLBFifthBusiness(req, res) });
+router.get("/Result/LLBFifthyear/Constitutional", (req, res) => { resultController.getLLBFifthConstitutional(req, res) });
+router.get("/Result/LLBFifthyear/Environment", (req, res) => { resultController.getLLBFifthEnvironment(req, res) });
+
+router.get("/Result/LLMFirstyear/HumanRights", (req, res) => { resultController.getLLMFirstHumanRights(req, res) });
+router.get("/Result/LLMFirstyear/Business", (req, res) => { resultController.getLLMFirstBusiness(req, res) });
+router.get("/Result/LLMFirstyear/Criminal", (req, res) => { resultController.getLLMFirstCriminalLaw(req, res) });
+router.get("/Result/LLMSecondyear/Criminal", (req, res) => { resultController.getLLMSecondCriminal(req, res) });
+router.get("/Result/LLMSecondyear/HumanRights", (req, res) => { resultController.getLLMSecondHumanRights(req, res) });
+router.get("/Result/LLMSecondyear/Business", (req, res) => { resultController.getLLMSecondBusiness(req, res) });
 // region end
 
 //when api doesnt matches with above api list then status 400 bad request is sent
