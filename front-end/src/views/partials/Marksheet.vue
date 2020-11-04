@@ -105,7 +105,14 @@
     </v-simple-table>
 
     <br />
-    <v-btn elevation="6" small class="mr-4" type="" color="primary">
+    <v-btn
+      elevation="6"
+      small
+      class="mr-4"
+      type=""
+      color="primary"
+      @click="handlePrintView"
+    >
       Print
     </v-btn>
   </v-card>
@@ -153,6 +160,11 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    handlePrintView() {
+      window.print();
+    },
   },
 };
 </script>
