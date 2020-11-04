@@ -48,10 +48,10 @@
         transition="dialog-bottom-transition"
       >
         <template v-slot:activator="{ on, attrs }">
-          <v-toolbar class="pl-2">
+          <v-toolbar class="pl-2 no-print">
             <v-app-bar-nav-icon v-bind="attrs" v-on="on" />
             <v-spacer></v-spacer>
-            <div class="overline">CHBEA | Exam</div>
+            <div class="overline">CHBEA | Exams</div>
             <v-spacer></v-spacer>
             <v-avatar>
               <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
@@ -151,6 +151,15 @@ export default {
   @media (min-width: 960px) {
     width: calc(100% - 210px);
     margin-left: 210px;
+  }
+}
+</style>
+
+<style lang="scss">
+@media print
+{    
+  .no-print {
+      display: none !important;
   }
 }
 </style>

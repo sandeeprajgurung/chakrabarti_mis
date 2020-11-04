@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-bottom-navigation v-model="tabValue" color="teal" grow>
+    <v-bottom-navigation v-model="tabValue" color="teal" grow class="no-print">
       <v-btn tabValue="0" @click="selectCategory('results')">
         <span>View Result</span>
         <v-icon>mdi-library</v-icon>
@@ -12,7 +12,7 @@
     </v-bottom-navigation>
 
     <v-container>
-      <v-card v-if="tabValue === 0" outlined class="mt-5 pa-10">
+      <v-card v-if="tabValue === 0" outlined class="mt-5 pa-10 no-print">
         <v-card-title class="pa-0">View Result</v-card-title>
         <v-form
           ref="viewResultsForm"
