@@ -3,7 +3,7 @@
     <v-card
       v-if="currentRouteName"
       height="100%"
-      width="210"
+      width="230"
       class="app-navbar float-left d-none d-md-block"
     >
       <v-navigation-drawer permanent>
@@ -48,10 +48,10 @@
         transition="dialog-bottom-transition"
       >
         <template v-slot:activator="{ on, attrs }">
-          <v-toolbar class="pl-2">
+          <v-toolbar class="pl-2 no-print">
             <v-app-bar-nav-icon v-bind="attrs" v-on="on" />
             <v-spacer></v-spacer>
-            <div class="overline">CHBEA | Exam</div>
+            <div class="overline">CHBEA | Exams</div>
             <v-spacer></v-spacer>
             <v-avatar>
               <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
@@ -65,7 +65,13 @@
             </v-btn>
             <v-spacer></v-spacer>
             <div class="pa-2">
-              <v-btn color="white" class="black--text" depressed rounded @click="logoutSubmit" >
+              <v-btn
+                color="white"
+                class="black--text"
+                depressed
+                rounded
+                @click="logoutSubmit"
+              >
                 Logout
               </v-btn>
             </div>
@@ -134,7 +140,7 @@ export default {
 
   methods: {
     async logoutSubmit() {
-      this.$router.push('/login');
+      this.$router.push("/login");
     },
   },
 };
@@ -149,8 +155,25 @@ export default {
   margin-top: 40px;
 
   @media (min-width: 960px) {
-    width: calc(100% - 210px);
-    margin-left: 210px;
+    width: calc(100% - 240px);
+    margin-left: 240px;
+  }
+}
+</style>
+
+<style lang="scss">
+.custom-snackbar {
+  .v-snack {
+    &__wrapper {
+      position: absolute;
+      right: 10px;
+    }
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
   }
 }
 </style>

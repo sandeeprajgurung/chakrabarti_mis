@@ -1,16 +1,10 @@
 <template>
-  <v-card class="mt-5 pa-10">
+  <v-card class="mt-5 pa-12">
     <div class="d-flex justify-center align-center">
       <v-card-title class="pa-0">
-        <v-row>
-          <v-img
-            lazy-src="../../assets/result-logo.png"
-            max-height="100px"
-            max-width="100px"
-            src="../../assets/result-logo.png"
-            class="college-logo"
-          ></v-img>
-          <v-list class="ml-4 text-center justify-center align-center">
+        <v-row class="justify-center ma-0">
+          <img src="../../assets/result-logo.png" alt="" srcset="" width="100" height="100">
+          <v-list class="ml-4 text-center align-center">
             Chakrabarti HaBi Education Academy (College of law)<br />
             Department of Examination<br />
             Bijulibazar, Kathmandu
@@ -20,41 +14,31 @@
     </div>
 
     <v-card-title class="pa-0 mt-10">
-      <v-row>
-        <v-col></v-col>
-        <v-col></v-col>
-        Pre-Board Examination 2020
-        <v-col></v-col>
-        <v-col></v-col>
+      <v-row class="justify-center ma-0">
+        <div>
+          Pre-Board Examination 2020
+        </div>
       </v-row>
     </v-card-title>
 
-    <v-card-title class="pa-0">
-      <v-row>
-        <v-col> <div class="text-subtitle-2">Name: Churi How</div></v-col>
-        <v-col></v-col>
-        <v-col></v-col>
-        <v-col> <div class="text-subtitle-2">Roll No.: 36</div> </v-col>
+    <v-card-title class="pa-0 mb-3">
+      <v-row class='justify-space-between ma-0'>
+        <div class="text-subtitle-2">Name: Churi How</div>
+         <div class="text-subtitle-2">Roll No.: 36</div>
       </v-row>
     </v-card-title>
 
-    <v-card-title class="pa-0">
-      <v-row>
-        <v-col> <div class="text-subtitle-2">Level: Majdur</div></v-col>
-        <v-col></v-col>
-        <v-col></v-col>
-        <v-col>
-          <div class="text-subtitle-2">Program: Machha palan</div>
-        </v-col>
+    <v-card-title class="pa-0 mb-3">
+      <v-row class='justify-space-between ma-0'>
+        <div class="text-subtitle-2">Level: Majdur</div>
+        <div class="text-subtitle-2">Program: Machha palan</div>
       </v-row>
     </v-card-title>
 
-    <v-card-title class="pa-0">
-      <v-row>
-        <v-col><div class="text-subtitle-2">Year: tannai</div></v-col>
-        <v-col></v-col>
-        <v-col></v-col>
-        <v-col><div class="text-subtitle-2">Group: Adhbaise</div></v-col>
+    <v-card-title class="pa-0 mb-3">
+      <v-row class='justify-space-between ma-0'>
+        <div class="text-subtitle-2">Year: tannai</div>
+        <div class="text-subtitle-2">Group: Adhbaise</div>
       </v-row>
     </v-card-title>
 
@@ -88,10 +72,10 @@
     <v-simple-table class="mt-5">
       <template v-slot:default>
         <thead>
-          <th class="text-center">________________________</th>
-          <th class="text-center">________________________</th>
-          <th class="text-center">________________________</th>
-          <th class="text-center">________________________</th>
+          <th class="text-center">______________</th>
+          <th class="text-center">______________</th>
+          <th class="text-center">______________</th>
+          <th class="text-center">______________</th>
         </thead>
         <tbody class="result-tbody">
           <tr>
@@ -108,7 +92,7 @@
     <v-btn
       elevation="6"
       small
-      class="mr-4"
+      class="mr-4 no-print"
       type=""
       color="primary"
       @click="handlePrintView"
@@ -170,7 +154,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.college-logo {
-  margin-left: -7rem;
-}
 </style>

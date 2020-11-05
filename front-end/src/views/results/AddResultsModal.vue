@@ -57,7 +57,7 @@
       </v-card>
     </v-dialog>
     <v-snackbar
-      class="white--text"
+      class="white--text custom-snackbar"
       color="green darken-2"
       v-model="snackbar"
       :timeout="timeout"
