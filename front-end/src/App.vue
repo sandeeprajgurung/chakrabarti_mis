@@ -3,7 +3,7 @@
     <v-card
       v-if="currentRouteName"
       height="100%"
-      width="210"
+      width="230"
       class="app-navbar float-left d-none d-md-block"
     >
       <v-navigation-drawer permanent>
@@ -149,8 +149,8 @@ export default {
   margin-top: 40px;
 
   @media (min-width: 960px) {
-    width: calc(100% - 210px);
-    margin-left: 210px;
+    width: calc(100% - 240px);
+    margin-left: 240px;
   }
 }
 </style>
