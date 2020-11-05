@@ -23,13 +23,6 @@
         <v-icon color="primary" class="mr-2" @click.prevent="addMarks(item)" v-if="!item.PERCENT" >
           mdi-plus-circle
         </v-icon>
-        <v-icon
-          color="primary"
-          class="mr-2"
-          @click.prevent="openResultViewModal = true"
-        >
-          mdi-information
-        </v-icon>
         <v-icon color="error" @click="deleteItem(item)"> mdi-delete </v-icon>
       </template>
     </v-data-table>
@@ -47,7 +40,6 @@
 
 <script>
 import AddResultsModal from "./AddResultsModal.vue";
-import ResultViewModal from "./ResultViewModal.vue";
 
 export default {
   props: {
@@ -59,7 +51,6 @@ export default {
 
   components: {
     AddResultsModal,
-    ResultViewModal,
   },
 
   data() {
@@ -81,10 +72,10 @@ export default {
           sortable: true,
           value: "SNAME",
         },
-        { text: "Roll no.", value: "ROLL_NO" },
-        { text: "Batch", value: "BATCH" },
-        { text: "Result", value: "RESULT" },
-        { text: "Action", value: "ACTIONS" },
+        { text: "Roll no.", value: "ROLL_NO", sortable: true },
+        { text: "Batch", value: "BATCH", sortable: true },
+        { text: "Result", value: "RESULT", sortable: false },
+        { text: "Action", value: "ACTIONS", sortable: false },
       ],
     };
   },
