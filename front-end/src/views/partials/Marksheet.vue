@@ -3,13 +3,7 @@
     <div class="d-flex justify-center align-center">
       <v-card-title class="pa-0">
         <v-row class="justify-center ma-0">
-          <v-img
-            lazy-src="../../assets/result-logo.png"
-            max-height="100px"
-            max-width="100px"
-            src="../../assets/result-logo.png"
-            class="college-logo"
-          ></v-img>
+          <img src="../../assets/result-logo.png" alt="" srcset="" width="100" height="100">
           <v-list class="ml-4 text-center align-center">
             Chakrabarti HaBi Education Academy (College of law)<br />
             Department of Examination<br />
@@ -160,7 +154,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.college-logo {
-  margin-left: -7rem;
-}
 </style>
