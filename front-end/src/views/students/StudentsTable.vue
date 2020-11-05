@@ -190,7 +190,7 @@
           </v-icon>
         </template>
         <template v-slot:no-data>
-          <v-btn color="primary" @click="initialize"> Reset </v-btn>
+          <v-card-text>There are no student available. please add Student.</v-card-text>
         </template>
       </v-data-table>
     </v-card>
