@@ -65,7 +65,13 @@
             </v-btn>
             <v-spacer></v-spacer>
             <div class="pa-2">
-              <v-btn color="white" class="black--text" depressed rounded @click="logoutSubmit" >
+              <v-btn
+                color="white"
+                class="black--text"
+                depressed
+                rounded
+                @click="logoutSubmit"
+              >
                 Logout
               </v-btn>
             </div>
@@ -134,7 +140,7 @@ export default {
 
   methods: {
     async logoutSubmit() {
-      this.$router.push('/login');
+      this.$router.push("/login");
     },
   },
 };
@@ -156,10 +162,18 @@ export default {
 </style>
 
 <style lang="scss">
-@media print
-{    
+.custom-snackbar {
+  .v-snack {
+    &__wrapper {
+      position: absolute;
+      right: 10px;
+    }
+  }
+}
+
+@media print {
   .no-print {
-      display: none !important;
+    display: none !important;
   }
 }
 </style>

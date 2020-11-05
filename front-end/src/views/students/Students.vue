@@ -5,7 +5,7 @@
     <template>
       <div class="text-center">
         <v-snackbar
-          class="white--text"
+          class="white--text custom-snackbar"
           color="green darken-2"
           v-model="snackbar"
           :timeout="timeout"
@@ -59,6 +59,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-</style>
