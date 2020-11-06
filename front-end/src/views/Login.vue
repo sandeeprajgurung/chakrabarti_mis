@@ -88,7 +88,7 @@
         </v-form>
       </v-card>
 
-      <marksheet v-if="tabValue === 0" :studentMarks="marks" />
+      <marksheet v-if="marks.length > 0" :studentMarks="marks" />
     </v-container>
   </div>
 </template>
@@ -148,7 +148,7 @@ export default {
       return (this.show = false);
     },
 
-    resultFormSubmit() {
+    async resultFormSubmit() {
       this.$refs.viewResultsForm.validate();
       this.marks = await api.getStudentMarks(this.result);
       console.log(this.marks);
