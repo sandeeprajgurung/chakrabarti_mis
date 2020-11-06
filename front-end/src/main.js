@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router'   
+import store from './store'
+import router from './router'
 import vuetify from './plugins/vuetify';
-
 
 Vue.config.productionTip = false
 
@@ -10,6 +10,7 @@ Vue.config.productionTip = false
 import "@/assets/scss/_global.scss"
 
 new Vue({
+  store,
   router,
   vuetify,
   render: h => h(App)

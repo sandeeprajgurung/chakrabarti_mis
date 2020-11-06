@@ -5,7 +5,7 @@
         <span>View Result</span>
         <v-icon>mdi-library</v-icon>
       </v-btn>
-      <v-btn tabValue="1" @click="selectCategory('login')">
+      <v-btn v-if="show" tabValue="1" @click="selectCategory('login')">
         <span>Login</span>
         <v-icon>mdi-login</v-icon>
       </v-btn>
@@ -97,6 +97,8 @@
 import api from "@/api";
 import Marksheet from "./partials/Marksheet.vue";
 
+var jwt = require("jsonwebtoken");
+
 export default {
   components: {
     Marksheet,
@@ -128,10 +130,23 @@ export default {
     ],
     checkbox: null,
     tabValue: 0,
+    show: true,
     model: {},
   }),
 
+  async created() {
+    this.load();
+  },
+
   methods: {
+    load() {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        return (this.show = true);
+      }
+      return (this.show = false);
+    },
+
     resultFormSubmit() {
       this.$refs.viewResultsForm.validate();
     },
@@ -160,7 +175,9 @@ export default {
       this.$refs.loginForm.validate();
       if (this.model) {
         await api.login(this.model);
-        this.$router.push('/');
+        const token = jwt.sign({ Auth: this.model }, "chakrabarti2020");
+        localStorage.setItem("token", token);
+        this.$router.push("/");
       }
       this.model = {};
     },
