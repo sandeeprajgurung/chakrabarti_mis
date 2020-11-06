@@ -13,7 +13,7 @@
               <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
             </v-avatar>
             <v-list-item-subtitle class="text-center mt-2">
-              CHBEA | Exam
+              {{ userName }}
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -103,12 +103,14 @@
 </template>
 
 <script>
+var jwt = require("jsonwebtoken");
+
 export default {
   name: "App",
-
   data() {
     return {
       dialog: false,
+      userName: "",
       items: [
         {
           title: "Dashboard",
@@ -129,6 +131,11 @@ export default {
       right: null,
     };
   },
+
+  async created() {
+    this.load();
+  },
+
   computed: {
     currentRouteName() {
       if (this.$route.name !== "Login") {
@@ -139,7 +146,16 @@ export default {
   },
 
   methods: {
+    load() {
+      const token = localStorage.getItem("token");
+      if (token) {
+        var decoded = jwt.decode(token);
+        this.userName = decoded.Auth.username;
+      }
+    },
+
     async logoutSubmit() {
+      localStorage.removeItem("token");
       this.$router.push("/login");
     },
   },
