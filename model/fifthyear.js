@@ -11,6 +11,9 @@ module.exports = (sequelize, Sequelize) => {
       AGRARIAN: {
           type: Sequelize.INTEGER
       },
+      LABOUR: {
+        type: Sequelize.INTEGER
+    },
       INTERNATIONAL_HUMANITARIAN:{
         type: Sequelize.INTEGER
       },

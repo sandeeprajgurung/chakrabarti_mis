@@ -57,18 +57,6 @@
 
           <v-col cols="12" sm="4">
             <v-text-field
-              v-model="marks.PrincipleOfLaw"
-              :counter="3"
-              :rules="numberRule"
-              label="General Principles of Law"
-              type="number"
-              outlined
-              dense
-            ></v-text-field>
-          </v-col>
-
-          <v-col cols="12" sm="4">
-            <v-text-field
               v-model="marks.InternationDisputes"
               :counter="3"
               :rules="numberRule"

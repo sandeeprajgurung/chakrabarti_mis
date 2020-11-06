@@ -190,7 +190,7 @@
           </v-icon>
         </template>
         <template v-slot:no-data>
-          <v-card-text>There are no student available. please add Student.</v-card-text>
+          <v-card-text>Currently, There are no student available. Please add Student details to see list.</v-card-text>
         </template>
       </v-data-table>
     </v-card>
