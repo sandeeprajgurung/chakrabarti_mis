@@ -135,6 +135,12 @@ export default {
         return this.execute('DELETE', `/LLMStudent/${id}`);
     },
 
+    getStudentMarks(data) {
+        if(data.academic === '1') {
+            return this.execute('GET', `/Result/LLBFirstyear?prgid=${data.program}&examno=${data.symbolNo}`);
+        }
+    },
+
     // getPosts() {
     //     return this.execute('get', '/posts')
     // },

@@ -88,7 +88,7 @@
         </v-form>
       </v-card>
 
-      <marksheet v-if="tabValue === 0" />
+      <marksheet v-if="tabValue === 0" :studentMarks="marks" />
     </v-container>
   </div>
 </template>
@@ -111,6 +111,7 @@ export default {
     result: {},
     select: null,
     programs: [],
+    marks: [],
     graduate: [
       { id: "6", name: "LL.M First Year" },
       { id: "7", name: "LL.M Second Year" },
@@ -132,8 +133,10 @@ export default {
   }),
 
   methods: {
-    resultFormSubmit() {
+    async resultFormSubmit() {
       this.$refs.viewResultsForm.validate();
+      this.marks = await api.getStudentMarks(this.result);
+      console.log(this.marks);
     },
 
     selectedAcademic() {
