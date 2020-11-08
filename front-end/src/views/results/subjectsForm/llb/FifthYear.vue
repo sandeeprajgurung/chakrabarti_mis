@@ -12,9 +12,9 @@
             <v-text-field
               v-model="marks.LegalPhilosophy"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Legal Philosophy"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -24,9 +24,9 @@
             <v-text-field
               v-model="marks.Agrarian"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Agrarian Law"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -36,9 +36,9 @@
             <v-text-field
               v-model="marks.Labour"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Labour Law"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -47,9 +47,9 @@
             <v-text-field
               v-model="marks.InternationalHumanitarian"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="International Humanitarian Law & Conflict Resolution"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -59,9 +59,9 @@
             <v-text-field
               v-model="marks.ConservationLaw"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Conservation Law"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -71,9 +71,9 @@
             <v-text-field
               v-model="marks.InternationalLaw"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Private International Law"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -83,9 +83,9 @@
             <v-text-field
               v-model="marks.PreTrialPresentation"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Pre-Trial Presentation, Trial Advocacy & Appellate Advocacy"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -95,9 +95,9 @@
             <v-text-field
               v-model="marks.ClinicalEducation"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Clinical Education: Legal Professionalism Development"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -107,9 +107,9 @@
             <v-text-field
               v-model="marks.Dissertation"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Dissertation"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -124,9 +124,9 @@
             <v-text-field
               v-model="marks.OrganizedCrime"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Law Against Organized Crime"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -135,9 +135,9 @@
             <v-text-field
               v-model="marks.FiscalCrime"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Forensic Crime Law"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -148,9 +148,9 @@
             <v-text-field
               v-model="marks.IntellectualProperty"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Intellectual Property"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -159,9 +159,9 @@
             <v-text-field
               v-model="marks.Taxation"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Taxation Law"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -172,9 +172,9 @@
             <v-text-field
               v-model="marks.LawOfEquity"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Law of Equity, Torts and Consumer Production"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -183,9 +183,9 @@
             <v-text-field
               v-model="marks.LawOfGender"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Law on Gender and Disadvantaged Sections of Population"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -194,22 +194,22 @@
         <v-row v-if="studentDetails.GRPID === 4">
           <v-col cols="12" sm="4">
             <v-text-field
-              v-model="marks.EnvironmentLaw"
+              v-model="marks.EnergyLaw"
               :counter="3"
-              :rules="numberRule"
-              label="Environmental Law"
-              type="number"
+              :rules="validRule"
+              label="Energy Law"
+              type="string"
               outlined
               dense
             ></v-text-field>
           </v-col>
           <v-col cols="12" sm="4">
             <v-text-field
-              v-model="marks.WaterRiver"
+              v-model="marks.CivilAviation"
               :counter="3"
-              :rules="numberRule"
-              label="Water and River Law"
-              type="number"
+              :rules="validRule"
+              label="Civil Aviation & Tourism Law"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -240,11 +240,9 @@ export default {
   data: () => ({
     marks: {},
     valid: false,
-    numberRule: [
+    validRule: [
       (v) => !!v || "Required",
-      (v) =>
-        Number.isInteger(Number(v)) || "The value must be an integer number",
-      (v) => (v >= 0 && v <= 999) || "Number has to be between 0 and 999",
+      (v) => v.length <= 3 || "Marks must be less than 3 Digits",
     ],
   }),
 
@@ -276,3 +274,17 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="string"] {
+  -moz-appearance: textfield;
+}
+</style>

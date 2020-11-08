@@ -7,14 +7,17 @@
   >
     <v-card>
       <v-card-text>
+        <v-alert dense text type="info">
+          Please enter <strong>'I'</strong> for abscent students.
+        </v-alert>
         <v-row>
           <v-col cols="12" sm="4">
             <v-text-field
               v-model="marks.Economic"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Economics"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -24,9 +27,9 @@
             <v-text-field
               v-model="marks.Socology"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Sociology"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -36,9 +39,9 @@
             <v-text-field
               v-model="marks.ClinicalWork"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Clinical Works"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -47,9 +50,9 @@
             <v-text-field
               v-model="marks.HistoryOfNepal"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="History of Nepal"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -59,9 +62,9 @@
             <v-text-field
               v-model="marks.PrincipleOfLaw"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="General Principles of Law"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -71,9 +74,9 @@
             <v-text-field
               v-model="marks.ConceptOfLaw"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="General Concept of Law"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -83,9 +86,9 @@
             <v-text-field
               v-model="marks.Political"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Political Theory Thoughts"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -95,9 +98,9 @@
             <v-text-field
               v-model="marks.LogicLegalReasoning"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Theories of Logic & Legal Reasoning"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -122,17 +125,15 @@ export default {
     studentDetails: {
       type: Object,
       required: true,
-    }
+    },
   },
 
   data: () => ({
     marks: {},
     valid: false,
-    numberRule: [
+    validRule: [
       (v) => !!v || "Required",
-      (v) =>
-        Number.isInteger(Number(v)) || "The value must be an integer number",
-      (v) => (v >= 0 && v <= 999) || "Number has to be between 0 and 999",
+      (v) => v.length <= 3 || "Marks must be less than 3 Digits",
     ],
   }),
 
@@ -174,7 +175,7 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type="number"] {
+input[type="string"] {
   -moz-appearance: textfield;
 }
 </style>
