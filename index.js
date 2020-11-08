@@ -27,9 +27,9 @@ const app = express();
 var cors = require('cors')
 const db = require("./connect/Connect");
 
-db.sequelize.sync({ force: true }).then(() => {
-    console.log("Drop and re-sync db.");
-  });
+// db.sequelize.sync({ force: true }).then(() => {
+//     console.log("Drop and re-sync db.");
+//   });
 
 var router = express.Router();
 
