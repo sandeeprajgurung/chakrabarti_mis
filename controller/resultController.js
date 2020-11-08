@@ -1,27 +1,45 @@
 const db = require("../connect/Connect");
+const LLBStudent = db.LLBSTUDENT;
+const Firstyear = db.FIRSTYEAR;
 
 exports.getLLBFirst = async (req, res) => {
-    try {
-        const student = await db.sequelize.query(`SELECT LB.SNAME,LB.PERCENT,LB.ROLL_NO,LB.EXAM_NO,LB.BATCH,IFNULL(F.POLITICAL,0) AS POLITICAL,IFNULL(F.ECONOMIC,0) AS ECONOMIC,
-        IFNULL(F.HISTORY_OF_NEPAL,0) AS HISTORY_OF_NEPAL,IFNULL(F.SOCOLOGY,0) AS SOCOLOGY,IFNULL(F.PRINCIPLE_OF_LAW,0) AS PRINCIPLE_OF_LAW,IFNULL(F.CONCEPT_OF_LAW,0) AS PRINCIPLE_OF_LAW,IFNULL(F.LOGIC_LEGAL_REASONING,0) AS LOGIC_LEGAL_REASONING,
-        IFNULL(F.CLINICAL_WORK,0) AS CLINICAL_WORK
-        FROM LLBSTUDENT AS LB join FIRSTYEAR AS F on LB.SID = F.SID 
-        WHERE LB.PRGID = (:prgid) AND LB.EXAM_NO = (:examno)`, {
-            replacements: {
-                prgid: req.query.prgid,
-                examno: req.query.examno
-            },
-            type: db.sequelize.QueryTypes.SELECT
-        });
+    // try {
+    //     const student = await db.sequelize.query(`SELECT LB.SNAME,LB.PERCENT,LB.ROLL_NO,LB.EXAM_NO,LB.BATCH,IFNULL(F.POLITICAL,0) AS POLITICAL,IFNULL(F.ECONOMIC,0) AS ECONOMIC,
+    //     IFNULL(F.HISTORY_OF_NEPAL,0) AS HISTORY_OF_NEPAL,IFNULL(F.SOCOLOGY,0) AS SOCOLOGY,IFNULL(F.PRINCIPLE_OF_LAW,0) AS PRINCIPLE_OF_LAW,IFNULL(F.CONCEPT_OF_LAW,0) AS PRINCIPLE_OF_LAW,IFNULL(F.LOGIC_LEGAL_REASONING,0) AS LOGIC_LEGAL_REASONING,
+    //     IFNULL(F.CLINICAL_WORK,0) AS CLINICAL_WORK
+    //     FROM LLBSTUDENT AS LB join FIRSTYEAR AS F on LB.SID = F.SID 
+    //     WHERE LB.PRGID = (:prgid) AND LB.EXAM_NO = (:examno)`, {
+    //         replacements: {
+    //             prgid: req.query.prgid,
+    //             examno: req.query.examno
+    //         },
+    //         type: db.sequelize.QueryTypes.SELECT
+    //     });
 
-        res.send(student);
-    }
-    catch (err) {
-        res.status(500).send({
-            message:
-                err.message || "Some error occurred while retrieving Student Result."
+    //     res.send(student);
+    // }
+    // catch (err) {
+    //     res.status(500).send({
+    //         message:
+    //             err.message || "Some error occurred while retrieving Student Result."
+    //     });
+    // }
+    console.log("here");
+    LLBStudent.findAll({
+        where: {
+            PRGID: req.query.prgid,
+            EXAM_NO: req.query.examno
+        }
+    })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving Student."
+            });
         });
-    }
 }
 
 exports.getLLBSecond = async (req, res) => {
