@@ -7,113 +7,13 @@
   >
     <v-card>
       <v-card-text>
-        <v-row>
-          <v-col cols="12" sm="4">
-            <v-text-field
-              v-model="marks.ContractLaw"
-              :counter="3"
-              :rules="numberRule"
-              label="Contract Law"
-              type="number"
-              outlined
-              dense
-            ></v-text-field>
-          </v-col>
-
-          <v-col cols="12" sm="4">
-            <v-text-field
-              v-model="marks.CompanyLaw"
-              :counter="3"
-              :rules="numberRule"
-              label="Company Law"
-              type="number"
-              outlined
-              dense
-            ></v-text-field>
-          </v-col>
-
-          <v-col cols="12" sm="4">
-            <v-text-field
-              v-model="marks.AdministativeLaw"
-              :counter="3"
-              :rules="numberRule"
-              label="Administrative Law"
-              type="number"
-              outlined
-              dense
-            ></v-text-field>
-          </v-col>
-          <v-col cols="12" sm="4">
-            <v-text-field
-              v-model="marks.AdvanceJurisprudence"
-              :counter="3"
-              :rules="numberRule"
-              label="Advanced Jurisprudence"
-              type="number"
-              outlined
-              dense
-            ></v-text-field>
-          </v-col>
-
-          <v-col cols="12" sm="4">
-            <v-text-field
-              v-model="marks.PrincipleOfLaw"
-              :counter="3"
-              :rules="numberRule"
-              label="General Principles of Law"
-              type="number"
-              outlined
-              dense
-            ></v-text-field>
-          </v-col>
-
-          <v-col cols="12" sm="4">
-            <v-text-field
-              v-model="marks.InternationDisputes"
-              :counter="3"
-              :rules="numberRule"
-              label="Settlement of International Disputes"
-              type="number"
-              outlined
-              dense
-            ></v-text-field>
-          </v-col>
-
-          <v-col cols="12" sm="4">
-            <v-text-field
-              v-model="marks.ClinicalEducation"
-              :counter="3"
-              :rules="numberRule"
-              label="Clinical Education: Community Outreach and Rural Law Advocacy Service"
-              type="number"
-              outlined
-              dense
-            ></v-text-field>
-          </v-col>
-
-          <v-col cols="12" sm="4">
-            <v-text-field
-              v-model="marks.ClinicalLegalEducation"
-              :counter="3"
-              :rules="numberRule"
-              label="Clinical Leagal Education: Effective Legal Writing Criminal Case"
-              type="number"
-              outlined
-              dense
-            ></v-text-field>
-          </v-col>
-        </v-row>
-        <hr />
-        <div class="mt-4 mb-1 text-subtitle-2 grey--text text--darken-2">
-          Optional Subject
-        </div>
         <v-row v-if="studentDetails.GRPID === 1">
           <v-col cols="12" sm="4">
             <v-text-field
-              v-model="marks.Criminology"
+              v-model="marks.FeministJurisprudence"
               :counter="3"
               :rules="numberRule"
-              label="Criminology and Ponology"
+              label="Feminist Jurisprudence"
               type="number"
               outlined
               dense
@@ -121,10 +21,32 @@
           </v-col>
           <v-col cols="12" sm="4">
             <v-text-field
-              v-model="marks.Forensic"
+              v-model="marks.WomenHumanRights"
               :counter="3"
               :rules="numberRule"
-              label="Forensic Science and Medical Jurisprudence"
+              label="Women's Human Rights"
+              type="number"
+              outlined
+              dense
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12" sm="4">
+            <v-text-field
+              v-model="marks.EconomicSocialCulture"
+              :counter="3"
+              :rules="numberRule"
+              label="Economic, Social & Culture Rights"
+              type="number"
+              outlined
+              dense
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12" sm="4">
+            <v-text-field
+              v-model="marks.Dissertation"
+              :counter="3"
+              :rules="numberRule"
+              label="Dissertation"
               type="number"
               outlined
               dense
@@ -134,10 +56,10 @@
         <v-row v-if="studentDetails.GRPID === 2">
           <v-col cols="12" sm="4">
             <v-text-field
-              v-model="marks.BankingInsurance"
+              v-model="marks.BankingLaw"
               :counter="3"
               :rules="numberRule"
-              label="Banking and Insurance Law"
+              label="Banking Law"
               type="number"
               outlined
               dense
@@ -145,10 +67,54 @@
           </v-col>
           <v-col cols="12" sm="4">
             <v-text-field
-              v-model="marks.InternationalTrade"
+              v-model="marks.CorporateManagement"
               :counter="3"
               :rules="numberRule"
-              label="International Trade Law and Arbitration"
+              label="Laws on Corporate Management"
+              type="number"
+              outlined
+              dense
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12" sm="4">
+            <v-text-field
+              v-model="marks.TradeLaw"
+              :counter="3"
+              :rules="numberRule"
+              label="International Trade Law & Arbitration"
+              type="number"
+              outlined
+              dense
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12" sm="4">
+            <v-text-field
+              v-model="marks.Taxation"
+              :counter="3"
+              :rules="numberRule"
+              label="Taxation (Income Tax & Value Added Tax)"
+              type="number"
+              outlined
+              dense
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12" sm="4">
+            <v-text-field
+              v-model="marks.Insurance"
+              :counter="3"
+              :rules="numberRule"
+              label="Insurance"
+              type="number"
+              outlined
+              dense
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12" sm="4">
+            <v-text-field
+              v-model="marks.Dissertation"
+              :counter="3"
+              :rules="numberRule"
+              label="Dissertation"
               type="number"
               outlined
               dense
@@ -158,10 +124,10 @@
         <v-row v-if="studentDetails.GRPID === 3">
           <v-col cols="12" sm="4">
             <v-text-field
-              v-model="marks.GoodGovernance"
+              v-model="marks.Criminology"
               :counter="3"
               :rules="numberRule"
-              label="Law on Good Governance"
+              label="Criminology & Penology"
               type="number"
               outlined
               dense
@@ -169,23 +135,10 @@
           </v-col>
           <v-col cols="12" sm="4">
             <v-text-field
-              v-model="marks.ElectroalLaw"
+              v-model="marks.FairTrail"
               :counter="3"
               :rules="numberRule"
-              label="Electoral Law"
-              type="number"
-              outlined
-              dense
-            ></v-text-field>
-          </v-col>
-        </v-row>
-        <v-row v-if="studentDetails.GRPID === 4">
-          <v-col cols="12" sm="4">
-            <v-text-field
-              v-model="marks.EnvironmentLaw"
-              :counter="3"
-              :rules="numberRule"
-              label="Environmental Law"
+              label="Fair Trail (International Human Rights Law in Relation to Criminal Procedure)"
               type="number"
               outlined
               dense
@@ -193,10 +146,21 @@
           </v-col>
           <v-col cols="12" sm="4">
             <v-text-field
-              v-model="marks.WaterRiver"
+              v-model="marks.WhiteCollar"
               :counter="3"
               :rules="numberRule"
-              label="Water and River Law"
+              label="White Collar Crime"
+              type="number"
+              outlined
+              dense
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12" sm="4">
+            <v-text-field
+              v-model="marks.Dissertation"
+              :counter="3"
+              :rules="numberRule"
+              label="Dissertation"
               type="number"
               outlined
               dense

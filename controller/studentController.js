@@ -14,8 +14,8 @@ exports.CreateLLB = (req, res) => {
         GENDER : req.body.GENDER,
         BATCH : req.body.BATCH,
         YEAR : req.body.YEAR,
-        PRGID : req.body.PRGID,
-        GRPID : req.body.GRPID
+        PROGRAMMEID : req.body.PRGID,
+        LLBGROUPID : req.body.GRPID
     }; 
 
         Llbstudent.create(student)
@@ -40,8 +40,8 @@ exports.CreateLLM = (req, res) => {
         GENDER : req.body.GENDER,
         BATCH : req.body.BATCH,
         YEAR : req.body.YEAR,
-        PRGID : req.body.PRGID,
-        GRPID : req.body.GRPID
+        PROGRAMMEID : req.body.PRGID,
+        LLMGROUPID : req.body.GRPID
     }; 
 
         Llmstudent.create(student)
@@ -60,7 +60,7 @@ exports.UpdateLLB = (req, res) => {
     const id = req.params.Id;
 
         Llbstudent.update(req.body, {
-            where: { SID: id }
+            where: { ID: id }
         })
         .then(num => {
             if (num == 1) {
@@ -85,7 +85,7 @@ exports.UpdateLLM = (req, res) => {
     const id = req.params.Id;
 
         Llmstudent.update(req.body, {
-            where: { SID: id }
+            where: { ID: id }
         })
         .then(num => {
             if (num == 1) {
@@ -111,7 +111,7 @@ exports.DeleteLLB = (req, res) => {
     const id = req.params.Id;
     
         Llbstudent.destroy({
-            where: { SID: id }
+            where: { ID: id }
         })
         .then(num => {
           if (num == 1) {
@@ -138,7 +138,7 @@ exports.DeleteLLM = (req, res) => {
     const id = req.params.Id;
     
         Llmstudent.destroy({
-            where: { SID: id }
+            where: { ID: id }
         })
         .then(num => {
           if (num == 1) {
@@ -253,13 +253,13 @@ exports.SearchLLBStudent = (req, res) => {
 
     Llbstudent.findAll({
         where: { 
-            PRGID: req.query.prgid,
+            PGROGRMMEID: req.query.prgid,
             [Op.or]:[
                 {
-                    GRPID: req.query.grpid
+                    LLBGROUPID: req.query.grpid
                 },
                 {
-                    GRPID:{
+                    LLBGROUPID:{
                         [Op.is]:null
                     }
                 }
@@ -281,13 +281,13 @@ exports.SearchLLBStudent = (req, res) => {
 
     Llmstudent.findAll({
         where: { 
-            PRGID: req.query.prgid,
+            PGROGRMMEID: req.query.prgid,
             [Op.or]:[
                 {
-                    GRPID: req.query.grpid
+                    LLMGROUPID: req.query.grpid
                 },
                 {
-                    GRPID:{
+                    LLMGROUPID:{
                         [Op.is]:null
                     }
                 }

@@ -32,7 +32,7 @@ exports.Create = (req, res) => {
     COMPARATIVE_STUDY : req.body.ComparativeStudy,
     CONTRACT_LAW : req.body.ContractLaw,
     INTELLECTUAL_PROPERTY : req.body.IntellectualProperty,
-    SID : req.body.SId
+    LLMSTUDENTID : req.body.SId
   };
 
   FirstyearBusiness.create(Business)
@@ -88,7 +88,7 @@ exports.Delete = (req, res) => {
   const id = req.params.Id;
 
   FirstyearBusiness.destroy({
-    where: { BUSINESSID: id }
+    where: { ID: id }
   })
     .then(num => {
       if (num == 1) {

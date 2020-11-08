@@ -26,7 +26,7 @@ exports.Create = (req, res) => {
     CONCEPT_OF_LAW : req.body.ConceptOfLaw,
     LOGIC_LEGAL_REASONING : req.body.LogicLegalReasoning,
     CLINICAL_WORK : req.body.ClinicalWork,
-    SID : req.body.SId
+    LLBSTUDENTID : req.body.SId
   };
 
       Firstyear.create(firstyear)
@@ -142,7 +142,7 @@ exports.Update = (req, res) => {
     const id = req.params.Id;
 
         Firstyear.update(req.body, {
-            where: { FIRSTYEARID: id }
+            where: { ID: id }
         })
         .then(num => {
             if (num == 1) {
@@ -168,7 +168,7 @@ exports.Delete = (req, res) => {
     const id = req.params.Id;
     
         Firstyear.destroy({
-            where: { FIRSTYEARID: id }
+            where: { ID: id }
         })
         .then(num => {
           if (num == 1) {

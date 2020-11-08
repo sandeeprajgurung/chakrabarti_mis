@@ -10,10 +10,10 @@
         <v-row>
           <v-col cols="12" sm="4">
             <v-text-field
-              v-model="marks.ContractLaw"
+              v-model="marks.LegalPhilosophy"
               :counter="3"
               :rules="numberRule"
-              label="Contract Law"
+              label="Legal Philosophy"
               type="number"
               outlined
               dense
@@ -22,10 +22,10 @@
 
           <v-col cols="12" sm="4">
             <v-text-field
-              v-model="marks.CompanyLaw"
+              v-model="marks.Agrarian"
               :counter="3"
               :rules="numberRule"
-              label="Company Law"
+              label="Agrarian Law"
               type="number"
               outlined
               dense
@@ -34,10 +34,10 @@
 
           <v-col cols="12" sm="4">
             <v-text-field
-              v-model="marks.AdministativeLaw"
+              v-model="marks.Labour"
               :counter="3"
               :rules="numberRule"
-              label="Administrative Law"
+              label="Labour Law"
               type="number"
               outlined
               dense
@@ -45,22 +45,10 @@
           </v-col>
           <v-col cols="12" sm="4">
             <v-text-field
-              v-model="marks.AdvanceJurisprudence"
+              v-model="marks.InternationalHumanitarian"
               :counter="3"
               :rules="numberRule"
-              label="Advanced Jurisprudence"
-              type="number"
-              outlined
-              dense
-            ></v-text-field>
-          </v-col>
-
-          <v-col cols="12" sm="4">
-            <v-text-field
-              v-model="marks.PrincipleOfLaw"
-              :counter="3"
-              :rules="numberRule"
-              label="General Principles of Law"
+              label="International Humanitarian Law & Conflict Resolution"
               type="number"
               outlined
               dense
@@ -69,10 +57,34 @@
 
           <v-col cols="12" sm="4">
             <v-text-field
-              v-model="marks.InternationDisputes"
+              v-model="marks.ConservationLaw"
               :counter="3"
               :rules="numberRule"
-              label="Settlement of International Disputes"
+              label="Conservation Law"
+              type="number"
+              outlined
+              dense
+            ></v-text-field>
+          </v-col>
+
+          <v-col cols="12" sm="4">
+            <v-text-field
+              v-model="marks.InternationalLaw"
+              :counter="3"
+              :rules="numberRule"
+              label="Private International Law"
+              type="number"
+              outlined
+              dense
+            ></v-text-field>
+          </v-col>
+
+          <v-col cols="12" sm="4">
+            <v-text-field
+              v-model="marks.PreTrialPresentation"
+              :counter="3"
+              :rules="numberRule"
+              label="Pre-Trial Presentation, Trial Advocacy & Appellate Advocacy"
               type="number"
               outlined
               dense
@@ -84,7 +96,7 @@
               v-model="marks.ClinicalEducation"
               :counter="3"
               :rules="numberRule"
-              label="Clinical Education: Community Outreach and Rural Law Advocacy Service"
+              label="Clinical Education: Legal Professionalism Development"
               type="number"
               outlined
               dense
@@ -93,10 +105,10 @@
 
           <v-col cols="12" sm="4">
             <v-text-field
-              v-model="marks.ClinicalLegalEducation"
+              v-model="marks.Dissertation"
               :counter="3"
               :rules="numberRule"
-              label="Clinical Leagal Education: Effective Legal Writing Criminal Case"
+              label="Dissertation"
               type="number"
               outlined
               dense
@@ -110,10 +122,10 @@
         <v-row v-if="studentDetails.GRPID === 1">
           <v-col cols="12" sm="4">
             <v-text-field
-              v-model="marks.Criminology"
+              v-model="marks.OrganizedCrime"
               :counter="3"
               :rules="numberRule"
-              label="Criminology and Ponology"
+              label="Law Against Organized Crime"
               type="number"
               outlined
               dense
@@ -121,10 +133,10 @@
           </v-col>
           <v-col cols="12" sm="4">
             <v-text-field
-              v-model="marks.Forensic"
+              v-model="marks.FiscalCrime"
               :counter="3"
               :rules="numberRule"
-              label="Forensic Science and Medical Jurisprudence"
+              label="Forensic Crime Law"
               type="number"
               outlined
               dense
@@ -134,10 +146,10 @@
         <v-row v-if="studentDetails.GRPID === 2">
           <v-col cols="12" sm="4">
             <v-text-field
-              v-model="marks.BankingInsurance"
+              v-model="marks.IntellectualProperty"
               :counter="3"
               :rules="numberRule"
-              label="Banking and Insurance Law"
+              label="Intellectual Property"
               type="number"
               outlined
               dense
@@ -145,10 +157,10 @@
           </v-col>
           <v-col cols="12" sm="4">
             <v-text-field
-              v-model="marks.InternationalTrade"
+              v-model="marks.Taxation"
               :counter="3"
               :rules="numberRule"
-              label="International Trade Law and Arbitration"
+              label="Taxation Law"
               type="number"
               outlined
               dense
@@ -158,10 +170,10 @@
         <v-row v-if="studentDetails.GRPID === 3">
           <v-col cols="12" sm="4">
             <v-text-field
-              v-model="marks.GoodGovernance"
+              v-model="marks.LawOfEquity"
               :counter="3"
               :rules="numberRule"
-              label="Law on Good Governance"
+              label="Law of Equity, Torts and Consumer Production"
               type="number"
               outlined
               dense
@@ -169,10 +181,10 @@
           </v-col>
           <v-col cols="12" sm="4">
             <v-text-field
-              v-model="marks.ElectroalLaw"
+              v-model="marks.LawOfGender"
               :counter="3"
               :rules="numberRule"
-              label="Electoral Law"
+              label="Law on Gender and Disadvantaged Sections of Population"
               type="number"
               outlined
               dense

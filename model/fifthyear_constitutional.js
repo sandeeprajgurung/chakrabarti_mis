@@ -1,18 +1,15 @@
 module.exports = (sequelize, Sequelize) => {
     const FIFTHYEAR_CONSTITUTIONAL = sequelize.define("FIFTHYEAR_CONSTITUTIONAL", {
-        CONSTITUTIONALID: {
+        ID: {
           type: Sequelize.INTEGER,
           autoIncrement: true,
           primaryKey: true
       },
       LAW_OF_EQUITY: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       LAW_ON_GENDER: {
-          type: Sequelize.INTEGER
-      },
-      FIFTHYEARID: {
-        type: Sequelize.INTEGER
+          type: Sequelize.STRING
       }
     },
     {

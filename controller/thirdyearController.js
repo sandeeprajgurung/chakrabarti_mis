@@ -27,7 +27,7 @@ exports.Create = (req, res) => {
     PROFESSIONAL_ETHICS : req.body.ProfessionalEthics,
     CLINICAL_LEGAL_EDUCATION : req.body.ClinicalLegalEducation,
     CLINICAL_WORK : req.body.ClinicalWork,
-    SID : req.body.SId
+    LLBSTUDENTID : req.body.SId
   };
 
   Thirdyear.create(thirdyear)
@@ -151,7 +151,7 @@ exports.Update = (req, res) => {
     const id = req.params.Id;
 
     Thirdyear.update(req.body, {
-            where: { THIRDYEARID: id }
+            where: { ID: id }
         })
         .then(num => {
             if (num == 1) {
@@ -177,7 +177,7 @@ exports.Delete = (req, res) => {
     const id = req.params.Id;
     
         Thirdyear.destroy({
-            where: { THIRDYEARID: id }
+            where: { ID: id }
         })
         .then(num => {
           if (num == 1) {

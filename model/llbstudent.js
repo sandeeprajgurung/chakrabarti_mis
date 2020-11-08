@@ -1,8 +1,6 @@
-const firstyear = require('./firstyear');
-
 module.exports = (sequelize, Sequelize) => {
     const LLBSTUDENT = sequelize.define("LLBSTUDENT", {
-        SID: {
+      ID: {
           type: Sequelize.INTEGER,
           autoIncrement: true,
           primaryKey: true
@@ -30,13 +28,7 @@ module.exports = (sequelize, Sequelize) => {
       },
       PERCENT:{
         type: Sequelize.FLOAT
-      },
-      PRGID: {
-        type: Sequelize.INTEGER
-    },
-    GRPID:{
-      type: Sequelize.INTEGER
-    }
+      }
     },
     {
       timestamps: false,

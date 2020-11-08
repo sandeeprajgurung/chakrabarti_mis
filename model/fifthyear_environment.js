@@ -1,18 +1,15 @@
 module.exports = (sequelize, Sequelize) => {
     const FIFTHYEAR_ENVIRONMENT = sequelize.define("FIFTHYEAR_ENVIRONMENT", {
-        ENVIRONMENTID: {
+        ID: {
           type: Sequelize.INTEGER,
           autoIncrement: true,
           primaryKey: true
       },
       ENERGY_LAW: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       CIVIL_AVIATION: {
-          type: Sequelize.INTEGER
-      },
-      FIFTHYEARID: {
-        type: Sequelize.INTEGER
+          type: Sequelize.STRING
       }
     },
     {

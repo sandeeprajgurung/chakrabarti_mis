@@ -5,7 +5,7 @@
         <span>View Result</span>
         <v-icon>mdi-library</v-icon>
       </v-btn>
-      <v-btn tabValue="1" @click="selectCategory('login')">
+      <v-btn v-if="show" tabValue="1" @click="selectCategory('login')">
         <span>Login</span>
         <v-icon>mdi-login</v-icon>
       </v-btn>
@@ -88,7 +88,7 @@
         </v-form>
       </v-card>
 
-      <marksheet v-if="tabValue === 0" />
+      <marksheet v-if="marks.length > 0" :studentMarks="marks" />
     </v-container>
   </div>
 </template>
@@ -96,6 +96,8 @@
 <script>
 import api from "@/api";
 import Marksheet from "./partials/Marksheet.vue";
+
+var jwt = require("jsonwebtoken");
 
 export default {
   components: {
@@ -111,6 +113,7 @@ export default {
     result: {},
     select: null,
     programs: [],
+    marks: [],
     graduate: [
       { id: "6", name: "LL.M First Year" },
       { id: "7", name: "LL.M Second Year" },
@@ -128,12 +131,27 @@ export default {
     ],
     checkbox: null,
     tabValue: 0,
+    show: true,
     model: {},
   }),
 
+  async created() {
+    this.load();
+  },
+
   methods: {
-    resultFormSubmit() {
+    load() {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        return (this.show = true);
+      }
+      return (this.show = false);
+    },
+
+    async resultFormSubmit() {
       this.$refs.viewResultsForm.validate();
+      this.marks = await api.getStudentMarks(this.result);
+      console.log(this.marks);
     },
 
     selectedAcademic() {
@@ -160,7 +178,9 @@ export default {
       this.$refs.loginForm.validate();
       if (this.model) {
         await api.login(this.model);
-        this.$router.push('/');
+        const token = jwt.sign({ Auth: this.model }, "chakrabarti2020");
+        localStorage.setItem("token", token);
+        this.$router.push("/");
       }
       this.model = {};
     },

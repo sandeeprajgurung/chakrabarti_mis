@@ -10,10 +10,57 @@
         <v-row>
           <v-col cols="12" sm="4">
             <v-text-field
-              v-model="marks.Economic"
+              v-model="marks.English"
               :counter="3"
               :rules="numberRule"
-              label="Economics"
+              label="Legal English"
+              type="number"
+              outlined
+              dense
+            ></v-text-field>
+          </v-col>
+
+          <v-col cols="12" sm="4">
+            <v-text-field
+              v-model="marks.Nepali"
+              :counter="3"
+              :rules="numberRule"
+              label="Legal Nepali"
+              type="number"
+              outlined
+              dense
+            ></v-text-field>
+          </v-col>
+
+          <v-col cols="12" sm="4">
+            <v-text-field
+              v-model="marks.InternationalRelation"
+              :counter="3"
+              :rules="numberRule"
+              label="International Relations & Diplomacy"
+              type="number"
+              outlined
+              dense
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12" sm="4">
+            <v-text-field
+              v-model="marks.LegislativePrinciple"
+              :counter="3"
+              :rules="numberRule"
+              label="Legislative Principles Law Making Process"
+              type="number"
+              outlined
+              dense
+            ></v-text-field>
+          </v-col>
+
+          <v-col cols="12" sm="4">
+            <v-text-field
+              v-model="marks.ProcedureLaw"
+              :counter="3"
+              :rules="numberRule"
+              label="Principles & Rules of Procedure Law"
               type="number"
               outlined
               dense
@@ -25,7 +72,7 @@
               v-model="marks.Socology"
               :counter="3"
               :rules="numberRule"
-              label="Sociology"
+              label="Sociology of Law"
               type="number"
               outlined
               dense
@@ -34,21 +81,10 @@
 
           <v-col cols="12" sm="4">
             <v-text-field
-              v-model="marks.ClinicalWork"
+              v-model="marks.CriminalLaw"
               :counter="3"
               :rules="numberRule"
-              label="Clinical Works"
-              type="number"
-              outlined
-              dense
-            ></v-text-field>
-          </v-col>
-          <v-col cols="12" sm="4">
-            <v-text-field
-              v-model="marks.HistoryOfNepal"
-              :counter="3"
-              :rules="numberRule"
-              label="History of Nepal"
+              label="Criminal Law"
               type="number"
               outlined
               dense
@@ -57,46 +93,10 @@
 
           <v-col cols="12" sm="4">
             <v-text-field
-              v-model="marks.PrincipleOfLaw"
+              v-model="marks.ClinicalCourse"
               :counter="3"
               :rules="numberRule"
-              label="General Principles of Law"
-              type="number"
-              outlined
-              dense
-            ></v-text-field>
-          </v-col>
-
-          <v-col cols="12" sm="4">
-            <v-text-field
-              v-model="marks.ConceptOfLaw"
-              :counter="3"
-              :rules="numberRule"
-              label="General Concept of Law"
-              type="number"
-              outlined
-              dense
-            ></v-text-field>
-          </v-col>
-
-          <v-col cols="12" sm="4">
-            <v-text-field
-              v-model="marks.Political"
-              :counter="3"
-              :rules="numberRule"
-              label="Political Theory Thoughts"
-              type="number"
-              outlined
-              dense
-            ></v-text-field>
-          </v-col>
-
-          <v-col cols="12" sm="4">
-            <v-text-field
-              v-model="marks.LogicLegalReasoning"
-              :counter="3"
-              :rules="numberRule"
-              label="Theories of Logic & Legal Reasoning"
+              label="Clinical Course"
               type="number"
               outlined
               dense
@@ -122,7 +122,7 @@ export default {
     studentDetails: {
       type: Object,
       required: true,
-    }
+    },
   },
 
   data: () => ({

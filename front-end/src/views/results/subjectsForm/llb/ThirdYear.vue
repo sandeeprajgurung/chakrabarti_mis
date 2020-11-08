@@ -10,10 +10,10 @@
         <v-row>
           <v-col cols="12" sm="4">
             <v-text-field
-              v-model="marks.Economic"
+              v-model="marks.InternationalHumanRight"
               :counter="3"
               :rules="numberRule"
-              label="Economics"
+              label="International Human Rights Law"
               type="number"
               outlined
               dense
@@ -22,10 +22,81 @@
 
           <v-col cols="12" sm="4">
             <v-text-field
-              v-model="marks.Socology"
+              v-model="marks.Interpretation"
               :counter="3"
               :rules="numberRule"
-              label="Sociology"
+              label="Principles of Interpretation"
+              type="number"
+              outlined
+              dense
+            ></v-text-field>
+          </v-col>
+
+          <v-col cols="12" sm="4">
+            <v-text-field
+              v-model="marks.LawEvidence"
+              :counter="3"
+              :rules="numberRule"
+              label="Law of Evidence"
+              type="number"
+              outlined
+              dense
+            ></v-text-field>
+          </v-col>
+          <v-col cols="12" sm="4">
+            <v-text-field
+              v-model="marks.InternationalLaw"
+              :counter="3"
+              :rules="numberRule"
+              label="Public International Law"
+              type="number"
+              outlined
+              dense
+            ></v-text-field>
+          </v-col>
+
+          <v-col cols="12" sm="4">
+            <v-text-field
+              v-model="marks.ConstitutionalLaw"
+              :counter="3"
+              :rules="numberRule"
+              label="Constitutional Law & Constitutionalism"
+              type="number"
+              outlined
+              dense
+            ></v-text-field>
+          </v-col>
+
+          <v-col cols="12" sm="4">
+            <v-text-field
+              v-model="marks.LegalResearch"
+              :counter="3"
+              :rules="numberRule"
+              label="Legal Research"
+              type="number"
+              outlined
+              dense
+            ></v-text-field>
+          </v-col>
+
+          <v-col cols="12" sm="4">
+            <v-text-field
+              v-model="marks.ProfessionalEthics"
+              :counter="3"
+              :rules="numberRule"
+              label="Professional Ethics"
+              type="number"
+              outlined
+              dense
+            ></v-text-field>
+          </v-col>
+
+          <v-col cols="12" sm="4">
+            <v-text-field
+              v-model="marks.ClinicalLegalEducation"
+              :counter="3"
+              :rules="numberRule"
+              label="Clinical Legal Education: Effective Legal Writing Civil Case"
               type="number"
               outlined
               dense
@@ -37,66 +108,7 @@
               v-model="marks.ClinicalWork"
               :counter="3"
               :rules="numberRule"
-              label="Clinical Works"
-              type="number"
-              outlined
-              dense
-            ></v-text-field>
-          </v-col>
-          <v-col cols="12" sm="4">
-            <v-text-field
-              v-model="marks.HistoryOfNepal"
-              :counter="3"
-              :rules="numberRule"
-              label="History of Nepal"
-              type="number"
-              outlined
-              dense
-            ></v-text-field>
-          </v-col>
-
-          <v-col cols="12" sm="4">
-            <v-text-field
-              v-model="marks.PrincipleOfLaw"
-              :counter="3"
-              :rules="numberRule"
-              label="General Principles of Law"
-              type="number"
-              outlined
-              dense
-            ></v-text-field>
-          </v-col>
-
-          <v-col cols="12" sm="4">
-            <v-text-field
-              v-model="marks.ConceptOfLaw"
-              :counter="3"
-              :rules="numberRule"
-              label="General Concept of Law"
-              type="number"
-              outlined
-              dense
-            ></v-text-field>
-          </v-col>
-
-          <v-col cols="12" sm="4">
-            <v-text-field
-              v-model="marks.Political"
-              :counter="3"
-              :rules="numberRule"
-              label="Political Theory Thoughts"
-              type="number"
-              outlined
-              dense
-            ></v-text-field>
-          </v-col>
-
-          <v-col cols="12" sm="4">
-            <v-text-field
-              v-model="marks.LogicLegalReasoning"
-              :counter="3"
-              :rules="numberRule"
-              label="Theories of Logic & Legal Reasoning"
+              label="Clinical Work"
               type="number"
               outlined
               dense
@@ -122,7 +134,7 @@ export default {
     studentDetails: {
       type: Object,
       required: true,
-    }
+    },
   },
 
   data: () => ({

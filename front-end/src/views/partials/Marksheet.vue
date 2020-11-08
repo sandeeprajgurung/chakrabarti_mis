@@ -23,22 +23,22 @@
 
     <v-card-title class="pa-0 mb-3">
       <v-row class='justify-space-between ma-0'>
-        <div class="text-subtitle-2">Name: Churi How</div>
-         <div class="text-subtitle-2">Roll No.: 36</div>
+        <div class="text-subtitle-2">Name: {{ studentMarks[0].SNAME }}</div>
+         <div class="text-subtitle-2">Roll No.: {{ studentMarks[0].ROLL_NO }}</div>
       </v-row>
     </v-card-title>
 
     <v-card-title class="pa-0 mb-3">
       <v-row class='justify-space-between ma-0'>
-        <div class="text-subtitle-2">Level: Majdur</div>
-        <div class="text-subtitle-2">Program: Machha palan</div>
+        <div class="text-subtitle-2">Level: {{ studentMarks[0].ROLL_NO }}</div>
+        <div class="text-subtitle-2">Program: {{ studentMarks[0].ROLL_NO }}</div>
       </v-row>
     </v-card-title>
 
     <v-card-title class="pa-0 mb-3">
       <v-row class='justify-space-between ma-0'>
-        <div class="text-subtitle-2">Year: tannai</div>
-        <div class="text-subtitle-2">Group: Adhbaise</div>
+        <div class="text-subtitle-2">Year: {{ studentMarks[0].BATCH }}</div>
+        <div class="text-subtitle-2">Group: {{ studentMarks[0].ROLL_NO }}</div>
       </v-row>
     </v-card-title>
 
@@ -104,6 +104,13 @@
 
 <script>
 export default {
+   props: {
+    studentMarks: {
+      type: Array,
+      required: true,
+    },
+  },
+
   data() {
     return {
       marks: [

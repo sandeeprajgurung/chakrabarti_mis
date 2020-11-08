@@ -190,7 +190,7 @@
           </v-icon>
         </template>
         <template v-slot:no-data>
-          <v-card-text>There are no student available. please add Student.</v-card-text>
+          <v-card-text>Currently, There are no student available. Please add Student details to see list.</v-card-text>
         </template>
       </v-data-table>
     </v-card>
@@ -229,20 +229,20 @@ export default {
         Number.isInteger(Number(v)) || "The value must be an integer number",
     ],
     emailRules: [
-      // (v) => {
-      //   if (v && v.length > 0) {
-      //     const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      //     return pattern.test(v) || "Invalid E-mail";
-      //   }
-      // },
+      (v) => {
+        if (v && v.length > 0) {
+          const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+          return pattern.test(v) || "Invalid E-mail";
+        }
+      },
     ],
     phoneNoRules: [
-      // (v) => {
-      //   if (v && v.length > 0) {
-      //     const pattern = /^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/;
-      //     return pattern.test(v) || "Invalid Phone Number";
-      //   }
-      // },
+      (v) => {
+        if (v && v.length > 0) {
+          const pattern = /^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/;
+          return pattern.test(v) || "Invalid Phone Number";
+        }
+      },
     ],
 
     search: "",

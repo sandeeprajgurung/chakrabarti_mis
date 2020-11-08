@@ -1,18 +1,15 @@
 module.exports = (sequelize, Sequelize) => {
     const FIFTHYEAR_CRIMINAL = sequelize.define("FIFTHYEAR_CRIMINAL", {
-        CRIMINALID: {
+        ID: {
           type: Sequelize.INTEGER,
           autoIncrement: true,
           primaryKey: true
       },
       ORGANIZED_CRIME: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       FISCAL_CRIME: {
-          type: Sequelize.INTEGER
-      },
-      FIFTHYEARID: {
-        type: Sequelize.INTEGER
+          type: Sequelize.STRING
       }
     },
     {
