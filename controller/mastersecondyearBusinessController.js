@@ -11,7 +11,7 @@ exports.Create = (req, res) => {
     TAXATION : req.body.Taxation,
     INSURANCE: req.body.Insurance,
     DISSERTATION : req.body.Dissertation,
-    SID : req.body.SId
+    LLMSTUDENTID : req.body.SId
   };
 
   SecondyearBusiness.create(Business)
@@ -75,7 +75,7 @@ exports.Delete = (req, res) => {
   const id = req.params.Id;
 
   SecondyearBusiness.destroy({
-    where: { SECOND_BUSINESSID: id }
+    where: { ID: id }
   })
     .then(num => {
       if (num == 1) {

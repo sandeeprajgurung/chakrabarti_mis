@@ -26,7 +26,7 @@ exports.Create = (req, res) => {
     SOCOLOGY : req.body.Socology,
     CRIMINAL_LAW : req.body.CriminalLaw,
     CLINICAL_COURSE : req.body.ClinicalCourse,
-    SID : req.body.SId
+    LLBSTUDENTID : req.body.SId
 };
 
   Secondyear.create(secondyear)
@@ -143,7 +143,7 @@ exports.Update = (req, res) => {
     const id = req.params.Id;
 
         Secondyear.update(req.body, {
-            where: { SECONDYEARID: id }
+            where: { ID: id }
         })
         .then(num => {
             if (num == 1) {
@@ -169,7 +169,7 @@ exports.Delete = (req, res) => {
     const id = req.params.Id;
     
         Secondyear.destroy({
-            where: { SECONDYEARID: id }
+            where: { ID: id }
         })
         .then(num => {
           if (num == 1) {

@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
   const LLBGROUP = sequelize.define("LLBGROUP", {
-    grpid: {
+    ID: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true

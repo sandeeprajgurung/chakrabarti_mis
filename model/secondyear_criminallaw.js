@@ -1,30 +1,27 @@
 module.exports = (sequelize, Sequelize) => {
-    const SECONDYEAR_CRIMINALLAW = sequelize.define("SECONDYEAR_CRIMINALLAW", {
-        SECOND_CRIMIANLID: {
-          type: Sequelize.INTEGER,
-          autoIncrement: true,
-          primaryKey: true
-      },
-      CRIMINOLOGY: {
-        type: Sequelize.INTEGER
-      },
-      FAIR_TRAIL: {
-          type: Sequelize.INTEGER
-      },
-      WHITE_COLLAR:{
-        type: Sequelize.INTEGER
-      },
-      DISSERTATION: {
-        type: Sequelize.INTEGER
-      },
-      SID:{
-        type: Sequelize.INTEGER
-      }
+  const SECONDYEAR_CRIMINALLAW = sequelize.define("SECONDYEAR_CRIMINALLAW", {
+    ID: {
+      type: Sequelize.INTEGER,
+      autoIncrement: true,
+      primaryKey: true
     },
+    CRIMINOLOGY: {
+      type: Sequelize.STRING
+    },
+    FAIR_TRAIL: {
+      type: Sequelize.STRING
+    },
+    WHITE_COLLAR: {
+      type: Sequelize.STRING
+    },
+    DISSERTATION: {
+      type: Sequelize.STRING
+    }
+  },
     {
       timestamps: false,
       freezeTableName: true
     });
-  
-    return SECONDYEAR_CRIMINALLAW;
-  };
+
+  return SECONDYEAR_CRIMINALLAW;
+};

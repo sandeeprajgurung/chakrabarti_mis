@@ -10,7 +10,7 @@ const Op = db.Sequelize.Op;
 
 exports.FindAll = async (req, res) => {
     try {
-        const student = await db.sequelize.query('SELECT LS.SNAME,FY.CLINICAL_EDUCATION,FY.ADVANCED_JURISPRUDENCE,FY.CONTRACT_LAW,FY.COMPANY_LAW,FY.ADMINISTATIVE_LAW,FY.CLINICAL_LEGAL_EDUCATION,FY.INTERNATIONAL_DISPUTES,IFNULL(FYC.FORENSIC,0),IFNULL(FYC.CRIMINOLOGY,0),IFNULL(FYB.BANKING_INSURANCE,0),IFNULL(FYB.INTERNATIONAL_TRADE,0),IFNULL(FYCN.GOOD_GONERNANCE,0),IFNULL(FYCN.ELECTORAL_LAW,0),IFNULL(FYE.ENVIRONMENT_LAW,0),IFNULL(FYE.WATER_RIVER,0) FROM llbstudent AS LS join fourthyear AS FY on LS.SID = FY.SID left join FOURTHYEAR_CRIMINAL FYC on FYC.FOURTHYEARID = FY.FOURTHYEARID left join FOURTHYEAR_BUSINESS FYB ON FYB.FOURTHYEARID = FY.FOURTHYEARID left join FOURTHYEAR_CONSTITUTIONAL FYCN ON FYCN.FOURTHYEARID = FY.FOURTHYEARID left join FOURTHYEAR_ENVIRONMENT FYE ON FYE.FOURTHYEARID = FY.FOURTHYEARID', {
+        const student = await db.sequelize.query('SELECT LS.SNAME,FY.CLINICAL_EDUCATION,FY.ADVANCED_JURISPRUDENCE,FY.CONTRACT_LAW,FY.COMPANY_LAW,FY.ADMINISTATIVE_LAW,FY.CLINICAL_LEGAL_EDUCATION,FY.INTERNATIONAL_DISPUTES,IFNULL(FYC.FORENSIC,0),IFNULL(FYC.CRIMINOLOGY,0),IFNULL(FYB.BANKING_INSURANCE,0),IFNULL(FYB.INTERNATIONAL_TRADE,0),IFNULL(FYCN.GOOD_GONERNANCE,0),IFNULL(FYCN.ELECTORAL_LAW,0),IFNULL(FYE.ENVIRONMENT_LAW,0),IFNULL(FYE.WATER_RIVER,0) FROM llbstudent AS LS join fourthyear AS FY on LS.ID = FY.LLBSTUDENTID left join FOURTHYEAR_CRIMINAL FYC on FYC.FOURTHYEARID = FY.ID left join FOURTHYEAR_BUSINESS FYB ON FYB.FOURTHYEARID = FY.ID left join FOURTHYEAR_CONSTITUTIONAL FYCN ON FYCN.FOURTHYEARID = FY.ID left join FOURTHYEAR_ENVIRONMENT FYE ON FYE.FOURTHYEARID = FY.ID', {
             type: db.sequelize.QueryTypes.SELECT
         });
 
@@ -33,16 +33,16 @@ exports.CreateCriminal = (req, res) => {
         ADMINISTATIVE_LAW: req.body.AdministativeLaw,
         CLINICAL_LEGAL_EDUCATION: req.body.ClinicalLegalEducation,
         INTERNATIONAL_DISPUTES: req.body.InternationDisputes,
-        SID: req.body.SId
+        LLBSTUDENTID: req.body.SId
     };
 
     Fourthyear.create(fourthyear)
         .then(data => {
-
+console.log(data);
             const fourthyearcriminal = {
                 FORENSIC: req.body.Forensic,
                 CRIMINOLOGY: req.body.Criminology,
-                FOURTHYEARID: data.FOURTHYEARID
+                FOURTHYEARID: data.ID
             };
 
             FourthyearCriminal.create(fourthyearcriminal)
@@ -121,7 +121,7 @@ exports.CreateCriminal = (req, res) => {
 
                     Llbstudent.update(
                         { PERCENT: percent },
-                        { where: { SID: req.body.SId } }
+                        { where: { ID: req.body.SId } }
                     )
                         .then(data1 => {
                             res.send(data);
@@ -159,7 +159,7 @@ exports.CreateBusiness = (req, res) => {
         ADMINISTATIVE_LAW: req.body.AdministativeLaw,
         CLINICAL_LEGAL_EDUCATION: req.body.ClinicalLegalEducation,
         INTERNATIONAL_DISPUTES: req.body.InternationDisputes,
-        SID: req.body.SId
+        LLBSTUDENTID: req.body.SId
     };
 
     Fourthyear.create(fourthyear)
@@ -167,7 +167,7 @@ exports.CreateBusiness = (req, res) => {
             const fourthyearbusiness = {
                 BANKING_INSURANCE: req.body.BankingInsurance,
                 INTERNATIONAL_TRADE: req.body.InternationalTrade,
-                FOURTHYEARID: data.FOURTHYEARID
+                FOURTHYEARID: data.ID
             };
 
             FourthyearBusiness.create(fourthyearbusiness)
@@ -246,7 +246,7 @@ exports.CreateBusiness = (req, res) => {
 
                     Llbstudent.update(
                         { PERCENT: percent },
-                        { where: { SID: req.body.SId } }
+                        { where: { ID: req.body.SId } }
                     )
                         .then(data1 => {
                             res.send(data);
@@ -283,7 +283,7 @@ exports.CreateConstitution = (req, res) => {
         ADMINISTATIVE_LAW: req.body.AdministativeLaw,
         CLINICAL_LEGAL_EDUCATION: req.body.ClinicalLegalEducation,
         INTERNATIONAL_DISPUTES: req.body.InternationDisputes,
-        SID: req.body.SId
+        LLBSTUDENTID: req.body.SId
     };
 
     Fourthyear.create(fourthyear)
@@ -291,7 +291,7 @@ exports.CreateConstitution = (req, res) => {
             const fourthyearconstitution = {
                 GOOD_GONERNANCE: req.body.GoodGovernance,
                 ELECTORAL_LAW: req.body.ElectroalLaw,
-                FOURTHYEARID: data.FOURTHYEARID
+                FOURTHYEARID: data.ID
             };
 
             FourthyearConstitutional.create(fourthyearconstitution)
@@ -370,7 +370,7 @@ exports.CreateConstitution = (req, res) => {
 
                     Llbstudent.update(
                         { PERCENT: percent },
-                        { where: { SID: req.body.SId } }
+                        { where: { ID: req.body.SId } }
                     )
                         .then(data1 => {
                             res.send(data);
@@ -407,7 +407,7 @@ exports.CreateEnvironment = (req, res) => {
         ADMINISTATIVE_LAW: req.body.AdministativeLaw,
         CLINICAL_LEGAL_EDUCATION: req.body.ClinicalLegalEducation,
         INTERNATIONAL_DISPUTES: req.body.InternationDisputes,
-        SID: req.body.SId
+        LLBSTUDENTID: req.body.SId
     };
 
     Fourthyear.create(fourthyear)
@@ -415,7 +415,7 @@ exports.CreateEnvironment = (req, res) => {
             const fourthyearenvironment = {
                 WATER_RIVER: req.body.WaterRiver,
                 ENVIRONMENT_LAW: req.body.EnvironmentLaw,
-                FOURTHYEARID: data.FOURTHYEARID
+                FOURTHYEARID: data.ID
             };
 
             FourthyearEnvironment.create(fourthyearenvironment)
@@ -494,7 +494,7 @@ exports.CreateEnvironment = (req, res) => {
 
                     Llbstudent.update(
                         { PERCENT: percent },
-                        { where: { SID: req.body.SId } }
+                        { where: { ID: req.body.SId } }
                     )
                         .then(data1 => {
                             res.send(data);
@@ -548,7 +548,7 @@ exports.UpdateCriminal = (req, res) => {
     const cid = req.params.CId;
 
     Fourthyear.update(req.body, {
-        where: { FOURTHYEARID: id }
+        where: { ID: id }
     })
         .then(num => {
             if (num == 1) {
@@ -558,7 +558,7 @@ exports.UpdateCriminal = (req, res) => {
                 };
 
                 FourthyearCriminal.update(criminal)({
-                    where: { CRIMINALID: cid }
+                    where: { ID: cid }
                 })
                     .then(num1 => {
                         res.send({
@@ -586,7 +586,7 @@ exports.UpdateBusiness = (req, res) => {
     const bid = req.params.BId;
 
     Fourthyear.update(req.body, {
-        where: { FOURTHYEARID: id }
+        where: { ID: id }
     })
         .then(num => {
             if (num == 1) {
@@ -596,7 +596,7 @@ exports.UpdateBusiness = (req, res) => {
                 };
 
                 FourthyearBusiness.update(business)({
-                    where: { BUSINESSID: bid }
+                    where: { ID: bid }
                 })
                     .then(num1 => {
                         res.send({
@@ -624,7 +624,7 @@ exports.UpdateConstitutional = (req, res) => {
     const cuid = req.params.CUId;
 
     Fourthyear.update(req.body, {
-        where: { FOURTHYEARID: id }
+        where: { ID: id }
     })
         .then(num => {
             if (num == 1) {
@@ -634,7 +634,7 @@ exports.UpdateConstitutional = (req, res) => {
                 };
 
                 FourthyearConstitutional.update(constitutional)({
-                    where: { CONSTITUTIONALID: cuid }
+                    where: { ID: cuid }
                 })
                     .then(num1 => {
                         res.send({
@@ -662,7 +662,7 @@ exports.UpdateEnvironment = (req, res) => {
     const eid = req.params.EId;
 
     fourthyear.update(req.body, {
-        where: { FOURTHYEARID: id }
+        where: { ID: id }
     })
         .then(num => {
             if (num == 1) {
@@ -672,7 +672,7 @@ exports.UpdateEnvironment = (req, res) => {
                 };
 
                 FourthyearEnvironment.update(environment)({
-                    where: { ENVIRONMENTID: eid }
+                    where: { ID: eid }
                 })
                     .then(num1 => {
                         res.send({
@@ -695,173 +695,26 @@ exports.UpdateEnvironment = (req, res) => {
 
 }
 
-exports.DeleteCriminal = (req, res) => {
+exports.Delete = (req, res) => {
     const id = req.params.Id;
 
-    FourthyearCriminal.findAll({
-        raw: true,
-        where: {
-            FOURTHYEARID: id
-        }
+    Fourthyear.destroy({
+        where: { ID: id }
     })
-        .then(data => {
-            console.log(data)
-            FourthyearCriminal.destroy({
-                where: {
-                    CRIMINALID: data[0].CRIMINALID
-                }
-            })
-
-            Fourthyear.destroy({
-                where: { FOURTHYEARID: id }
-            })
-                .then(num => {
-                    if (num == 1) {
-                        res.send({
-                            message: "Student Result was deleted successfully!"
-                        });
-                    } else {
-                        res.send({
-                            message: `Cannot delete Student Result with id=${id}. Maybe Student was not found!`
-                        });
-                    }
-                })
-                .catch(err => {
-                    res.status(500).send({
-                        message: "Could not delete Student Result with id=" + id
-                    });
+        .then(num => {
+            if (num == 1) {
+                res.send({
+                    message: "Student Result was deleted successfully!"
                 });
+            } else {
+                res.send({
+                    message: `Cannot delete Student Result with id=${id}. Maybe Student was not found!`
+                });
+            }
         })
         .catch(err => {
             res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving Student."
-            });
-        });
-}
-
-exports.DeleteBusiness = (req, res) => {
-    const id = req.params.Id;
-
-    FourthyearBusiness.findAll({
-        raw: true,
-        where: { FOURTHYEARID: id }
-    })
-        .then(data => {
-            FourthyearBusiness.destroy({
-                where: {
-                    BUSINESSID: data[0].BUSINESSID
-                }
-            })
-
-            Fourthyear.destroy({
-                where: { FOURTHYEARID: id }
-            })
-                .then(num => {
-                    if (num == 1) {
-                        res.send({
-                            message: "Student Result was deleted successfully!"
-                        });
-                    } else {
-                        res.send({
-                            message: `Cannot delete Student Result with id=${id}. Maybe Student was not found!`
-                        });
-                    }
-                })
-                .catch(err => {
-                    res.status(500).send({
-                        message: "Could not delete Student Result with id=" + id
-                    });
-                });
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving Student."
-            });
-        });
-}
-
-exports.DeleteConstitutional = (req, res) => {
-    const id = req.params.Id;
-
-    FourthyearBusiness.findAll({
-        raw: true,
-        where: { FOURTHYEARID: id }
-    })
-        .then(data => {
-            FourthyearBusiness.destroy({
-                where: {
-                    CONSTITUTIONALID: data[0].CONSTITUTIONALID
-                }
-            })
-
-            Fourthyear.destroy({
-                where: { FOURTHYEARID: id }
-            })
-                .then(num => {
-                    if (num == 1) {
-                        res.send({
-                            message: "Student Result was deleted successfully!"
-                        });
-                    } else {
-                        res.send({
-                            message: `Cannot delete Student Result with id=${id}. Maybe Student was not found!`
-                        });
-                    }
-                })
-                .catch(err => {
-                    res.status(500).send({
-                        message: "Could not delete Student Result with id=" + id
-                    });
-                });
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving Student."
-            });
-        });
-}
-
-exports.DeleteEnvironment = (req, res) => {
-    const id = req.params.Id;
-
-    FourthyearEnvironment.findAll({
-        raw: true,
-        where: { FOURTHYEARID: id }
-    })
-        .then(data => {
-            FourthyearEnvironment.destroy({
-                where: {
-                    ENVIRONMENTID: data[0].ENVIRONMENTID
-                }
-            })
-
-            Fourthyear.destroy({
-                where: { FOURTHYEARID: id }
-            })
-                .then(num => {
-                    if (num == 1) {
-                        res.send({
-                            message: "Student Result was deleted successfully!"
-                        });
-                    } else {
-                        res.send({
-                            message: `Cannot delete Student Result with id=${id}. Maybe Student was not found!`
-                        });
-                    }
-                })
-                .catch(err => {
-                    res.status(500).send({
-                        message: "Could not delete Student Result with id=" + id
-                    });
-                });
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving Student."
+                message: "Could not delete Student Result with id=" + id
             });
         });
 }

@@ -1,18 +1,18 @@
+
+const fourthyear = require("./fourthyear");
+
 module.exports = (sequelize, Sequelize) => {
     const FOURTHYEAR_CRIMINAL = sequelize.define("FOURTHYEAR_CRIMINAL", {
-        CRIMINALID: {
+        ID: {
           type: Sequelize.INTEGER,
           autoIncrement: true,
           primaryKey: true
       },
       FORENSIC: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       CRIMINOLOGY: {
-          type: Sequelize.INTEGER
-      },
-      FOURTHYEARID: {
-        type: Sequelize.INTEGER
+          type: Sequelize.STRING
       }
     },
     {

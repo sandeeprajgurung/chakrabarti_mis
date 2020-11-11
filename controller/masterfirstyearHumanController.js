@@ -25,7 +25,7 @@ exports.Create = (req, res) => {
     COMPARATIVE_STUDY : req.body.ComparativeStudy,
     NEPALESE_STUDY : req.body.NepaleseStudy,
     CIVIL_POLITICAL : req.body.CivilPolitical,
-    SID : req.body.SId
+    LLMSTUDENTID : req.body.SId
   };
 
   FirstyearHumanrights.create(HumanRights)
@@ -130,7 +130,7 @@ exports.Delete = (req, res) => {
     const id = req.params.Id;
     
         FirstyearHumanrights.destroy({
-            where: { HUMANRIGHTID: id }
+            where: { ID: id }
         })
         .then(num => {
           if (num == 1) {

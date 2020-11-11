@@ -25,10 +25,8 @@ const http = require('http');
 const express = require('express');
 const app = express();
 var cors = require('cors')
-// const db = require("./connect/Connect");
-// // db.sequelize.sync();
-// const Llbgroup = db.LLBGROUP;
-// const Op = db.Sequelize.Op;
+const db = require("./connect/Connect");
+
 // db.sequelize.sync({ force: true }).then(() => {
 //     console.log("Drop and re-sync db.");
 //   });
@@ -95,10 +93,6 @@ router.get("/LLBStudent/Search", (req, res) => { studentController.SearchLLBStud
 router.get("/LLMStudent/Search", (req, res) => { studentController.SearchLLMStudent(req, res) });
 //region end
 
-// region to save student marks
-router.post("/Result", (req, res) => { resultController.Create(req, res) });
-// region end
-
 // region for first year student result
 router.get("/Firstyear", (req, res) => { firstyearController.FindAll(req, res) });
 router.post("/Firstyear", (req, res) => { firstyearController.Create(req, res) });
@@ -134,10 +128,10 @@ router.put("/Fourthyear/Criminal/:Id/:CId", (req, res) => { fourthyearController
 router.put("/Fourthyear/Business/:Id/:BId", (req, res) => { fourthyearController.UpdateBusiness(req, res) });
 router.put("/Fourthyear/Constitutional/:Id/:CUId", (req, res) => { fourthyearController.UpdateConstitutional(req, res) });
 router.put("/Fourthyear/Environment/:Id/:EId", (req, res) => { fourthyearController.UpdateEnvironment(req, res) });
-router.delete("/Fourthyear/Criminal/:Id", (req, res) => { fourthyearController.DeleteCriminal(req, res) });
-router.delete("/Fourthyear/Business/:Id", (req, res) => { fourthyearController.DeleteBusiness(req, res) });
-router.delete("/Fourthyear/Constitutional/:Id", (req, res) => { fourthyearController.DeleteConstitutional(req, res) });
-router.delete("/Fourthyear/Environment/:Id", (req, res) => { fourthyearController.DeleteEnvironment(req, res) });
+router.delete("/Fourthyear/Criminal/:Id", (req, res) => { fourthyearController.Delete(req, res) });
+router.delete("/Fourthyear/Business/:Id", (req, res) => { fourthyearController.Delete(req, res) });
+router.delete("/Fourthyear/Constitutional/:Id", (req, res) => { fourthyearController.Delete(req, res) });
+router.delete("/Fourthyear/Environment/:Id", (req, res) => { fourthyearController.Delete(req, res) });
 // region end
 
 // region for fifth year student result
@@ -151,10 +145,10 @@ router.put("/Fifthyear/Criminal/:Id/:CId", (req, res) => { fifthyearController.U
 router.put("/Fifthyear/Business/:Id/:BId", (req, res) => { fifthyearController.UpdateBusiness(req, res) });
 router.put("/Fifthyear/Constitutional/:Id/:CUId", (req, res) => { fifthyearController.UpdateConstitutional(req, res) });
 router.put("/Fifthyear/Environment/:Id/:EId", (req, res) => { fifthyearController.UpdateEnvironment(req, res) });
-router.delete("/Fifthyear/Criminal/:Id", (req, res) => { fifthyearController.DeleteCriminal(req, res) });
-router.delete("/Fifthyear/Business/:Id", (req, res) => { fifthyearController.DeleteBusiness(req, res) });
-router.delete("/Fifthyear/Constitutional/:Id", (req, res) => { fifthyearController.DeleteConstitutional(req, res) });
-router.delete("/Fifthyear/Environment/:Id", (req, res) => { fifthyearController.DeleteEnvironment(req, res) });
+router.delete("/Fifthyear/Criminal/:Id", (req, res) => { fifthyearController.Delete(req, res) });
+router.delete("/Fifthyear/Business/:Id", (req, res) => { fifthyearController.Delete(req, res) });
+router.delete("/Fifthyear/Constitutional/:Id", (req, res) => { fifthyearController.Delete(req, res) });
+router.delete("/Fifthyear/Environment/:Id", (req, res) => { fifthyearController.Delete(req, res) });
 // region end
 
 // region for LLM Human Rights first year student result

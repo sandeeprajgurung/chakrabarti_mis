@@ -1,18 +1,15 @@
 module.exports = (sequelize, Sequelize) => {
     const FIFTHYEAR_BUSINESS = sequelize.define("FIFTHYEAR_BUSINESS", {
-        BUSINESSID: {
+        ID: {
           type: Sequelize.INTEGER,
           autoIncrement: true,
           primaryKey: true
       },
       INTELLECTUAL_PROPERTY: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       TAXATION: {
-          type: Sequelize.INTEGER
-      },
-      FIFTHYEARID: {
-        type: Sequelize.INTEGER
+          type: Sequelize.STRING
       }
     },
     {

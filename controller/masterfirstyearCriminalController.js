@@ -33,7 +33,7 @@ exports.Create = (req, res) => {
     CRIMINAL_LAW : req.body.CriminalLaw,
     FORENSIC : req.body.Forensic,
     JUVINAL_JUSTICE : req.body.JuvinalJustice,
-    SID : req.body.SId
+    LLMSTUDENTID : req.body.SId
   };
 
   FirstyearCriminal.create(Criminal)
@@ -93,7 +93,7 @@ exports.Delete = (req, res) => {
   const id = req.params.Id;
 
   FirstyearCriminal.destroy({
-    where: { CRIMINALID: id }
+    where: { ID: id }
   })
     .then(num => {
       if (num == 1) {

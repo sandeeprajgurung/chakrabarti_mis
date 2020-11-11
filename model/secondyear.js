@@ -1,36 +1,33 @@
 module.exports = (sequelize, Sequelize) => {
     const SECONDYEAR = sequelize.define("SECONDYEAR", {
-        SECONDYEARID: {
+      ID: {
           type: Sequelize.INTEGER,
           autoIncrement: true,
           primaryKey: true
       },
       ENGLISH: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       NEPALI: {
-          type: Sequelize.INTEGER
+          type: Sequelize.STRING
       },
       INTERNATIONAL_RELATION:{
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       LEGISLATIVE_PRINCIPLE: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       PROCEDURE_LAW:{
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       SOCOLOGY:{
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       CRIMINAL_LAW:{
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       CLINICAL_COURSE:{
-        type: Sequelize.INTEGER
-      },
-      SID:{
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       }
     },
     {

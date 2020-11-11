@@ -34,7 +34,7 @@ exports.CreateCriminal = (req, res) => {
         PRE_TRIAL_PRESENTATION: req.body.PreTrialPresentation,
         CLINICAL_EDUCATION: req.body.ClinicalEducation,
         DISSERTATION: req.body.Dissertation,
-        SID: req.body.SId
+        LLBSTUDENTID: req.body.SId
     };
 
     Fifthyear.create(fifthyear)
@@ -43,7 +43,7 @@ exports.CreateCriminal = (req, res) => {
             const fifthyearcriminal = {
                 ORGANIZED_CRIME: req.body.OrganizedCrime,
                 FISCAL_CRIME: req.body.FiscalCrime,
-                FIFTHYEARID: data.FIFTHYEARID
+                FIFTHYEARID: data.ID
             };
 
             FifthyearCriminal.create(fifthyearcriminal)
@@ -177,7 +177,7 @@ exports.CreateBusiness = (req, res) => {
         PRE_TRIAL_PRESENTATION: req.body.PreTrialPresentation,
         CLINICAL_EDUCATION: req.body.ClinicalEducation,
         DISSERTATION: req.body.Dissertation,
-        SID: req.body.SId
+        LLBSTUDENTID: req.body.SId
     };
 
     Fifthyear.create(fifthyear)
@@ -185,7 +185,7 @@ exports.CreateBusiness = (req, res) => {
             const fifthyearbusiness = {
                 INTELLECTUAL_PROPERTY: req.body.IntellectualProperty,
                 TAXATION: req.body.Taxation,
-                FIFTHYEARID: data.FIFTHYEARID
+                FIFTHYEARID: data.ID
             };
 
             FifthyearBusiness.create(fifthyearbusiness)
@@ -318,7 +318,7 @@ exports.CreateConstitution = (req, res) => {
         PRE_TRIAL_PRESENTATION: req.body.PreTrialPresentation,
         CLINICAL_EDUCATION: req.body.ClinicalEducation,
         DISSERTATION: req.body.Dissertation,
-        SID: req.body.SId
+        LLBSTUDENTID: req.body.SId
     };
 
     Fifthyear.create(fifthyear)
@@ -326,7 +326,7 @@ exports.CreateConstitution = (req, res) => {
             const fifthyearconstitution = {
                 LAW_OF_EQUITY: req.body.LawOfEquity,
                 LAW_ON_GENDER: req.body.LawOfGender,
-                FIFTHYEARID: data.FIFTHYEARID
+                FIFTHYEARID: data.ID
             };
 
             FifthyearConstitutional.create(fifthyearconstitution)
@@ -459,7 +459,7 @@ exports.CreateEnvironment = (req, res) => {
         PRE_TRIAL_PRESENTATION: req.body.PreTrialPresentation,
         CLINICAL_EDUCATION: req.body.ClinicalEducation,
         DISSERTATION: req.body.Dissertation,
-        SID: req.body.SId
+        LLBSTUDENTID: req.body.SId
     };
 
     Fifthyear.create(fifthyear)
@@ -467,7 +467,7 @@ exports.CreateEnvironment = (req, res) => {
             const fifthyearenvironment = {
                 ENERGY_LAW: req.body.EnergyLaw,
                 CIVIL_AVIATION: req.body.CivilAviation,
-                FIFTHYEARID: data.FIFTHYEARID
+                FIFTHYEARID: data.ID
             };
 
             FifthyearEnvironment.create(fifthyearenvironment)
@@ -615,7 +615,7 @@ exports.UpdateCriminal = (req, res) => {
     const cid = req.params.CId;
 
     Fifthyear.update(req.body, {
-        where: { FIFTHYEARID: id }
+        where: { ID: id }
     })
         .then(num => {
             if (num == 1) {
@@ -625,7 +625,7 @@ exports.UpdateCriminal = (req, res) => {
                 };
 
                 FifthyearCriminal.update(criminal)({
-                    where: { CRIMINALID: cid }
+                    where: { ID: cid }
                 })
                     .then(num1 => {
                         res.send({
@@ -653,7 +653,7 @@ exports.UpdateBusiness = (req, res) => {
     const bid = req.params.BId;
 
     Fifthyear.update(req.body, {
-        where: { FIFTHYEARID: id }
+        where: { ID: id }
     })
         .then(num => {
             if (num == 1) {
@@ -663,7 +663,7 @@ exports.UpdateBusiness = (req, res) => {
                 };
 
                 FifthyearBusiness.update(business)({
-                    where: { BUSINESSID: bid }
+                    where: { ID: bid }
                 })
                     .then(num1 => {
                         res.send({
@@ -691,7 +691,7 @@ exports.UpdateConstitutional = (req, res) => {
     const cuid = req.params.CUId;
 
     Fifthyear.update(req.body, {
-        where: { FIFTHYEARID: id }
+        where: { ID: id }
     })
         .then(num => {
             if (num == 1) {
@@ -701,7 +701,7 @@ exports.UpdateConstitutional = (req, res) => {
                 };
 
                 FifthyearConstitutional.update(constitutional)({
-                    where: { CONSTITUTIONALID: cuid }
+                    where: { ID: cuid }
                 })
                     .then(num1 => {
                         res.send({
@@ -729,7 +729,7 @@ exports.UpdateEnvironment = (req, res) => {
     const eid = req.params.EId;
 
     Fifthyear.update(req.body, {
-        where: { FIFTHYEARID: id }
+        where: { ID: id }
     })
         .then(num => {
             if (num == 1) {
@@ -739,7 +739,7 @@ exports.UpdateEnvironment = (req, res) => {
                 };
 
                 FifthyearEnvironment.update(environment)({
-                    where: { ENVIRONMENTID: eid }
+                    where: { ID: eid }
                 })
                     .then(num1 => {
                         res.send({
@@ -762,24 +762,11 @@ exports.UpdateEnvironment = (req, res) => {
 
 }
 
-exports.DeleteCriminal = (req, res) => {
+exports.Delete = (req, res) => {
     const id = req.params.Id;
 
-    FifthyearCriminal.findAll({
-        raw: true,
-        where: {
-            FIFTHYEARID: id
-        }
-    })
-        .then(data => {
-            FifthyearCriminal.destroy({
-                where: {
-                    CRIMINALID: data[0].CRIMINALID
-                }
-            })
-
             Fifthyear.destroy({
-                where: { FIFTHYEARID: id }
+                where: { ID: id }
             })
                 .then(num => {
                     if (num == 1) {
@@ -797,143 +784,4 @@ exports.DeleteCriminal = (req, res) => {
                         message: "Could not delete Student Result with id=" + id
                     });
                 });
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving Student."
-            });
-        });
-}
-
-exports.DeleteBusiness = (req, res) => {
-    const id = req.params.Id;
-
-    FifthyearBusiness.findAll({
-        raw: true,
-        where: {
-            FIFTHYEARID: id
-        }
-    })
-        .then(data => {
-            FifthyearBusiness.destroy({
-                where: {
-                    BUSINESSID: data[0].BUSINESSID
-                }
-            })
-
-            Fifthyear.destroy({
-                where: { FIFTHYEARID: id }
-            })
-                .then(num => {
-                    if (num == 1) {
-                        res.send({
-                            message: "Student Result was deleted successfully!"
-                        });
-                    } else {
-                        res.send({
-                            message: `Cannot delete Student Result with id=${id}. Maybe Student was not found!`
-                        });
-                    }
-                })
-                .catch(err => {
-                    res.status(500).send({
-                        message: "Could not delete Student Result with id=" + id
-                    });
-                });
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving Student."
-            });
-        });
-}
-
-exports.DeleteConstitutional = (req, res) => {
-    const id = req.params.Id;
-
-    FifthyearConstitutional.findAll({
-        raw: true,
-        where: {
-            FIFTHYEARID: id
-        }
-    })
-        .then(data => {
-            FifthyearConstitutional.destroy({
-                where: {
-                    CONSTITUTIONALID: data[0].CONSTITUTIONALID
-                }
-            })
-
-            Fifthyear.destroy({
-                where: { FIFTHYEARID: id }
-            })
-                .then(num => {
-                    if (num == 1) {
-                        res.send({
-                            message: "Student Result was deleted successfully!"
-                        });
-                    } else {
-                        res.send({
-                            message: `Cannot delete Student Result with id=${id}. Maybe Student was not found!`
-                        });
-                    }
-                })
-                .catch(err => {
-                    res.status(500).send({
-                        message: "Could not delete Student Result with id=" + id
-                    });
-                });
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving Student."
-            });
-        });
-}
-
-exports.DeleteEnvironment = (req, res) => {
-    const id = req.params.Id;
-
-    FifthyearEnvironment.findAll({
-        raw: true,
-        where: {
-            FIFTHYEARID: id
-        }
-    })
-        .then(data => {
-            FifthyearEnvironment.destroy({
-                where: {
-                    ENVIRONMENTID: data[0].ENVIRONMENTID
-                }
-            })
-
-            Fifthyear.destroy({
-                where: { FIFTHYEARID: id }
-            })
-                .then(num => {
-                    if (num == 1) {
-                        res.send({
-                            message: "Student Result was deleted successfully!"
-                        });
-                    } else {
-                        res.send({
-                            message: `Cannot delete Student Result with id=${id}. Maybe Student was not found!`
-                        });
-                    }
-                })
-                .catch(err => {
-                    res.status(500).send({
-                        message: "Could not delete Student Result with id=" + id
-                    });
-                });
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving Student."
-            });
-        });
 }
