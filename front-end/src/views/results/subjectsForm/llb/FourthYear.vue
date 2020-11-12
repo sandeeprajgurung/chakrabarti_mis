@@ -12,9 +12,9 @@
             <v-text-field
               v-model="marks.ContractLaw"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Contract Law"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -24,9 +24,9 @@
             <v-text-field
               v-model="marks.CompanyLaw"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Company Law"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -36,9 +36,9 @@
             <v-text-field
               v-model="marks.AdministativeLaw"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Administrative Law"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -47,9 +47,9 @@
             <v-text-field
               v-model="marks.AdvanceJurisprudence"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Advanced Jurisprudence"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -59,9 +59,9 @@
             <v-text-field
               v-model="marks.InternationDisputes"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Settlement of International Disputes"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -71,9 +71,9 @@
             <v-text-field
               v-model="marks.ClinicalEducation"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Clinical Education: Community Outreach and Rural Law Advocacy Service"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -83,9 +83,9 @@
             <v-text-field
               v-model="marks.ClinicalLegalEducation"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Clinical Leagal Education: Effective Legal Writing Criminal Case"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -100,9 +100,9 @@
             <v-text-field
               v-model="marks.Criminology"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Criminology and Ponology"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -111,9 +111,9 @@
             <v-text-field
               v-model="marks.Forensic"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Forensic Science and Medical Jurisprudence"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -124,9 +124,9 @@
             <v-text-field
               v-model="marks.BankingInsurance"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Banking and Insurance Law"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -135,9 +135,9 @@
             <v-text-field
               v-model="marks.InternationalTrade"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="International Trade Law and Arbitration"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -148,9 +148,9 @@
             <v-text-field
               v-model="marks.GoodGovernance"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Law on Good Governance"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -159,9 +159,9 @@
             <v-text-field
               v-model="marks.ElectroalLaw"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Electoral Law"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -172,9 +172,9 @@
             <v-text-field
               v-model="marks.EnvironmentLaw"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Environmental Law"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -183,9 +183,9 @@
             <v-text-field
               v-model="marks.WaterRiver"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Water and River Law"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -216,11 +216,9 @@ export default {
   data: () => ({
     marks: {},
     valid: false,
-    numberRule: [
+    validRule: [
       (v) => !!v || "Required",
-      (v) =>
-        Number.isInteger(Number(v)) || "The value must be an integer number",
-      (v) => (v >= 0 && v <= 999) || "Number has to be between 0 and 999",
+      (v) => v.length <= 3 || "Marks must be less than 3 Digits",
     ],
   }),
 
@@ -252,3 +250,17 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="string"] {
+  -moz-appearance: textfield;
+}
+</style>

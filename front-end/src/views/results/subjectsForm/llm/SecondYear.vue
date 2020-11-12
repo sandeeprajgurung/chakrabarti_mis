@@ -12,9 +12,9 @@
             <v-text-field
               v-model="marks.FeministJurisprudence"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Feminist Jurisprudence"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -23,9 +23,9 @@
             <v-text-field
               v-model="marks.WomenHumanRights"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Women's Human Rights"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -34,9 +34,9 @@
             <v-text-field
               v-model="marks.EconomicSocialCulture"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Economic, Social & Culture Rights"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -45,9 +45,9 @@
             <v-text-field
               v-model="marks.Dissertation"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Dissertation"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -58,9 +58,9 @@
             <v-text-field
               v-model="marks.BankingLaw"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Banking Law"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -69,9 +69,9 @@
             <v-text-field
               v-model="marks.CorporateManagement"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Laws on Corporate Management"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -80,9 +80,9 @@
             <v-text-field
               v-model="marks.TradeLaw"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="International Trade Law & Arbitration"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -91,9 +91,9 @@
             <v-text-field
               v-model="marks.Taxation"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Taxation (Income Tax & Value Added Tax)"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -102,9 +102,9 @@
             <v-text-field
               v-model="marks.Insurance"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Insurance"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -113,9 +113,9 @@
             <v-text-field
               v-model="marks.Dissertation"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Dissertation"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -126,9 +126,9 @@
             <v-text-field
               v-model="marks.Criminology"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Criminology & Penology"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -137,9 +137,9 @@
             <v-text-field
               v-model="marks.FairTrail"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Fair Trail (International Human Rights Law in Relation to Criminal Procedure)"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -148,9 +148,9 @@
             <v-text-field
               v-model="marks.WhiteCollar"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="White Collar Crime"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -159,9 +159,9 @@
             <v-text-field
               v-model="marks.Dissertation"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Dissertation"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -192,11 +192,9 @@ export default {
   data: () => ({
     marks: {},
     valid: false,
-    numberRule: [
+    validRule: [
       (v) => !!v || "Required",
-      (v) =>
-        Number.isInteger(Number(v)) || "The value must be an integer number",
-      (v) => (v >= 0 && v <= 999) || "Number has to be between 0 and 999",
+      (v) => v.length <= 3 || "Marks must be less than 3 Digits",
     ],
   }),
 
@@ -228,3 +226,17 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="string"] {
+  -moz-appearance: textfield;
+}
+</style>

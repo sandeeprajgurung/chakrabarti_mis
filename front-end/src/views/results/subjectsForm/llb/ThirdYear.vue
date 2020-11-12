@@ -7,14 +7,17 @@
   >
     <v-card>
       <v-card-text>
+        <v-alert dense text type="info">
+          Please enter <strong>'I'</strong> for abscent students.
+        </v-alert>
         <v-row>
           <v-col cols="12" sm="4">
             <v-text-field
               v-model="marks.InternationalHumanRight"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="International Human Rights Law"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -24,9 +27,9 @@
             <v-text-field
               v-model="marks.Interpretation"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Principles of Interpretation"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -36,9 +39,9 @@
             <v-text-field
               v-model="marks.LawEvidence"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Law of Evidence"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -47,9 +50,9 @@
             <v-text-field
               v-model="marks.InternationalLaw"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Public International Law"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -59,9 +62,9 @@
             <v-text-field
               v-model="marks.ConstitutionalLaw"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Constitutional Law & Constitutionalism"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -71,9 +74,9 @@
             <v-text-field
               v-model="marks.LegalResearch"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Legal Research"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -83,9 +86,9 @@
             <v-text-field
               v-model="marks.ProfessionalEthics"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Professional Ethics"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -95,9 +98,9 @@
             <v-text-field
               v-model="marks.ClinicalLegalEducation"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Clinical Legal Education: Effective Legal Writing Civil Case"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -107,9 +110,9 @@
             <v-text-field
               v-model="marks.ClinicalWork"
               :counter="3"
-              :rules="numberRule"
+              :rules="validRule"
               label="Clinical Work"
-              type="number"
+              type="string"
               outlined
               dense
             ></v-text-field>
@@ -140,11 +143,9 @@ export default {
   data: () => ({
     marks: {},
     valid: false,
-    numberRule: [
+    validRule: [
       (v) => !!v || "Required",
-      (v) =>
-        Number.isInteger(Number(v)) || "The value must be an integer number",
-      (v) => (v >= 0 && v <= 999) || "Number has to be between 0 and 999",
+      (v) => v.length <= 3 || "Marks must be less than 3 Digits",
     ],
   }),
 
@@ -156,6 +157,12 @@ export default {
         await api.postLlbStudentMarks(this.marks);
         this.resetAll();
         this.close();
+        let msg = {
+          status: "true",
+          text: "Marks added successfully",
+          studentId: this.marks.SId,
+        };
+        this.$emit("childToParent", msg);
       }
     },
 
@@ -180,7 +187,7 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type="number"] {
+input[type="string"] {
   -moz-appearance: textfield;
 }
 </style>
