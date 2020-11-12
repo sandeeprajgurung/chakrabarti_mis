@@ -106,7 +106,7 @@ exports.Create = (req, res) => {
 
     Llbstudent.update(
       { PERCENT : percent}, 
-      {where : {SID : req.body.SId}}
+      {where : {ID : req.body.SId}}
     )
     .then (data1 => {
       res.send(data);

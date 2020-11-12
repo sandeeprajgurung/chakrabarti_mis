@@ -85,7 +85,7 @@ exports.Create = (req, res) => {
 
         Llbstudent.update(
           { PERCENT : percent}, 
-          {where : {SID : req.body.SId}}
+          {where : {ID : req.body.SId}}
         )
         .then (data1 => {
           res.send(data);
@@ -126,7 +126,7 @@ exports.Create = (req, res) => {
 exports.Search = (req, res) => {
 
   Secondyear.findAll({
-    where: { PRGID: req.query.prgid }
+    where: { PROGRAMMEID: req.query.prgid }
   })
         .then(data =>{
             res.send(data);
