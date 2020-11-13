@@ -253,17 +253,17 @@ exports.SearchLLBStudent = (req, res) => {
 
     Llbstudent.findAll({
         where: { 
-            PGROGRMMEID: req.query.prgid,
-            [Op.or]:[
+            PROGRAMMEID: req.query.prgid,
+            [Op.or]: [
                 {
                     LLBGROUPID: req.query.grpid
                 },
                 {
-                    LLBGROUPID:{
-                        [Op.is]:null
+                    LLBGROUPID: {
+                        [Op.is]: null
                     }
                 }
-                ]
+            ]
          }
     })
     .then(data =>{
@@ -281,7 +281,7 @@ exports.SearchLLBStudent = (req, res) => {
 
     Llmstudent.findAll({
         where: { 
-            PGROGRMMEID: req.query.prgid,
+            PROGRAMMEID: req.query.prgid,
             [Op.or]:[
                 {
                     LLMGROUPID: req.query.grpid
