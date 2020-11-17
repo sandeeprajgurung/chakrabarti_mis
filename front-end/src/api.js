@@ -40,11 +40,11 @@ export default {
     },
 
     updateLlbStudent(data) {
-        return this.execute('PUT', `/LLBStudent/${data.SID}`, data);
+        return this.execute('PUT', `/LLBStudent/${data.ID}`, data);
     },
 
     updateLlmStudent(data) {
-        return this.execute('PUT', `/LLMStudent/${data.SID}`, data);
+        return this.execute('PUT', `/LLMStudent/${data.ID}`, data);
     },
 
     getLlmStudents() {
