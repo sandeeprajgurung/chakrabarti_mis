@@ -14,8 +14,8 @@ exports.CreateLLB = (req, res) => {
         GENDER : req.body.GENDER,
         BATCH : req.body.BATCH,
         YEAR : req.body.YEAR,
-        PROGRAMMEID : req.body.PRGID,
-        LLBGROUPID : req.body.GRPID
+        PROGRAMMEID : req.body.PROGRAMMEID,
+        LLBGROUPID : req.body.GROUPID
     }; 
 
         Llbstudent.create(student)
@@ -40,8 +40,8 @@ exports.CreateLLM = (req, res) => {
         GENDER : req.body.GENDER,
         BATCH : req.body.BATCH,
         YEAR : req.body.YEAR,
-        PROGRAMMEID : req.body.PRGID,
-        LLMGROUPID : req.body.GRPID
+        PROGRAMMEID : req.body.PROGRAMMEID,
+        LLMGROUPID : req.body.GROUPID
     }; 
 
         Llmstudent.create(student)
