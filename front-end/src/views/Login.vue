@@ -14,7 +14,12 @@
 					width="40"
 					height="40"
 				/>
-				<div class="overline ml-3">CHBEA | Exams</div>
+				<div class="overline d-none d-md-block ml-3">
+					CHBEA | Exams
+				</div>
+				<div class="overline d-block d-md-none ml-3">
+					CHBEA
+				</div>
 			</div>
 			<v-spacer></v-spacer>
 			<v-btn tabValue="0" @click="selectCategory('results')">
