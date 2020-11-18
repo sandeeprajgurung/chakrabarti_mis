@@ -41,7 +41,7 @@
 		<v-card-title class="pa-0 mb-3">
 			<v-row class="justify-space-between ma-0">
 				<div class="text-subtitle-2">
-					Level: {{ studentMarks[0].ROLL_NO }}
+					Level: {{ studentLevel(studentMarks[0].PROGRAMMEID) }}
 				</div>
 				<div class="text-subtitle-2">
 					Program: {{ program(studentMarks[0].PROGRAMMEID) }}
@@ -55,7 +55,7 @@
 					Batch: {{ studentMarks[0].BATCH }}
 				</div>
 				<div class="text-subtitle-2">
-					Group: {{ studentMarks[0].ROLL_NO }}
+					Symbol no.: {{ studentMarks[0].EXAM_NO }}
 				</div>
 			</v-row>
 		</v-card-title>
@@ -85,11 +85,12 @@
 						<td>{{ value }}</td>
 						<td></td>
 					</tr>
-					<tr class="text-center">
+					<tr>
 						<td colspan="3" class="font-weight-bold">
 							Percentage:
 						</td>
-						<td colspan="2">{{ studentMarks[0].PERCENT }}%</td>
+						<td class="text-center">{{ studentMarks[0].PERCENT }}%</td>
+						<td></td>
 					</tr>
 				</tbody>
 			</template>
@@ -206,6 +207,13 @@ export default {
 			}
 			return programInfo.PRGNAME;
 		},
+
+		studentLevel(numb) {
+			if (numb >= 6 ) {
+				return "Master";
+			}
+			return "Bachelor";
+		}
 	},
 };
 </script>

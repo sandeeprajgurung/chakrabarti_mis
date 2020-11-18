@@ -186,8 +186,4 @@ exports.Delete = (req, res) => {
             message: "Could not delete Student with id=" + id
           });
         });
-    
 }
-
-
-

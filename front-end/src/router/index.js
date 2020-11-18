@@ -11,33 +11,33 @@ const routes = [{
   path: '/',
   name: 'Dashboard',
   component: Dashboard,
-  // meta: {
-  //   requiresAuth: true
-  // }
+  meta: {
+    requiresAuth: true
+  }
 },
 {
   path: '/dashboard',
   name: 'Dashboard',
   component: Dashboard,
-  // meta: {
-  //   requiresAuth: true
-  // }
+  meta: {
+    requiresAuth: true
+  }
 },
 {
   path: '/students',
   name: 'Students',
   component: Students,
-  // meta: {
-  //   requiresAuth: true
-  // }
+  meta: {
+    requiresAuth: true
+  }
 },
 {
   path: '/results',
   name: 'Results',
   component: Results,
-  // meta: {
-  //   requiresAuth: true
-  // }
+  meta: {
+    requiresAuth: true
+  }
 },
 {
   path: '/login',

@@ -17,7 +17,6 @@
               :counter="3"
               :rules="validRule"
               label="International Human Rights Law"
-              type="string"
               outlined
               dense
             ></v-text-field>
@@ -29,7 +28,6 @@
               :counter="3"
               :rules="validRule"
               label="Principles of Interpretation"
-              type="string"
               outlined
               dense
             ></v-text-field>
@@ -41,7 +39,6 @@
               :counter="3"
               :rules="validRule"
               label="Law of Evidence"
-              type="string"
               outlined
               dense
             ></v-text-field>
@@ -52,7 +49,6 @@
               :counter="3"
               :rules="validRule"
               label="Public International Law"
-              type="string"
               outlined
               dense
             ></v-text-field>
@@ -64,7 +60,6 @@
               :counter="3"
               :rules="validRule"
               label="Constitutional Law & Constitutionalism"
-              type="string"
               outlined
               dense
             ></v-text-field>
@@ -76,7 +71,6 @@
               :counter="3"
               :rules="validRule"
               label="Legal Research"
-              type="string"
               outlined
               dense
             ></v-text-field>
@@ -88,7 +82,6 @@
               :counter="3"
               :rules="validRule"
               label="Professional Ethics"
-              type="string"
               outlined
               dense
             ></v-text-field>
@@ -100,7 +93,6 @@
               :counter="3"
               :rules="validRule"
               label="Clinical Legal Education: Effective Legal Writing Civil Case"
-              type="string"
               outlined
               dense
             ></v-text-field>
@@ -111,8 +103,7 @@
               v-model="marks.ClinicalWork"
               :counter="3"
               :rules="validRule"
-              label="Clinical Work"
-              type="string"
+              label="Clinical Work" 
               outlined
               dense
             ></v-text-field>
@@ -152,8 +143,8 @@ export default {
   methods: {
     async marksFormSubmit() {
       if (this.$refs.marksForm.validate() === true) {
-        this.marks.SId = `${this.studentDetails.SID}`;
-        this.marks.program = `${this.studentDetails.PRGID}`;
+        this.marks.SId = `${this.studentDetails.ID}`;
+        this.marks.program = `${this.studentDetails.PROGRAMMEID}`;
         await api.postLlbStudentMarks(this.marks);
         this.resetAll();
         this.close();

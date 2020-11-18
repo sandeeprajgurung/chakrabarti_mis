@@ -140,7 +140,6 @@ export default {
 			if (this.$refs.marksForm.validate() === true) {
 				this.marks.SId = `${this.studentDetails.ID}`;
 				this.marks.program = `${this.studentDetails.PROGRAMMEID}`;
-				console.log(this.marks);
 				await api.postLlbStudentMarks(this.marks);
 				this.resetAll();
 				this.close();

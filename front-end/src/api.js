@@ -136,10 +136,65 @@ export default {
     },
 
     getStudentMarks(data) {
-        if(data.academic === '1') {
+        console.log(data.program);
+        if(data.program === '1') {
             return this.execute('GET', `/Result/LLBFirstyear?prgid=${data.program}&examno=${data.symbolNo}`);
         }
+        if(data.program === '2') {
+            return this.execute('GET', `/Result/LLBSecondyear?prgid=${data.program}&examno=${data.symbolNo}`);
+        }
+        if(data.program === '3') {
+            return this.execute('GET', `/Result/LLBThirdyear?prgid=${data.program}&examno=${data.symbolNo}`);
+        }
+        if (data.program === '4') {
+            if (data.group === '1') {
+                return this.execute('GET', `/Result/LLBFourthyear/Criminal?prgid=${data.program}&examno=${data.symbolNo}`);
+            }
+            if (data.group === '2') {
+                return this.execute('POST', `/Result/LLBFourthyear/Business?prgid=${data.program}&examno=${data.symbolNo}`);
+            }
+            if (data.group === '3') {
+                return this.execute('POST', `/Result/LLBFourthyear/Constitutional?prgid=${data.program}&examno=${data.symbolNo}`);
+            }
+            return this.execute('POST', `/Result/LLBFourthyear/Environment?prgid=${data.program}&examno=${data.symbolNo}`);
+        }
+    
+        if (data.program === '5') {
+            if (data.group === '1') {
+                return this.execute('POST', `/Result/LLBFifthyear/Criminal?prgid=${data.program}&examno=${data.symbolNo}`);
+            }
+            if (data.group === '2') {
+                return this.execute('POST', `/Result/LLBFifthyear/Business?prgid=${data.program}&examno=${data.symbolNo}`);
+            }
+            if (data.group === '3') {
+                return this.execute('POST', `/Result/LLBFifthyear/Constitutional?prgid=${data.program}&examno=${data.symbolNo}`);
+            }
+            return this.execute('POST', `/Result/LLBFifthyear/Environment?prgid=${data.program}&examno=${data.symbolNo}`);
+        }
+
+        if(data.program === '6') {
+            if (data.group === '1') {
+                return this.execute('POST', `/Result/LLMFirstyear/HumanRights?prgid=${data.program}&examno=${data.symbolNo}`);
+            }
+            if (data.group === '2') {
+                return this.execute('POST', `/Result/LLMFirstyear/Business?prgid=${data.program}&examno=${data.symbolNo}`);
+            }
+            return this.execute('POST', `/Result/LLMFirstyear/Criminal?prgid=${data.program}&examno=${data.symbolNo}`);
+        }
+        if(data.program === '7') {
+            if (data.group === '1') {
+                return this.execute('POST', `/Result/LLMSecondyear/HumanRights?prgid=${data.program}&examno=${data.symbolNo}`);
+            }
+            if (data.group === '2') {
+                return this.execute('POST', `/Result/LLMSecondyear/Business?prgid=${data.program}&examno=${data.symbolNo}`);
+            }
+            return this.execute('POST', `/Result/LLMSecondyear/Criminal?prgid=${data.program}&examno=${data.symbolNo}`);
+        }
     },
+
+    deleteMarks(id) {
+        return this.execute('DELETE', `/Firstyear/${id}`);
+    }
 
     // getPosts() {
     //     return this.execute('get', '/posts')

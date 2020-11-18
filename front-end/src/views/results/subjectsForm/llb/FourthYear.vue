@@ -95,7 +95,7 @@
         <div class="mt-4 mb-1 text-subtitle-2 grey--text text--darken-2">
           Optional Subject
         </div>
-        <v-row v-if="studentDetails.GRPID === 1">
+        <v-row v-if="studentDetails.LLBGROUPID === 1">
           <v-col cols="12" sm="4">
             <v-text-field
               v-model="marks.Criminology"
@@ -119,7 +119,7 @@
             ></v-text-field>
           </v-col>
         </v-row>
-        <v-row v-if="studentDetails.GRPID === 2">
+        <v-row v-if="studentDetails.LLBGROUPID === 2">
           <v-col cols="12" sm="4">
             <v-text-field
               v-model="marks.BankingInsurance"
@@ -143,7 +143,7 @@
             ></v-text-field>
           </v-col>
         </v-row>
-        <v-row v-if="studentDetails.GRPID === 3">
+        <v-row v-if="studentDetails.LLBGROUPID === 3">
           <v-col cols="12" sm="4">
             <v-text-field
               v-model="marks.GoodGovernance"
@@ -167,7 +167,7 @@
             ></v-text-field>
           </v-col>
         </v-row>
-        <v-row v-if="studentDetails.GRPID === 4">
+        <v-row v-if="studentDetails.LLBGROUPID === 4">
           <v-col cols="12" sm="4">
             <v-text-field
               v-model="marks.EnvironmentLaw"
@@ -225,9 +225,9 @@ export default {
   methods: {
     async marksFormSubmit() {
       if (this.$refs.marksForm.validate() === true) {
-        this.marks.SId = `${this.studentDetails.SID}`;
-        this.marks.program = `${this.studentDetails.PRGID}`;
-        this.marks.group = `${this.studentDetails.GRPID}`;
+        this.marks.SId = `${this.studentDetails.ID}`;
+        this.marks.program = `${this.studentDetails.PROGRAMMEID}`;
+        this.marks.group = `${this.studentDetails.LLBGROUPID}`;
         await api.postLlbStudentMarks(this.marks);
         this.resetAll();
         this.close();

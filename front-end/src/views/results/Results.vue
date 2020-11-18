@@ -29,7 +29,7 @@
 							:items="group"
 							:rules="[(v) => !!v || 'Group is required']"
 							item-text="grpname"
-							item-value="grpid"
+							item-value="ID"
 							label="Group id"
 							dense
 							outlined
