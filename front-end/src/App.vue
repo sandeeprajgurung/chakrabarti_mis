@@ -40,7 +40,7 @@
       </v-navigation-drawer>
     </v-card>
 
-    <v-row justify="center" class="d-block d-md-none">
+    <div v-if="currentRouteName" justify="center" class="d-block d-md-none">
       <v-dialog
         v-model="dialog"
         fullscreen
@@ -94,7 +94,7 @@
           </v-list>
         </v-card>
       </v-dialog>
-    </v-row>
+    </div>
 
     <v-main :class="currentRouteName ? 'main-component' : 'login-component'">
       <router-view />
