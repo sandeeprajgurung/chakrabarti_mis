@@ -6,6 +6,7 @@ var Op = Sequelize.Op;
 
 const sequelize = new Sequelize(server.DB, server.USER, server.PASSWORD, {
   host: server.HOST,
+  port: server.PORT,
   dialect: "mysql",
   omitNull: false,
   pool: {
@@ -30,19 +31,19 @@ const sequelize = new Sequelize(server.DB, server.USER, server.PASSWORD, {
 });
 
 // Create a connection to the database
-// const connection = mysql.createConnection({
-//   host: server.HOST,
-//   user: server.USER,
-//   password: server.PASSWORD,
-//   database: server.DB
-// });
+const connection = mysql.createConnection({
+  host: server.HOST,
+  user: server.USER,
+  password: server.PASSWORD,
+  database: server.DB
+});
 
 
 // // open the MySQL connection
-// connection.connect(error => {
-//   if (error) throw error;
-//   console.log("Successfully connected to the database.");
-// });
+connection.connect(error => {
+  if (error) throw error;
+  console.log("Successfully connected to the database.");
+});
 
 const db = {};
 db.Sequelize = Sequelize;
