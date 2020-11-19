@@ -31,7 +31,7 @@
 					mdi-plus-circle
 				</v-icon>
 				<v-icon
-					v-if="item.PERCENT || item.SID == resultAddedTrueId"
+					v-if="item.PERCENT || item.SID == resultAddedTrueId || item.PERCENT === 0"
 					color="error"
 					@click="deleteItem(item)"
 				>

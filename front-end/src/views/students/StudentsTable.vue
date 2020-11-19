@@ -301,18 +301,18 @@ export default {
 		],
 		emailRules: [
 			(v) => {
-				if (v && v.length > 0) {
-					const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-					return pattern.test(v) || "Invalid E-mail";
-				}
+				if (v) return /.+@.+\..+/.test(v) || "E-mail must be valid";
+				else return true;
 			},
 		],
 		phoneNoRules: [
 			(v) => {
-				if (v && v.length > 0) {
-					const pattern = /^\D?(\d{3})\D?\D?(\d{3})\D?(\d{4})$/;
-					return pattern.test(v) || "Invalid Phone Number";
-				}
+				if (v)
+					return (
+						Number.isInteger(Number(v)) ||
+						"The value must be an integer number"
+					);
+				else return true;
 			},
 		],
 
