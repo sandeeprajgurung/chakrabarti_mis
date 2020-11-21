@@ -9,9 +9,9 @@
       <v-navigation-drawer permanent>
         <v-list-item>
           <v-list-item-content>
-            <v-avatar>
+            <!-- <v-avatar>
               <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
-            </v-avatar>
+            </v-avatar> -->
             <v-list-item-subtitle class="text-center mt-2">
               {{ userName }}
             </v-list-item-subtitle>
@@ -53,9 +53,9 @@
             <v-spacer></v-spacer>
             <div class="overline">CHBEA | Exams</div>
             <v-spacer></v-spacer>
-            <v-avatar>
+            <!-- <v-avatar>
               <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
-            </v-avatar>
+            </v-avatar> -->
           </v-toolbar>
         </template>
         <v-card>
