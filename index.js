@@ -56,12 +56,12 @@ app.use((req, res, next) => {
   next();
 });
 
-var httpServer = http.createServer(app).listen(6445, function () {
+var httpServer = http.createServer(app).listen(8080, function () {
   console.log("Live at Port 6445 for HTTPS");
 });
-app.get('/', (req, res, next) => {
-  res.send('Hello World');
-});
+// app.get('/', (req, res, next) => {
+//   res.send('Hello World');
+// });
 
 router.post("/Signup", (req, res, next) => { userController.Create(req, res, next) });
 router.post("/Login", (req, res) => { userController.login(req, res) });
