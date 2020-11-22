@@ -3,20 +3,23 @@ const FirstyearHumanrights = db.FIRSTYEAR_HUMANRIGHTS;
 const Llmstudent = db.LLMSTUDENT;
 const Op = db.Sequelize.Op;
 
-exports.FindAll= async (req,res)=>{
-    try{
-        const student = await db.sequelize.query('SELECT LS.SNAME,FYH.LEGAL_RESEARCH,FYH.COMPARATIVE_STUDY,FYH.NEPALESE_STUDY,FYH.CIVIL_POLITICAL FROM llmstudent AS LS join FIRSTYEAR_HUMANRIGHTS AS FYH on LS.SID = FYH.SID', {
-            type: db.sequelize.QueryTypes.SELECT
-          });
-    
-          res.send(student);
-    }
-    catch(err){
-        res.status(500).send({
-            message:
-              err.message || "Some error occurred while retrieving Student Result."
-          });
-    }
+exports.FindAll = async (req, res) => {
+
+  Llmstudent.findAll({
+    include: [{
+      model: FirstyearHumanrights
+    }],
+    raw: true
+  })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving Student."
+      });
+    });
 }
 
 exports.Create = (req, res) => {
@@ -128,25 +131,53 @@ exports.Update = (req, res) => {
 
 exports.Delete = (req, res) => {
     const id = req.params.Id;
-    
-        FirstyearHumanrights.destroy({
-            where: { ID: id }
-        })
+
+  FirstyearHumanrights.findAll({ where: { ID: id }, raw: true })
+    .then(data => {
+      Llmstudent.update(
+        { PERCENT: null },
+        { where: { ID: data[0].LLMSTUDENTID } },
+      )
         .then(num => {
           if (num == 1) {
-            res.send({
-              message: "Student Result was deleted successfully!"
-            });
+            FirstyearHumanrights.destroy({
+              where: { ID: id }
+            })
+              .then(num => {
+                if (num == 1) {
+                  res.send({
+                    message: "Student Result was deleted successfully!"
+                  });
+                } else {
+                  res.send({
+                    message: `Cannot delete Student Result with id=${id}. Maybe Student was not found!`
+                  });
+                }
+              })
+              .catch(err => {
+                res.status(500).send({
+                  message: "Could not delete Student Result with id=" + id
+                });
+              });
           } else {
             res.send({
-              message: `Cannot delete Student Result with id=${id}. Maybe Student was not found!`
+              message: `Cannot update Student with id=${id}. Maybe Student was not found or req.body is empty!`
             });
           }
         })
         .catch(err => {
           res.status(500).send({
-            message: "Could not delete Student Result with id=" + id
+            message:
+              err.message || "Error updating Student with id=" + id
           });
         });
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Could not delete Student with id=" + id
+      });
+    });
+    
+        
     
 }

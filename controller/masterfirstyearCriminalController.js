@@ -3,28 +3,24 @@ const FirstyearCriminal = db.FIRSTYEAR_CRIMINALLAW;
 const Llmstudent = db.LLMSTUDENT;
 const Op = db.Sequelize.Op;
 
-// exports.Search=async (req,res)=>{
-//     try{
-//         const student = await db.sequelize.query(`SELECT LS.SNAME,IFNULL(FCL.LEGAL_RESEARCH,0),IFNULL(FCL.COMPARATIVE_STUDY,0),IFNULL(FCL.CRIMINAL_LAW,0),IFNULL(FCL.FORENSIC,0),IFNULL(FCL.JUVINAL_JUSTICE,0) 
-//         FROM llmstudent AS LS join FIRSTYEAR_CRIMINALLAW AS FCL on LS.SID = FCL.SID 
-//         WHERE LS.PRGID = (:prgid) AND LS.GRPID = (:grpid)`, {
-//             replacements: {
-//               prgid: req.query.prgid,
-//               grpid: req.query.grpid
-//             },
-//             type: db.sequelize.QueryTypes.SELECT
-//           });
-    
-//           res.send(student);
-//     }
-//     catch(err){
-//         res.status(500).send({
-//             message:
-//               err.message || "Some error occurred while retrieving Student Result."
-//           });
-//     }
-   
-// }
+exports.FindAll = async (req, res) => {
+
+  Llmstudent.findAll({
+    include: [{
+      model: FirstyearCriminal
+    }],
+    raw: true
+  })
+    .then(data => {
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving Student."
+      });
+    });
+}
 
 exports.Create = (req, res) => {
   const Criminal = {
@@ -92,24 +88,52 @@ exports.Create = (req, res) => {
 exports.Delete = (req, res) => {
   const id = req.params.Id;
 
-  FirstyearCriminal.destroy({
-    where: { ID: id }
-  })
-    .then(num => {
-      if (num == 1) {
-        res.send({
-          message: "Student Result was deleted successfully!"
+  FirstyearCriminal.findAll({ where: { ID: id }, raw: true })
+    .then(data => {
+      Llmstudent.update(
+        { PERCENT: null },
+        { where: { ID: data[0].LLMSTUDENTID } },
+      )
+        .then(num => {
+          if (num == 1) {
+            FirstyearCriminal.destroy({
+              where: { ID: id }
+            })
+              .then(num => {
+                if (num == 1) {
+                  res.send({
+                    message: "Student Result was deleted successfully!"
+                  });
+                } else {
+                  res.send({
+                    message: `Cannot delete Student Result with id=${id}. Maybe Student was not found!`
+                  });
+                }
+              })
+              .catch(err => {
+                res.status(500).send({
+                  message: "Could not delete Student Result with id=" + id
+                });
+              });
+          } else {
+            res.send({
+              message: `Cannot update Student with id=${id}. Maybe Student was not found or req.body is empty!`
+            });
+          }
+        })
+        .catch(err => {
+          res.status(500).send({
+            message:
+              err.message || "Error updating Student with id=" + id
+          });
         });
-      } else {
-        res.send({
-          message: `Cannot delete Student Result with id=${id}. Maybe Student was not found!`
-        });
-      }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Could not delete Student Result with id=" + id
+        message: "Could not delete Student with id=" + id
       });
     });
+
+  
 
 }

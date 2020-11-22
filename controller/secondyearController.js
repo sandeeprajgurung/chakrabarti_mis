@@ -167,25 +167,53 @@ exports.Update = (req, res) => {
 
 exports.Delete = (req, res) => {
     const id = req.params.Id;
-    
-        Secondyear.destroy({
-            where: { ID: id }
-        })
+
+  Secondyear.findAll({ where: { ID: id }, raw: true })
+    .then(data => {
+      Llbstudent.update(
+        { PERCENT: null },
+        { where: { ID: data[0].LLBSTUDENTID } },
+      )
         .then(num => {
           if (num == 1) {
-            res.send({
-              message: "Student was deleted successfully!"
-            });
+            Secondyear.destroy({
+              where: { ID: id }
+            })
+              .then(num => {
+                if (num == 1) {
+                  res.send({
+                    message: "Student was deleted successfully!"
+                  });
+                } else {
+                  res.send({
+                    message: `Cannot delete Student with id=${id}. Maybe Student was not found!`
+                  });
+                }
+              })
+              .catch(err => {
+                res.status(500).send({
+                  message: "Could not delete Student with id=" + id
+                });
+              });
           } else {
             res.send({
-              message: `Cannot delete Student with id=${id}. Maybe Student was not found!`
+              message: `Cannot update Student with id=${id}. Maybe Student was not found or req.body is empty!`
             });
           }
         })
         .catch(err => {
           res.status(500).send({
-            message: "Could not delete Student with id=" + id
+            message:
+              err.message || "Error updating Student with id=" + id
           });
         });
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Could not delete Student with id=" + id
+      });
+    });
+    
+        
     
 }

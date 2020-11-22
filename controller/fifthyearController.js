@@ -7,20 +7,100 @@ const FifthyearEnvironment = db.FIFTHYEAR_ENVIRONMENT;
 const Llbstudent = db.LLBSTUDENT;
 const Op = db.Sequelize.Op;
 
-exports.FindAll = async (req, res) => {
-    try {
-        const student = await db.sequelize.query('SELECT LS.SNAME,FY.LEGAL_PHILOSOPHY,FY.AGRARIAN,FY.LABOUR,FY.INTERNATIONAL_HUMANITARIAN,FY.CONSERVATION_LAW,FY.INTERNATIONAL_LAW,FY.PRE_TRIAL_PRESENTATION,FY.CLINICAL_EDUCATION,FY.DISSERTATION,IFNULL(FYC.ORGANIZED_CRIME,0),IFNULL(FYC.FISCAL_CRIME,0),IFNULL(FYB.INTELLECTUAL_PROPERTY,0),IFNULL(FYB.TAXATION,0),IFNULL(FYCN.LAW_OF_EQUITY,0),IFNULL(FYCN.LAW_ON_GENDER,0),IFNULL(FYE.ENERGY_LAW,0),IFNULL(FYE.CIVIL_AVIATION,0) FROM llbstudent AS LS join fifthyear AS FY on LS.SID = FY.SID left join FIFTHYEAR_CRIMINAL FYC on FYC.FIFTHYEARID = FY.FIFTHYEARID left join FIFTHYEAR_BUSINESS FYB ON FYB.FIFTHYEARID = FY.FIFTHYEARID left join FIFTHYEAR_CONSTITUTIONAL FYCN ON FYCN.FIFTHYEARID = FY.FIFTHYEARID left join FIFTHYEAR_ENVIRONMENT FYE ON FYE.FIFTHYEARID = FY.FIFTHYEARID', {
-            type: db.sequelize.QueryTypes.SELECT
-        });
+exports.FindAllCriminal = async (req, res) => {
 
-        res.send(student);
-    }
-    catch (err) {
-        res.status(500).send({
-            message:
-                err.message || "Some error occurred while retrieving Student Result."
+    Llbstudent.findAll({
+        include: [{
+            model: Fifthyear,
+            required: true,
+            include: [{
+                model: FifthyearCriminal,
+                required: true
+            }]
+        }],
+        raw: true
+    })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving Student."
+            });
         });
-    }
+}
+
+exports.FindAllBusiness = async (req, res) => {
+
+    Llbstudent.findAll({
+        include: [{
+            model: Fifthyear,
+            required: true,
+            include: [{
+                model: FifthyearBusiness,
+                required: true
+            }]
+        }],
+        raw: true
+    })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving Student."
+            });
+        });
+}
+
+exports.FindAllConstitutional = async (req, res) => {
+
+    Llbstudent.findAll({
+        include: [{
+            model: Fifthyear,
+            required: true,
+            include: [{
+                model: FifthyearConstitutional,
+                required: true
+            }]
+        }],
+        raw: true
+    })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving Student."
+            });
+        });
+}
+
+exports.FindAllEnvironment = async (req, res) => {
+
+    Llbstudent.findAll({
+        include: [{
+            model: Fifthyear,
+            required: true,
+            include: [{
+                model: FifthyearEnvironment,
+                required: true
+            }]
+        }],
+        raw: true
+    })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving Student."
+            });
+        });
 }
 
 exports.CreateCriminal = (req, res) => {
@@ -765,23 +845,51 @@ exports.UpdateEnvironment = (req, res) => {
 exports.Delete = (req, res) => {
     const id = req.params.Id;
 
-            Fifthyear.destroy({
-                where: { ID: id }
-            })
+    Fifthyear.findAll({ where: { ID: id }, raw: true })
+        .then(data => {
+            Llbstudent.update(
+                { PERCENT: null },
+                { where: { ID: data[0].LLBSTUDENTID } },
+            )
                 .then(num => {
                     if (num == 1) {
-                        res.send({
-                            message: "Student Result was deleted successfully!"
-                        });
+                        Fifthyear.destroy({
+                            where: { ID: id }
+                        })
+                            .then(num => {
+                                if (num == 1) {
+                                    res.send({
+                                        message: "Student Result was deleted successfully!"
+                                    });
+                                } else {
+                                    res.send({
+                                        message: `Cannot delete Student Result with id=${id}. Maybe Student was not found!`
+                                    });
+                                }
+                            })
+                            .catch(err => {
+                                res.status(500).send({
+                                    message: "Could not delete Student Result with id=" + id
+                                });
+                            });
                     } else {
                         res.send({
-                            message: `Cannot delete Student Result with id=${id}. Maybe Student was not found!`
+                            message: `Cannot update Student with id=${id}. Maybe Student was not found or req.body is empty!`
                         });
                     }
                 })
                 .catch(err => {
                     res.status(500).send({
-                        message: "Could not delete Student Result with id=" + id
+                        message:
+                            err.message || "Error updating Student with id=" + id
                     });
                 });
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Could not delete Student with id=" + id
+            });
+        });
+
+            
 }

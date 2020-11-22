@@ -8,20 +8,114 @@ const FourthyearEnvironment = db.FOURTHYEAR_ENVIRONMENT;
 const Llbstudent = db.LLBSTUDENT;
 const Op = db.Sequelize.Op;
 
-exports.FindAll = async (req, res) => {
-    try {
-        const student = await db.sequelize.query('SELECT LS.SNAME,FY.CLINICAL_EDUCATION,FY.ADVANCED_JURISPRUDENCE,FY.CONTRACT_LAW,FY.COMPANY_LAW,FY.ADMINISTATIVE_LAW,FY.CLINICAL_LEGAL_EDUCATION,FY.INTERNATIONAL_DISPUTES,IFNULL(FYC.FORENSIC,0),IFNULL(FYC.CRIMINOLOGY,0),IFNULL(FYB.BANKING_INSURANCE,0),IFNULL(FYB.INTERNATIONAL_TRADE,0),IFNULL(FYCN.GOOD_GONERNANCE,0),IFNULL(FYCN.ELECTORAL_LAW,0),IFNULL(FYE.ENVIRONMENT_LAW,0),IFNULL(FYE.WATER_RIVER,0) FROM llbstudent AS LS join fourthyear AS FY on LS.ID = FY.LLBSTUDENTID left join FOURTHYEAR_CRIMINAL FYC on FYC.FOURTHYEARID = FY.ID left join FOURTHYEAR_BUSINESS FYB ON FYB.FOURTHYEARID = FY.ID left join FOURTHYEAR_CONSTITUTIONAL FYCN ON FYCN.FOURTHYEARID = FY.ID left join FOURTHYEAR_ENVIRONMENT FYE ON FYE.FOURTHYEARID = FY.ID', {
-            type: db.sequelize.QueryTypes.SELECT
-        });
+exports.FindAllCriminal = async (req, res) => {
+    // try {
+    //     const student = await db.sequelize.query('SELECT LS.SNAME,FY.CLINICAL_EDUCATION,FY.ADVANCED_JURISPRUDENCE,FY.CONTRACT_LAW,FY.COMPANY_LAW,FY.ADMINISTATIVE_LAW,FY.CLINICAL_LEGAL_EDUCATION,FY.INTERNATIONAL_DISPUTES,IFNULL(FYC.FORENSIC,0),IFNULL(FYC.CRIMINOLOGY,0),IFNULL(FYB.BANKING_INSURANCE,0),IFNULL(FYB.INTERNATIONAL_TRADE,0),IFNULL(FYCN.GOOD_GONERNANCE,0),IFNULL(FYCN.ELECTORAL_LAW,0),IFNULL(FYE.ENVIRONMENT_LAW,0),IFNULL(FYE.WATER_RIVER,0) FROM llbstudent AS LS join fourthyear AS FY on LS.ID = FY.LLBSTUDENTID left join FOURTHYEAR_CRIMINAL FYC on FYC.FOURTHYEARID = FY.ID left join FOURTHYEAR_BUSINESS FYB ON FYB.FOURTHYEARID = FY.ID left join FOURTHYEAR_CONSTITUTIONAL FYCN ON FYCN.FOURTHYEARID = FY.ID left join FOURTHYEAR_ENVIRONMENT FYE ON FYE.FOURTHYEARID = FY.ID', {
+    //         type: db.sequelize.QueryTypes.SELECT
+    //     });
 
-        res.send(student);
-    }
-    catch (err) {
-        res.status(500).send({
-            message:
-                err.message || "Some error occurred while retrieving Student Result."
+    //     res.send(student);
+    // }
+    // catch (err) {
+    //     res.status(500).send({
+    //         message:
+    //             err.message || "Some error occurred while retrieving Student Result."
+    //     });
+    // }
+
+    Llbstudent.findAll({
+        include: [{
+            model: Fourthyear,
+            required: true,
+            //attributes: ['CLINICAL_EDUCATION', 'ADVANCED_JURISPRUDENCE', 'CONTRACT_LAW', 'COMPANY_LAW', 'ADMINISTATIVE_LAW', 'CLINICAL_LEGAL_EDUCATION', 'INTERNATIONAL_DISPUTES']
+            include: [{
+                model: FourthyearCriminal,
+                required: true
+            }]
+        }],
+        raw: true
+    })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving Student."
+            });
         });
-    }
+}
+
+exports.FindAllBusiness = async (req, res) => {
+
+    Llbstudent.findAll({
+        include: [{
+            model: Fourthyear,
+            required: true,
+            include: [{
+                model: FourthyearBusiness,
+                required: true
+            }]
+        }],
+        raw: true
+    })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving Student."
+            });
+        });
+}
+
+exports.FindAllConstitutional = async (req, res) => {
+
+    Llbstudent.findAll({
+        include: [{
+            model: Fourthyear,
+            required: true,
+            include: [{
+                model: FourthyearConstitutional,
+                required: true
+            }]
+        }],
+        raw: true
+    })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving Student."
+            });
+        });
+}
+
+exports.FindAllEnvironment = async (req, res) => {
+
+    Llbstudent.findAll({
+        include: [{
+            model: Fourthyear,
+            required: true,
+            include: [{
+                model: FourthyearEnvironment,
+                required: true
+            }]
+        }],
+        raw: true
+    })
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving Student."
+            });
+        });
 }
 
 exports.CreateCriminal = (req, res) => {
@@ -38,7 +132,7 @@ exports.CreateCriminal = (req, res) => {
 
     Fourthyear.create(fourthyear)
         .then(data => {
-console.log(data);
+
             const fourthyearcriminal = {
                 FORENSIC: req.body.Forensic,
                 CRIMINOLOGY: req.body.Criminology,
@@ -698,23 +792,51 @@ exports.UpdateEnvironment = (req, res) => {
 exports.Delete = (req, res) => {
     const id = req.params.Id;
 
-    Fourthyear.destroy({
-        where: { ID: id }
-    })
-        .then(num => {
-            if (num == 1) {
-                res.send({
-                    message: "Student Result was deleted successfully!"
+    Fourthyear.findAll({ where: { ID: id }, raw: true })
+        .then(data => {
+            Llbstudent.update(
+                { PERCENT: null },
+                { where: { ID: data[0].LLBSTUDENTID } },
+            )
+                .then(num => {
+                    if (num == 1) {
+                        Fourthyear.destroy({
+                            where: { ID: id }
+                        })
+                            .then(num => {
+                                if (num == 1) {
+                                    res.send({
+                                        message: "Student Result was deleted successfully!"
+                                    });
+                                } else {
+                                    res.send({
+                                        message: `Cannot delete Student Result with id=${id}. Maybe Student was not found!`
+                                    });
+                                }
+                            })
+                            .catch(err => {
+                                res.status(500).send({
+                                    message: "Could not delete Student Result with id=" + id
+                                });
+                            });
+                    } else {
+                        res.send({
+                            message: `Cannot update Student with id=${id}. Maybe Student was not found or req.body is empty!`
+                        });
+                    }
+                })
+                .catch(err => {
+                    res.status(500).send({
+                        message:
+                            err.message || "Error updating Student with id=" + id
+                    });
                 });
-            } else {
-                res.send({
-                    message: `Cannot delete Student Result with id=${id}. Maybe Student was not found!`
-                });
-            }
         })
         .catch(err => {
             res.status(500).send({
-                message: "Could not delete Student Result with id=" + id
+                message: "Could not delete Student with id=" + id
             });
         });
+
+
 }
